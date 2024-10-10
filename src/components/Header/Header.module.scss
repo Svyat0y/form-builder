@@ -6,6 +6,10 @@
   padding: 0 16px;
   box-shadow: var(--border-shadow-color);
   background: #fff;
+  grid-area: header;
+  z-index: 1;
+  position: sticky;
+  top: 0;
 }
 
 .logo {

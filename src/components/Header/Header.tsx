@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Header.module.scss';
 //components
-import { Burger } from '../ui/Burger/Burger';
+import { Burger } from '@components/ui/Burger';
 
 export const Header: React.FC = () => {
   return (
