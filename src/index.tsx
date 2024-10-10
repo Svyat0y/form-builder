@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 //styles
 import './styles/scss/_main.scss';
 //other
 import { ThemeProvider } from './context/ThemeContext';
+import { AppRouter } from './AppRouter';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <AppRouter />
     </ThemeProvider>
   </React.StrictMode>
 );
