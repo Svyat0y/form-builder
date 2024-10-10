@@ -9,7 +9,7 @@
   grid-template-columns: 1fr;
   height: 100%;
 
-  @include xs {
+  @include lg {
     grid-template-areas:
     "header header"
     "main sidebar";
