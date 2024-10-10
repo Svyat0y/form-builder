@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@styles/*": ["styles/scss/*"],
+      "@actions/*": ["actions/*"],
+      "@api/*": ["api/*"],
+      "@common/*": ["common/*"],
+      "@containers/*": ["containers/*"],
+      "@helper/*": ["helper/*"],
+      "@icon/*": ["icon/*"],
+      "@reducers/*": ["reducers/*"]
+    }
+  }
+}

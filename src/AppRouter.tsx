@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import App from './App';
 //components
-import { FormBuilder } from './pages/form-builder/FormBuilder';
-import { WelcomePage } from './pages/welcome-page/WelcomePage';
-import { UserForm } from './pages/user-form/UserForm';
+import { WelcomePage } from './pages/welcome-page';
+import { UserForm } from './pages/user-form';
+import { FormBuilder } from './pages/form-builder';
 
 export const AppRouter = () => {
   return (

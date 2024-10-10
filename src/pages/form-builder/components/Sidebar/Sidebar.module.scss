@@ -1,9 +1,29 @@
 .wrapper {
   grid-area: sidebar;
   background-color: #e0e0e0;
-  padding: 20px;
   position: sticky;
   top: 100px;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 100px);
   overflow-y: auto;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+}
+
+.resizer {
+  width: 3px;
+  cursor: col-resize;
+  resize: horizontal;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+
+  &:hover {
+    width: 10px;
+    background: #c1c3c5b4;
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 //components
-import { Container } from './components/Container/Container';
+import { Container } from '@components/Container';
 //other
 import { Outlet } from 'react-router-dom';
 
