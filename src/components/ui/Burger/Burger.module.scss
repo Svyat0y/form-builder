@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+
+  &:hover .line {
+    background-color: #555;
+  }
+}
+
+.line {
+  background-color: #333;
+  height: 4px;
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &.active {
+    background-color: #555;
+    &:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 7px);
+    }
+    &:nth-child(2) {
+      opacity: 0;
+    }
+    &:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+  }
+}
+
+.activeLine {
+  background-color: #555;
+  transform: rotate(45deg);
+}
