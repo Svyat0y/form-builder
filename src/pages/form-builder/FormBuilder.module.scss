@@ -1,0 +1,9 @@
+.wrapper {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "main sidebar";
+  grid-template-rows: 100px auto;
+  grid-template-columns: 1fr 25%;
+  height: 100%;
+}

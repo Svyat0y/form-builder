@@ -4,6 +4,7 @@ import App from './App';
 //components
 import { FormBuilder } from './pages/form-builder/FormBuilder';
 import { WelcomePage } from './pages/welcome-page/WelcomePage';
+import { UserForm } from './pages/user-form/UserForm';
 
 export const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ export const AppRouter = () => {
         <Route path="/" element={<App />}>
           <Route index element={<WelcomePage />} />
           <Route path="/form-builder" element={<FormBuilder />} />
+          <Route path="/user-form" element={<UserForm />} />
         </Route>
       </Routes>
     </Router>

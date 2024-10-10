@@ -1,0 +1,9 @@
+.wrapper {
+  grid-area: sidebar;
+  background-color: #e0e0e0;
+  padding: 20px;
+  position: sticky;
+  top: 100px;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+}
