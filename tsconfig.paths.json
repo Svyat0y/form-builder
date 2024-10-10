@@ -10,7 +10,8 @@
       "@containers/*": ["containers/*"],
       "@helper/*": ["helper/*"],
       "@icon/*": ["icon/*"],
-      "@reducers/*": ["reducers/*"]
+      "@reducers/*": ["reducers/*"],
+      "@hooks/*": ["hooks/*"]
     }
   }
 }

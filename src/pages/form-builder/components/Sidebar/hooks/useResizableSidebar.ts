@@ -41,5 +41,5 @@ export const useResizableSidebar = (
     };
   }, [resize, stopResizing]);
 
-  return { sidebarRef, sidebarWidth, startResizing };
+  return { sidebarRef, sidebarWidth, startResizing, setSidebarWidth };
 };

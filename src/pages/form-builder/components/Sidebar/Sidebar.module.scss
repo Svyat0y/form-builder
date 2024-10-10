@@ -1,16 +1,41 @@
+@import "@styles/media";
+
 .wrapper {
   grid-area: sidebar;
   background-color: #e0e0e0;
-  position: sticky;
-  top: 100px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+  height: 100vh;
+  position: fixed;
+  max-width: 100%!important;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  transition: .5s ease-in-out all;
+
+  &.active {
+    @include xs {
+      width: 100%!important;
+      transform: translateX(0);
+    }
+   }
+
+  @include sm {
+    max-width: 375px!important;
+  }
+
+  @include lg {
+    max-width: initial!important;
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 100px);
+    transform: initial;
+  }
 }
 
 .content {
   flex: 1;
   padding: 20px;
   height: 100%;
+  overflow-y: auto;
 }
 
 .resizer {
@@ -25,5 +50,20 @@
   &:hover {
     width: 10px;
     background: #c1c3c5b4;
+  }
+}
+
+.openButton {
+  border: none;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: -45px;
+  top: 25%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+
+  @include lg {
+    display: none;
   }
 }

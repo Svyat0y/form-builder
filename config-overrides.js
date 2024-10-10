@@ -13,6 +13,7 @@ module.exports = function override(config) {
     '@helper': path.resolve(__dirname, 'src/helper'),
     '@icon': path.resolve(__dirname, 'src/icon'),
     '@reducers': path.resolve(__dirname, 'src/reducers'),
+    '@hooks': path.resolve(__dirname, 'src/hooks'),
   };
   return config;
 };
