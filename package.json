@@ -2,7 +2,7 @@
   "name": "form-builder",
   "version": "0.5.4",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
