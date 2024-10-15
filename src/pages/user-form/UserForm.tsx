@@ -1,5 +1,5 @@
-import React from 'react';
+import { FC } from 'react';
 
-export const UserForm: React.FC = () => {
+export const UserForm: FC = () => {
   return <div>UserForm</div>;
 };
