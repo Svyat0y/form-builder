@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import styles from './Sidebar.module.scss';
 //other
 import { useResizableSidebar } from './hooks/useResizableSidebar';
 import classNames from 'classnames';
 import { useMediaQuery } from '@hooks/useMediaQuery';
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
   const isDesktop = useMediaQuery('(min-width: 1440px)');
   const { sidebarRef, sidebarWidth, startResizing } = useResizableSidebar(400);
   const [isOpen, setIsOpen] = useState(false);

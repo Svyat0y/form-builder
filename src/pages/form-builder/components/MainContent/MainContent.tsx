@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './MainContent.module.scss';
 
-export const MainContent: React.FC = () => {
+export const MainContent: FC = () => {
   return (
     <main className={styles.wrapper}>
       <div className={styles.content}>
