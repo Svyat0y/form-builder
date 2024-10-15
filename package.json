@@ -1,6 +1,6 @@
 {
   "name": "form-builder",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^6.5.0",
