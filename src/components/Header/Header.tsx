@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './Header.module.scss';
 //components
 import { Burger } from '@components/ui/Burger';
 
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   return (
     <header className={styles.wrapper}>
       <div className={styles.logo}>Builder</div>
