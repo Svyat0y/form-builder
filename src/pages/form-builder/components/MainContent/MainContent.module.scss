@@ -1,5 +1,10 @@
+@import "@styles/colors";
+
 .wrapper {
   grid-area: main;
-  background-color: #ffffff;
+}
+
+.content {
+  background: $whiteColor;
   padding: 20px;
 }
