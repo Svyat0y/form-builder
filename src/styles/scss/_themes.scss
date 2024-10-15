@@ -2,8 +2,10 @@
 
 html[data-theme='light'] {
   --border-shadow-color: #{$borderShadowColor};
+  --primary-bg-color: #{$mainBgLightColor}
 }
 
 html[data-theme='dark'] {
   --border-shadow-color: #{$borderShadowColor};
+  --primary-bg-color: #{$mainBgDarkColor}
 }
