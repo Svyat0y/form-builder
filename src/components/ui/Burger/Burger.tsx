@@ -1,10 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './Burger.module.scss';
 import classNames from 'classnames';
 //other
-import { useOpen } from '../../../hooks/useOpen';
+import { useOpen } from '@hooks/useOpen';
 
-export const Burger: React.FC = () => {
+export const Burger: FC = () => {
   const { isOpen, onToggle } = useOpen();
 
   const handleClickBurger = () => {
