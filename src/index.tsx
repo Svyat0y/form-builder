@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 //styles
 import './styles/scss/_main.scss';
 //other
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider } from './context';
 import { AppRouter } from './AppRouter';
 
 const root = ReactDOM.createRoot(

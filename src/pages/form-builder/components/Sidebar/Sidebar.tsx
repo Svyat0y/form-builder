@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import styles from './Sidebar.module.scss';
 //other
-import { useResizableSidebar } from './hooks/useResizableSidebar';
+import { useResizableSidebar } from './hooks';
 import classNames from 'classnames';
 import { useMediaQuery } from '@hooks/useMediaQuery';
 
