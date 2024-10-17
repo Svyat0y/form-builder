@@ -1,2 +1,36 @@
 @use 'themes' as *;
 @use 'media' as *;
+@use 'vars' as *;
+
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: var(--main-bg-color);
+  //background-attachment: fixed;
+  //background-size: cover;
+  min-height: 100vh;
+}
+
+.app {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

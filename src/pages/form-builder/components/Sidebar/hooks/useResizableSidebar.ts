@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useEffect } from 'react';
 export const useResizableSidebar = (
   initialWidth: number,
   minWidth: number = 300,
-  maxWidth: number = 600
+  maxWidth: number = 600,
 ) => {
   const sidebarRef = useRef<HTMLDivElement | null>(null);
   const [isResizing, setIsResizing] = useState(false);
@@ -29,7 +29,7 @@ export const useResizableSidebar = (
         }
       }
     },
-    [isResizing]
+    [isResizing],
   );
 
   useEffect(() => {

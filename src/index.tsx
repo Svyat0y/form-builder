@@ -1,21 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 //styles
 import './styles/scss/_main.scss';
 //other
-import { ThemeProvider } from './context/ThemeContext';
 import { AppRouter } from './AppRouter';
+import AppTheme from './theme/AppTheme';
+import { StyledEngineProvider } from '@mui/material';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <AppRouter />
-    </ThemeProvider>
-  </React.StrictMode>
+    <StyledEngineProvider injectFirst>
+      <AppTheme>
+        <AppRouter />
+      </AppTheme>
+    </StyledEngineProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

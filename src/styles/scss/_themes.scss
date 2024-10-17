@@ -1,11 +1,21 @@
 @use '_colors' as *;
 
 html[data-theme='light'] {
-  --border-shadow-color: #{$borderShadowColor};
-  --primary-bg-color: #{$mainBgLightColor}
+  --primary-color: #{$primaryMain};
+  --background-color: #{$backgroundLight};
+  --text-color-primary: #{$textPrimaryLight};
+  --text-color-secondary: #{$textSecondaryLight};
+  --border-shadow-color: #{$borderShadowColorLightTheme};
+  --main-bg-color: #{$mainBgLightColor};
+  --box-shadow: #{$boxShadow};
 }
 
 html[data-theme='dark'] {
-  --border-shadow-color: #{$borderShadowColor};
-  --primary-bg-color: #{$mainBgDarkColor}
+  --primary-color: #{$primaryDark};
+  --background-color: #{$backgroundDark};
+  --text-color-primary: #{$textPrimaryDark};
+  --text-color-secondary: #{$textSecondaryDark};
+  --border-shadow-color: #{$borderShadowColorDarkTheme};
+  --main-bg-color: #{$mainBgDarkColor};
+  --box-shadow: #{$boxShadow};
 }

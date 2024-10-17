@@ -1,9 +1,14 @@
 {
   "name": "form-builder",
-  "version": "0.5.4",
+  "version": "1.0.0",
   "private": true,
   "type": "commonjs",
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.1.0",
+    "@mui/icons-material": "^6.1.4",
+    "@mui/material": "^6.1.4",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
@@ -16,6 +21,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.0",
     "react-router-dom": "^6.26.2",
     "react-scripts": "^5.0.1",
     "sass": "^1.79.4",

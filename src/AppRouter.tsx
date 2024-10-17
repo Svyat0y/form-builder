@@ -5,15 +5,39 @@ import App from './App';
 import { WelcomePage } from './pages/welcome-page';
 import { UserForm } from './pages/user-form';
 import { FormBuilder } from './pages/form-builder';
+import { ProtectedRout } from '@components/ProtectedRout/ProtectedRout';
+import SignIn from './pages/auth/SignIn/SignIn';
 
 export const AppRouter = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<WelcomePage />} />
-          <Route path="/form-builder" element={<FormBuilder />} />
-          <Route path="/user-form" element={<UserForm />} />
+          <Route
+            index
+            element={
+              <ProtectedRout>
+                <WelcomePage />
+              </ProtectedRout>
+            }
+          />
+          <Route
+            path="/form-builder"
+            element={
+              <ProtectedRout>
+                <FormBuilder />
+              </ProtectedRout>
+            }
+          />
+          <Route
+            path="/user-form"
+            element={
+              <ProtectedRout>
+                <UserForm />
+              </ProtectedRout>
+            }
+          />
+          <Route path={'/login'} element={<SignIn />} />
         </Route>
       </Routes>
     </Router>

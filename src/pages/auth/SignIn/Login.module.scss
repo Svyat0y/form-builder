@@ -1,0 +1,118 @@
+@import "@styles/media";
+@import "@styles/vars";
+@import "@styles/colors";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: $padding-16;
+  color: var(--text-color-primary);
+}
+
+.card {
+  width: 100%;
+  padding: $padding-16;
+  background: var(--background-color);
+  border: 1px solid var(--border-shadow-color);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  border-radius: $borderRadius-12;
+  gap: $gap-16;
+
+  @include sm {
+    max-width: 450px;
+  }
+}
+
+.title {
+  font-size: $font-size-title-2;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $gap-16;
+}
+
+.formBoxLabel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $margin-8;
+
+  & label {
+    color: var(--text-color-primary);
+  }
+}
+
+.inputWrapper {
+  max-width: 100%;
+
+  & > div {
+    padding: $padding-8 calc($padding-8 * 1.5);
+    border-radius: $borderRadius-8;
+    border: 1px solid var(--border-shadow-color);
+
+    & input {
+      overflow: hidden;
+      padding: 0;
+      color: var(--text-color-primary);
+    }
+  }
+
+  & fieldset {
+    box-shadow: none !important;
+    border: 0 !important;
+    outline: none !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.forgotBtn {
+  border: none;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0;
+  line-height: $line-height-1;
+  font-size: $font-size-body2;
+
+  &:after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgb($blackColor, 0.2);
+    transition: $transition-0-3 ease all;
+  }
+
+  &:hover {
+    &:after {
+      width: 0;
+    }
+  }
+}
+
+.linkQuestion {
+  display: flex;
+  justify-content: center;
+  gap: $gap-4;
+}
+
+.link {
+  color: var(--text-color-primary);
+}
+
+.devider {
+  &::before, &::after {
+    border-top: thin solid var(--border-shadow-color) !important;
+  }
+}
