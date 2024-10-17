@@ -5,8 +5,8 @@ import App from './App';
 import { WelcomePage } from './pages/welcome-page';
 import { UserForm } from './pages/user-form';
 import { FormBuilder } from './pages/form-builder';
-import { ProtectedRout } from '@components/ProtectedRout/ProtectedRout';
 import SignIn from './pages/auth/SignIn/SignIn';
+import { ProtectedRoute } from '@components/ProtectedRout';
 
 export const AppRouter = () => {
   return (
@@ -16,25 +16,25 @@ export const AppRouter = () => {
           <Route
             index
             element={
-              <ProtectedRout>
+              <ProtectedRoute>
                 <WelcomePage />
-              </ProtectedRout>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/form-builder"
             element={
-              <ProtectedRout>
+              <ProtectedRoute>
                 <FormBuilder />
-              </ProtectedRout>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/user-form"
             element={
-              <ProtectedRout>
+              <ProtectedRoute>
                 <UserForm />
-              </ProtectedRout>
+              </ProtectedRoute>
             }
           />
           <Route path={'/login'} element={<SignIn />} />
