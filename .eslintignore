@@ -4,3 +4,5 @@ build
 *.config.js
 *-overrides.js
 **/wrappers/**
+
+**/theme/AppTheme.tsx

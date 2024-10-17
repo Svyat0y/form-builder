@@ -14,11 +14,11 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     document.documentElement.setAttribute(
       'data-theme',
-      isDarkTheme ? Theme.Dark : Theme.Light
+      isDarkTheme ? Theme.Dark : Theme.Light,
     );
     localStorage.setItem(
       StorageKey.Theme,
-      isDarkTheme ? Theme.Dark : Theme.Light
+      isDarkTheme ? Theme.Dark : Theme.Light,
     );
   }, [isDarkTheme]);
 

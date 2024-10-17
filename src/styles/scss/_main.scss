@@ -1,5 +1,12 @@
 @use 'themes' as *;
 @use 'media' as *;
+@use 'vars' as *;
+
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+
 
 html,
 body {
@@ -16,9 +23,9 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--primary-bg-color);
-  background-attachment: fixed;
-  background-size: cover;
+  background-image: var(--main-bg-color);
+  //background-attachment: fixed;
+  //background-size: cover;
   min-height: 100vh;
 }
 

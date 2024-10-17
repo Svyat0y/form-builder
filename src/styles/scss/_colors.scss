@@ -1,8 +1,29 @@
-//colors
+// main colors
 $whiteColor: #fff;
 $blackColor: #000;
-$borderShadowColor: 0 2px 8px rgba(0, 0, 0, 0.1);
+$primaryLight: hsl(210, 100%, 80%);
+$primaryMain: hsl(210, 98%, 48%);
+$primaryDark: hsl(210, 100%, 35%);
 
-//background
-$mainBgLightColor: radial-gradient(circle, rgb(206, 204, 202) 0%, rgba(237, 238, 240, 1) 100%);
-$mainBgDarkColor: radial-gradient(circle, rgba(120, 115, 145, 1) 0%, rgba(37, 38, 40, 1) 100%);
+// additional colors
+$warningMain: hsl(45, 90%, 40%);
+$errorMain: hsl(0, 90%, 40%);
+$successMain: hsl(120, 44%, 53%);
+$infoMain: hsl(210, 100%, 65%);
+
+// backgrounds
+$backgroundLight: hsl(0, 0%, 100%);
+$backgroundDark: hsl(220, 30%, 7%);
+
+// text colors
+$textPrimaryLight: hsl(220, 20%, 25%);
+$textPrimaryDark: hsl(0, 0%, 100%);
+$textSecondaryLight: hsl(220, 20%, 35%);
+$textSecondaryDark: hsl(220, 20%, 65%);
+
+// shadows and gradients
+$borderShadowColorLightTheme: hsla(220, 20%, 80%, .5);
+$borderShadowColorDarkTheme: hsla(220, 20%, 80%, .3);
+$boxShadow: hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px;
+$mainBgLightColor: radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%));
+$mainBgDarkColor: radial-gradient(at 50% 50%, hsla(210, 100%, 10%, 0.9), hsl(221, 30%, 0%))

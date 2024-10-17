@@ -6,7 +6,7 @@ import { WelcomePage } from './pages/welcome-page';
 import { UserForm } from './pages/user-form';
 import { FormBuilder } from './pages/form-builder';
 import { ProtectedRout } from '@components/ProtectedRout/ProtectedRout';
-import { Login } from './pages/auth/Login/Login';
+import SignIn from './pages/auth/SignIn/SignIn';
 
 export const AppRouter = () => {
   return (
@@ -37,8 +37,8 @@ export const AppRouter = () => {
               </ProtectedRout>
             }
           />
+          <Route path={'/login'} element={<SignIn />} />
         </Route>
-        <Route path={'/auth/login'} element={<Login />} />
       </Routes>
     </Router>
   );
