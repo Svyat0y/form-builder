@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { FC, FormEvent } from 'react';
+//mui
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -6,32 +7,35 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { forgotPasswordStyles } from './forgotPasswordStyles';
+import { useTheme } from '@mui/material';
 
 interface ForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
 }
 
-export default function ForgotPassword({
+export const ForgotPassword: FC<ForgotPasswordProps> = ({
   open,
   handleClose,
-}: ForgotPasswordProps) {
+}) => {
+  const theme = useTheme();
+
   return (
     <Dialog
       open={open}
       onClose={handleClose}
       PaperProps={{
         component: 'form',
-        onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+        onSubmit: (event: FormEvent<HTMLFormElement>) => {
           event.preventDefault();
           handleClose();
         },
       }}
+      sx={forgotPasswordStyles(theme).wrapper}
     >
       <DialogTitle>Reset password</DialogTitle>
-      <DialogContent
-        sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}
-      >
+      <DialogContent sx={forgotPasswordStyles().content}>
         <DialogContentText>
           Enter your account&apos;s email address, and we&apos;ll send you a
           link to reset your password.
@@ -56,4 +60,4 @@ export default function ForgotPassword({
       </DialogActions>
     </Dialog>
   );
-}
+};

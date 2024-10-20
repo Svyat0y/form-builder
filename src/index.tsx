@@ -4,19 +4,16 @@ import ReactDOM from 'react-dom/client';
 import './styles/scss/_main.scss';
 //other
 import { AppRouter } from './AppRouter';
-import AppTheme from './theme/AppTheme';
-import { StyledEngineProvider } from '@mui/material';
+import { ThemeProvider } from './context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <StyledEngineProvider injectFirst>
-      <AppTheme>
-        <AppRouter />
-      </AppTheme>
-    </StyledEngineProvider>
+    <ThemeProvider>
+      <AppRouter />
+    </ThemeProvider>
   </React.StrictMode>,
 );
 

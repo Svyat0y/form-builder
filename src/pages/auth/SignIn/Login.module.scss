@@ -1,6 +1,7 @@
 @import "@styles/media";
 @import "@styles/vars";
 @import "@styles/colors";
+@import "@styles/mixin";
 
 .wrapper {
   display: flex;
@@ -13,14 +14,15 @@
 
 .card {
   width: 100%;
-  padding: $padding-16;
+  padding: $padding-24;
   background: var(--background-color);
-  border: 1px solid var(--border-shadow-color);
+  border: 1px solid var(--border-color);
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   border-radius: $borderRadius-12;
   gap: $gap-16;
+  overflow: hidden;
 
   @include sm {
     max-width: 450px;
@@ -29,6 +31,7 @@
 
 .title {
   font-size: $font-size-title-2;
+  font-weight: 600;
 }
 
 .form {
@@ -36,6 +39,12 @@
   flex-direction: column;
   width: 100%;
   gap: $gap-16;
+  max-width: 100%;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
 }
 
 .formBoxLabel {
@@ -48,28 +57,37 @@
   }
 }
 
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $margin-8;
+}
+
 .inputWrapper {
-  max-width: 100%;
+  width: 100%;
+  border-radius: $borderRadius-8;
+  border: 1px solid var(--border-color);
+  padding: $padding-8 calc($padding-8 * 1.5);
+  transition: $transition-0-3;
+  background-color: var(--background-color);
 
-  & > div {
-    padding: $padding-8 calc($padding-8 * 1.5);
-    border-radius: $borderRadius-8;
-    border: 1px solid var(--border-shadow-color);
-
-    & input {
-      overflow: hidden;
-      padding: 0;
-      color: var(--text-color-primary);
-    }
+  &:focus-within {
+    @include focus-within-effect();
+    box-shadow: 0 0 4px 4px rgba(0, 153, 250, 0.3);
   }
 
-  & fieldset {
-    box-shadow: none !important;
-    border: 0 !important;
-    outline: none !important;
-    background: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+  & input {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-size: $inputSize1;
+    background: transparent;
+    color: var(--text-color-primary);
+
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px var(--background-color) inset !important;
+      -webkit-text-fill-color: var(--text-color-primary) !important;
+    }
   }
 }
 
@@ -82,21 +100,22 @@
   padding: 0;
   line-height: $line-height-1;
   font-size: $font-size-body2;
+  color: var(--text-color-primary);
 
   &:after {
     position: absolute;
     content: "";
-    bottom: 0;
+    bottom: -2px;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 1px;
-    background: rgb($blackColor, 0.2);
+    background: var(--border-color);
     transition: $transition-0-3 ease all;
   }
 
   &:hover {
     &:after {
-      width: 0;
+      width: 100%;
     }
   }
 }
@@ -111,8 +130,146 @@
   color: var(--text-color-primary);
 }
 
-.devider {
+//divider
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+
   &::before, &::after {
-    border-top: thin solid var(--border-shadow-color) !important;
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--border-color);
+  }
+
+  & span {
+    display: inline-block;
+    padding: 0 10px;
+    z-index: 1;
+  }
+}
+
+
+//checkbox
+.checkBoxWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $gap-8;
+  cursor: pointer;
+  margin: $padding-6 0;
+
+  input[type="checkbox"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: $gap-8;
+  cursor: pointer;
+  font-size: $font-size-body2;
+
+  &:focus-within svg {
+    @include focus-within-effect();
+  }
+}
+
+.checkbox {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background: $backgroundColor1;
+  border: 2px transparent solid;
+  transition: $transition-0-3;
+  padding: 3px;
+
+  &:hover {
+    border-color: $primaryMain;
+  }
+
+  &.active {
+    border-color: $primaryMain;
+    background: $primaryMain;
+  }
+}
+
+
+.buttonWrapper {
+  padding: $padding-6 $padding-16;
+  font-weight: 600;
+  font-size: $font-size-body2;
+  min-width: 64px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--main-color-button);
+  background: var(--main-background-button);
+  border: 1px solid var(--border-color);
+  transition: $transition-0-1;
+  border-radius: $borderRadius-8;
+  gap: $gap-8;
+
+  &.socialButtonWrapper {
+    background: var(--second-background-button);
+    color: var(--second-color-button);
+  }
+
+  &:focus-within {
+    outline: 3px solid hsla(210, 98%, 48%, 0.5);
+  }
+
+  &:active {
+    opacity: 1;
+    box-shadow: $boxShadow2;
+    transform: scale(.99);
+  }
+
+  &:hover {
+    opacity: .8;
+    box-shadow: none;
+  }
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+  gap: $gap-4;
+  font-size: $font-size-body2;
+
+  span {
+    font-weight: 600;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      background: var(--border-color);
+      width: 0;
+      bottom: -2px;
+      left: 0;
+      transition: $transition-0-3;
+    }
+
+    &:hover {
+      &:before {
+        width: 100%;
+      }
+    }
   }
 }

@@ -13,7 +13,8 @@ $infoMain: hsl(210, 100%, 65%);
 
 // backgrounds
 $backgroundLight: hsl(0, 0%, 100%);
-$backgroundDark: hsl(220, 30%, 7%);
+$backgroundDark: hsl(220, 30%, 15%);
+$backgroundColor1: hsla(220, 20%, 80%, .5);
 
 // text colors
 $textPrimaryLight: hsl(220, 20%, 25%);
@@ -22,8 +23,11 @@ $textSecondaryLight: hsl(220, 20%, 35%);
 $textSecondaryDark: hsl(220, 20%, 65%);
 
 // shadows and gradients
-$borderShadowColorLightTheme: hsla(220, 20%, 80%, .5);
-$borderShadowColorDarkTheme: hsla(220, 20%, 80%, .3);
-$boxShadow: hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px;
 $mainBgLightColor: radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%));
-$mainBgDarkColor: radial-gradient(at 50% 50%, hsla(210, 100%, 10%, 0.9), hsl(221, 30%, 0%))
+$mainBgDarkColor: radial-gradient(at 50% 50%, hsla(210, 100%, 13%, .9), hsl(220, 30%, 10%));
+$boxShadow: hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px;
+$boxShadow2: 0 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+
+//borders
+$greyColor500: hsla(220, 20%, 80%, .5);
+$greyColor300: hsla(220, 20%, 80%, .3);
