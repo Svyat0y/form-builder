@@ -1,9 +1,0 @@
-@import "@styles/media";
-@import "@styles/vars";
-@import "@styles/colors";
-
-.button {
-  border: 1px solid var(--border-shadow-color) !important;
-  color: var(--text-color-primary) !important;
-  border-radius: $borderRadius-8 !important;
-}

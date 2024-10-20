@@ -3,19 +3,35 @@
 html[data-theme='light'] {
   --primary-color: #{$primaryMain};
   --background-color: #{$backgroundLight};
+  //text
   --text-color-primary: #{$textPrimaryLight};
   --text-color-secondary: #{$textSecondaryLight};
-  --border-shadow-color: #{$borderShadowColorLightTheme};
-  --main-bg-color: #{$mainBgLightColor};
+  //borders, shadows
+  --border-color: #{$greyColor500};
   --box-shadow: #{$boxShadow};
+  //buttons
+  --main-background-button: #{$backgroundDark};
+  --second-background-button: #{$backgroundLight};
+  --main-color-button: #{$textPrimaryDark};
+  --second-color-button: #{$textPrimaryLight};
+  //background
+  --main-bg-color: #{$mainBgLightColor};
 }
 
 html[data-theme='dark'] {
   --primary-color: #{$primaryDark};
   --background-color: #{$backgroundDark};
+  //text
   --text-color-primary: #{$textPrimaryDark};
   --text-color-secondary: #{$textSecondaryDark};
-  --border-shadow-color: #{$borderShadowColorDarkTheme};
-  --main-bg-color: #{$mainBgDarkColor};
+  //borders, shadows
+  --border-color: #{$greyColor300};
   --box-shadow: #{$boxShadow};
+  //buttons
+  --main-background-button: #{$backgroundLight};
+  --second-background-button: #{$backgroundDark};
+  --main-color-button: #{$textPrimaryLight};
+  --second-color-button: #{$textPrimaryDark};
+  //background
+  --main-bg-color: #{$mainBgDarkColor};
 }
