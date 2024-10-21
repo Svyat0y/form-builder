@@ -1,26 +1,24 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import App from './App';
+import { ROUTES } from './routes/routes';
 //components
 import { UserForm } from './pages/user-form';
 import { FormBuilder } from './pages/form-builder';
-import { Login } from './pages/auth/SignIn/Login';
 import { WelcomePage } from './pages/welcome-page';
-import { AuthProvider } from './context/AuthContext';
+import { Signup } from './pages/auth/Signup';
+import { Signin } from './pages/auth/SignIn';
 
 export const AppRouter = () => {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<WelcomePage />} />
-            <Route path="/form-builder" element={<FormBuilder />} />
-            <Route path="/user-form" element={<UserForm />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <Routes>
+      <Route path={ROUTES.home} element={<App />}>
+        <Route index element={<WelcomePage />} />
+        <Route path={ROUTES.formBuilder} element={<FormBuilder />} />
+        <Route path={ROUTES.userForm} element={<UserForm />} />
+      </Route>
+      <Route path={ROUTES.signUp} element={<Signup />} />
+      <Route path={ROUTES.signIn} element={<Signin />} />
+    </Routes>
   );
 };

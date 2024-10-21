@@ -1,15 +1,15 @@
+import { Outlet } from 'react-router-dom';
 //components
 import { Container } from '@components/Container';
-//other
-import { Outlet } from 'react-router-dom';
+import { Layout } from '@components/Layout';
 
 function App() {
   return (
-    <div className="app">
+    <Layout>
       <Container>
         <Outlet />
       </Container>
-    </div>
+    </Layout>
   );
 }
 

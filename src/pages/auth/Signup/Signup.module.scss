@@ -1,0 +1,98 @@
+@import "@styles/media";
+@import "@styles/vars";
+@import "@styles/colors";
+@import "@styles/mixins";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: $padding-16;
+  color: var(--text-color-primary);
+}
+
+.card {
+  width: 100%;
+  padding: $padding-24;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  border-radius: $borderRadius-12;
+  gap: $gap-16;
+  overflow: hidden;
+
+  @include sm {
+    max-width: 450px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $gap-16;
+  max-width: 100%;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+}
+
+.formBoxLabel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $margin-8;
+
+  & label {
+    color: var(--text-color-primary);
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $margin-8;
+}
+
+.linkQuestion {
+  display: flex;
+  justify-content: center;
+  gap: $gap-4;
+}
+
+.link {
+  color: var(--text-color-primary);
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+  gap: $gap-4;
+  font-size: $font-size-body2;
+
+  span {
+    font-weight: 600;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      background: var(--border-color);
+      width: 0;
+      bottom: -2px;
+      left: 0;
+      transition: $transition-0-3;
+    }
+
+    &:hover {
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+}
