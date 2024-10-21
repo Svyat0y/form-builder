@@ -1,0 +1,43 @@
+@import '@styles/vars';
+@import '@styles/colors';
+
+.wrapper {
+  padding: $padding-6 $padding-16;
+  font-weight: 600;
+  font-size: $font-size-body2;
+  min-width: 64px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: $transition-0-1;
+  border-radius: $borderRadius-8;
+  gap: $gap-8;
+
+  &.primary {
+    color: var(--main-color-button);
+    background: var(--main-background-button);
+  }
+
+  &.secondary {
+    background: var(--second-background-button);
+    color: var(--second-color-button);
+  }
+
+  &:focus-within {
+    outline: 3px solid hsla(210, 98%, 48%, 0.5);
+  }
+
+  &:active {
+    opacity: 1;
+    box-shadow: $boxShadow2;
+    transform: scale(.99);
+  }
+
+  &:hover {
+    opacity: .8;
+    box-shadow: none;
+  }
+}
