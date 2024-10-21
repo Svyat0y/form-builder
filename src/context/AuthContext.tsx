@@ -1,5 +1,6 @@
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../routes/routes';
 
 interface IAuthContext {
   authToken: string | null;
@@ -13,6 +14,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const fetchUserData = async () => {
     return new Promise((resolve, reject) => {
@@ -46,7 +48,9 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
       navigate('/');
     } catch (error: any) {
       console.log(error);
-      navigate('/login');
+      if (location.pathname !== ROUTES.signUp) {
+        navigate(ROUTES.signIn);
+      }
     } finally {
       setIsLoading(false);
     }

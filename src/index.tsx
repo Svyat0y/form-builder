@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-//styles
+import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/scss/_main.scss';
 //other
 import { AppRouter } from './AppRouter';
 import { ThemeProvider } from './context';
+import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -12,7 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <AppRouter />
+      <Router>
+        <AuthProvider>
+          <AppRouter />
+        </AuthProvider>
+      </Router>
     </ThemeProvider>
   </React.StrictMode>,
 );
