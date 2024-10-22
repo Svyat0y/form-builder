@@ -2,7 +2,7 @@
 @import '@styles/colors';
 
 .wrapper {
-  padding: $padding-6 $padding-16;
+  padding: $padding2 $padding4;
   font-weight: 600;
   font-size: $font-size-body2;
   min-width: 64px;
@@ -12,9 +12,9 @@
   justify-content: center;
   cursor: pointer;
   border: 1px solid var(--border-color);
-  transition: $transition-0-1;
-  border-radius: $borderRadius-8;
-  gap: $gap-8;
+  transition: $transition1;
+  border-radius: $borderRadius2;
+  gap: $gap2;
 
   &.primary {
     color: var(--main-color-button);

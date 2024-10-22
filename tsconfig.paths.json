@@ -4,14 +4,10 @@
     "paths": {
       "@components/*": ["components/*"],
       "@styles/*": ["styles/scss/*"],
-      "@actions/*": ["actions/*"],
       "@api/*": ["api/*"],
-      "@common/*": ["common/*"],
-      "@containers/*": ["containers/*"],
-      "@helper/*": ["helper/*"],
-      "@icon/*": ["icon/*"],
-      "@reducers/*": ["reducers/*"],
-      "@hooks/*": ["hooks/*"]
+      "@helpers/*": ["helpers/*"],
+      "@hooks/*": ["hooks/*"],
+      "@app-types/*": ["types/*"]
     }
   }
 }

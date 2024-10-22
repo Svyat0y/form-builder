@@ -1,5 +1,7 @@
+import { MouseEvent } from 'react';
 import styles from './Signin.module.scss';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../routes/routes';
 //components
 import { Icons } from '@components/CustomIcons/CustomIcons';
 import { Input } from '@components/formElements/Input';
@@ -9,9 +11,24 @@ import { Title } from '@components/Title';
 import { Button } from '@components/ui/Button';
 import { Layout } from '@components/Layout';
 import { Container } from '@components/Container';
-import { ROUTES } from '../../../routes/routes';
+import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword';
+//sweetalert
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 export const Signin = () => {
+  const handleClickRightLabel = (e: MouseEvent) => {
+    e.preventDefault();
+    MySwal.fire({
+      html: <ForgotPassword onCloseSwal={() => MySwal.close()} />,
+      showConfirmButton: false,
+      customClass: {
+        popup: styles.myCustomModal,
+      },
+    });
+  };
+
   return (
     <Layout>
       <Container>
@@ -31,6 +48,7 @@ export const Signin = () => {
                 type="password"
                 autoComplete="current-password"
                 isRightItemInLabel="Forgot your password?"
+                handleClickRightLabel={handleClickRightLabel}
               />
               <Checkbox label="Remember me" />
               <Button variant="primary">Sign in</Button>

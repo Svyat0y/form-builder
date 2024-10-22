@@ -6,14 +6,10 @@ module.exports = function override(config) {
     ...config.resolve.alias,
     '@components': path.resolve(__dirname, 'src/components'),
     '@styles': path.resolve(__dirname, 'src/styles/scss'),
-    '@actions': path.resolve(__dirname, 'src/actions'),
     '@api': path.resolve(__dirname, 'src/api'),
-    '@common': path.resolve(__dirname, 'src/common'),
-    '@containers': path.resolve(__dirname, 'src/containers'),
-    '@helper': path.resolve(__dirname, 'src/helper'),
-    '@icon': path.resolve(__dirname, 'src/icon'),
-    '@reducers': path.resolve(__dirname, 'src/reducers'),
+    '@helpers': path.resolve(__dirname, 'src/helpers'),
     '@hooks': path.resolve(__dirname, 'src/hooks'),
+    '@app-types': path.resolve(__dirname, 'src/types'),
   };
   return config;
 };

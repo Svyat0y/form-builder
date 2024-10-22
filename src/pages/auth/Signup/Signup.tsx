@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Signup.module.scss';
+import { ROUTES } from '../../../routes/routes';
 //components
 import { Icons } from '@components/CustomIcons/CustomIcons';
 import { Title } from '@components/Title';
@@ -9,7 +10,6 @@ import { Button } from '@components/ui/Button';
 import { Divider } from '@components/Devider';
 import { Layout } from '@components/Layout';
 import { Container } from '@components/Container';
-import { ROUTES } from '../../../routes/routes';
 
 export const Signup = () => {
   return (
@@ -31,7 +31,6 @@ export const Signup = () => {
                 label="Password"
                 type="password"
                 autoComplete="current-password"
-                isRightItemInLabel="Forgot your password?"
               />
               <Checkbox label="I want to receive updates via email." />
               <Button variant="primary">Sign up</Button>

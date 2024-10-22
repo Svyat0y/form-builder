@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode, FC } from 'react';
-import { StorageKey, Theme } from '../types/enums';
+import { StorageKey, Theme } from '@app-types/enums';
 
 export const ThemeContext = createContext({
   isDarkTheme: false,

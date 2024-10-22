@@ -11,8 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: $gap-8;
-  margin: $padding-6 0;
+  gap: $gap2;
+  margin: $padding2 0;
 
   input[type="checkbox"] {
     clip: rect(0 0 0 0);
@@ -28,7 +28,7 @@
 .checkboxLabel {
   display: flex;
   align-items: center;
-  gap: $gap-8;
+  gap: $gap2;
   cursor: pointer;
   font-size: $font-size-body2;
 
@@ -44,7 +44,7 @@
   border-radius: 5px;
   background: $backgroundColor1;
   border: 2px transparent solid;
-  transition: $transition-0-3;
+  transition: $transition2;
   padding: 3px;
 
   &:hover {

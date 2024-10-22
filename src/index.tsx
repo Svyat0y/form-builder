@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/scss/_main.scss';
-//other
+//providers
 import { AppRouter } from './AppRouter';
-import { ThemeProvider } from './context';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, ThemeProvider } from './context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

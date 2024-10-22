@@ -1,64 +1,58 @@
 // Font sizes
 $font-size-title-1: clamp(2.5rem, 5vw, 3rem);
-$font-size-title-2: clamp(2rem, 4vw, 2.5rem);
-$font-size-title-3: clamp(1.75rem, 3.5vw, 2rem);
-$font-size-title-4: clamp(1.5rem, 3vw, 1.75rem);
-$font-size-title-5: clamp(1.25rem, 2.5vw, 1.5rem);
-$font-size-title-6: clamp(1rem, 2vw, 1.25rem);
+$font-size-title-2: clamp(2.25rem, 4vw, 2.5rem);
+$font-size-title-3: clamp(2rem, 3.5vw, 2.25rem);
+$font-size-title-4: clamp(1.75rem, 3vw, 2rem);
+$font-size-title-5: clamp(1.5rem, 2.5vw, 1.75rem);
+$font-size-title-6: clamp(1.25rem, 2vw, 1.5rem);
 
-$font-size-subtitle1: clamp(1rem, 2vw, 1.25rem);
-$font-size-subtitle2: clamp(0.875rem, 1.5vw, 1rem);
+$font-size-subtitle1: clamp(1.25rem, 2vw, 1.5rem);
+$font-size-subtitle2: clamp(1rem, 1.5vw, 1.25rem);
 $font-size-body1: clamp(1rem, 1.5vw, 1.125rem);
 $font-size-body2: clamp(0.875rem, 1.5vw, 1rem);
 $font-size-caption: clamp(0.75rem, 1vw, 0.875rem);
 
 $inputSize1: 1rem;
 
-// Font weights
-$font-weight-bold: 600;
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-bold: 700;
-
 // Line-height options
 $line-height-normal: normal;
-$line-height-1: 1;
-$line-height-1-5: 1.5;
-$line-height-2: 2;
+$line-height1: 1;
+$line-height2: 1.5;
+$line-height3: 2;
 
 // Letter spacing
 $letter-spacing-h1: -0.5px;
 
 // Padding sizes
-$padding-4: 4px;
-$padding-6: 6px;
-$padding-8: 8px;
-$padding-16: 16px;
-$padding-24: 24px;
-$padding-32: 32px;
+$padding1: 4px;
+$padding2: 6px;
+$padding3: 8px;
+$padding4: 16px;
+$padding5: 24px;
+$padding6: 32px;
 
 // Margin sizes
-$margin-4: 4px;
-$margin-6: 6px;
-$margin-8: 8px;
-$margin-16: 16px;
-$margin-24: 24px;
-$margin-32: 32px;
+$margin1: 4px;
+$margin2: 6px;
+$margin3: 8px;
+$margin4: 16px;
+$margin5: 24px;
+$margin6: 32px;
 
 // Gap sizes
-$gap-4: 4px;
-$gap-8: 8px;
-$gap-16: 16px;
-$gap-24: 24px;
-$gap-32: 32px;
+$gap1: 4px;
+$gap2: 8px;
+$gap3: 16px;
+$gap4: 24px;
+$gap5: 32px;
 
 // Transition
-$transition-0-1: .1s;
-$transition-0-3: .3s;
-$transition-0-6: .6s;
+$transition1: .1s;
+$transition2: .3s;
+$transition3: .6s;
 
 //Border radius
-$borderRadius-4: 4px;
-$borderRadius-8: 8px;
-$borderRadius-12: 12px;
-$borderRadius-16: 16px;
+$borderRadius1: 4px;
+$borderRadius2: 8px;
+$borderRadius3: 12px;
+$borderRadius4: 16px;

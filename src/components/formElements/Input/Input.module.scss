@@ -9,7 +9,7 @@
 .labelWrapper {
   display: flex;
   justify-content: space-between;
-  margin-bottom: $margin-8;
+  margin-bottom: $margin3;
 
   & label {
     color: var(--text-color-primary);
@@ -18,10 +18,10 @@
 
 .inputWrapper {
   width: 100%;
-  border-radius: $borderRadius-8;
+  border-radius: $borderRadius2;
   border: 1px solid var(--border-color);
-  padding: $padding-8 calc($padding-8 * 1.5);
-  transition: $transition-0-3;
+  padding: $padding3 calc($padding3 * 1.5);
+  transition: $transition2;
   background-color: var(--background-color);
 
   &:focus-within {
@@ -50,7 +50,7 @@
   cursor: pointer;
   display: inline-block;
   padding: 0;
-  line-height: $line-height-1;
+  line-height: $line-height1;
   font-size: $font-size-body2;
   color: var(--text-color-primary);
 
@@ -62,7 +62,7 @@
     width: 0;
     height: 1px;
     background: var(--border-color);
-    transition: $transition-0-3 ease all;
+    transition: $transition2 ease all;
   }
 
   &:hover {
