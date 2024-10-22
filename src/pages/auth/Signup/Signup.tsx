@@ -31,7 +31,6 @@ export const Signup = () => {
                 label="Password"
                 type="password"
                 autoComplete="current-password"
-                isRightItemInLabel="Forgot your password?"
               />
               <Checkbox label="I want to receive updates via email." />
               <Button variant="primary">Sign up</Button>
