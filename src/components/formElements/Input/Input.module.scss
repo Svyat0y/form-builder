@@ -26,7 +26,6 @@
 
   &:focus-within {
     @include focus-within-effect();
-    box-shadow: 0 0 4px 4px rgba(0, 153, 250, 0.3);
   }
 
   & input {
