@@ -8,13 +8,19 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'primary' | 'secondary';
 }
 
-export const Button: FC<IButtonProps> = ({ children, icon, variant }) => {
+export const Button: FC<IButtonProps> = ({
+  children,
+  icon,
+  variant,
+  ...props
+}) => {
   return (
     <button
       className={classNames(styles.wrapper, {
         [styles.primary]: variant === 'primary',
         [styles.secondary]: variant === 'secondary',
       })}
+      {...props}
     >
       {icon && icon}
       {children}
