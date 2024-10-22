@@ -3,32 +3,6 @@
 @import "@styles/colors";
 @import "@styles/mixins";
 
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: $padding4;
-  color: var(--text-color-primary);
-}
-
-.card {
-  width: 100%;
-  padding: $padding5;
-  background: var(--background-color);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--box-shadow);
-  display: flex;
-  flex-direction: column;
-  border-radius: $borderRadius3;
-  gap: $gap3;
-  overflow: hidden;
-
-  @include sm {
-    max-width: 450px;
-  }
-}
-
 .form {
   display: flex;
   flex-direction: column;
