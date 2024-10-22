@@ -1,5 +1,6 @@
 import styles from './Signin.module.scss';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../routes/routes';
 //components
 import { Icons } from '@components/CustomIcons/CustomIcons';
 import { Input } from '@components/formElements/Input';
@@ -9,7 +10,6 @@ import { Title } from '@components/Title';
 import { Button } from '@components/ui/Button';
 import { Layout } from '@components/Layout';
 import { Container } from '@components/Container';
-import { ROUTES } from '../../../routes/routes';
 
 export const Signin = () => {
   return (
