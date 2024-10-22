@@ -1,3 +1,4 @@
-@mixin focus-within-effect($border-color: rgba(0, 180, 250, 0.9)) {
+@mixin focus-within-effect($border-color: rgba(0, 180, 250, 0.9), $boxShadow: 0 0 4px 4px rgba(0, 153, 250, 0.2)) {
   border-color: $border-color;
+  box-shadow: $boxShadow;
 }
