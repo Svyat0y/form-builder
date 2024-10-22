@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent } from 'react';
 import styles from './Signin.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../routes/routes';

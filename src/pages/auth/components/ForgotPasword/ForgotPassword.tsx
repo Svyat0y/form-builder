@@ -1,10 +1,14 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import styles from './ForgotPassword.module.scss';
 //components
 import { Input } from '@components/formElements/Input';
 import { Button } from '@components/ui/Button';
 
-export const ForgotPassword = ({ onCloseSwal }: any) => {
+interface ForgotPasswordProps {
+  onCloseSwal: () => void;
+}
+
+export const ForgotPassword: FC<ForgotPasswordProps> = ({ onCloseSwal }) => {
   const [state, setState] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
