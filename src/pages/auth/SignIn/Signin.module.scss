@@ -8,20 +8,20 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: $padding-16;
+  padding: $padding4;
   color: var(--text-color-primary);
 }
 
 .card {
   width: 100%;
-  padding: $padding-24;
+  padding: $padding5;
   background: var(--background-color);
   border: 1px solid var(--border-color);
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
-  border-radius: $borderRadius-12;
-  gap: $gap-16;
+  border-radius: $borderRadius3;
+  gap: $gap3;
   overflow: hidden;
 
   @include sm {
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: $gap-16;
+  gap: $gap3;
   max-width: 100%;
 }
 
@@ -45,7 +45,7 @@
 .formBoxLabel {
   display: flex;
   justify-content: space-between;
-  margin-bottom: $margin-8;
+  margin-bottom: $margin3;
 
   & label {
     color: var(--text-color-primary);
@@ -55,13 +55,13 @@
 .head {
   display: flex;
   justify-content: space-between;
-  margin-bottom: $margin-8;
+  margin-bottom: $margin3;
 }
 
 .linkQuestion {
   display: flex;
   justify-content: center;
-  gap: $gap-4;
+  gap: $gap1;
 }
 
 .link {
@@ -71,7 +71,7 @@
 .question {
   display: flex;
   justify-content: center;
-  gap: $gap-4;
+  gap: $gap1;
   font-size: $font-size-body2;
 
   span {
@@ -86,7 +86,7 @@
       width: 0;
       bottom: -2px;
       left: 0;
-      transition: $transition-0-3;
+      transition: $transition2;
     }
 
     &:hover {
@@ -102,5 +102,5 @@
 //sweetalert
 .myCustomModal {
   background: var(--background-color);
-  border-radius: $borderRadius-12;
+  border-radius: $borderRadius3;
 }
