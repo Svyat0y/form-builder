@@ -1,11 +1,10 @@
 {
   "name": "form-builder",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "type": "commonjs",
   "dependencies": {
     "@mui/icons-material": "^6.1.4",
-    "@mui/material": "^6.1.4",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",

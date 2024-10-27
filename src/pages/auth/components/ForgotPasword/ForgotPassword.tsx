@@ -5,10 +5,10 @@ import { Input } from '@components/formElements/Input';
 import { Button } from '@components/ui/Button';
 
 interface ForgotPasswordProps {
-  onCloseSwal: () => void;
+  onClose?: () => void;
 }
 
-export const ForgotPassword: FC<ForgotPasswordProps> = ({ onCloseSwal }) => {
+export const ForgotPassword: FC<ForgotPasswordProps> = ({ onClose }) => {
   const [state, setState] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,9 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onCloseSwal }) => {
   };
 
   const handleReset = () => {
-    setTimeout(() => onCloseSwal(), 2000);
+    if (onClose) {
+      setTimeout(() => onClose(), 2000);
+    }
   };
 
   return (
@@ -31,7 +33,7 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onCloseSwal }) => {
         placeholder="Email address"
       />
       <div className={styles.navigation}>
-        <Button variant="secondary" onClick={onCloseSwal}>
+        <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
         <Button variant="primary" onClick={handleReset}>
