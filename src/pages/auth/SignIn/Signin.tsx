@@ -12,22 +12,14 @@ import { Button } from '@components/ui/Button';
 import { Layout } from '@components/Layout';
 import { Container } from '@components/Container';
 import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword';
-//sweetalert
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { Card } from '../components/Card/Card';
-const MySwal = withReactContent(Swal);
+//sweetalert
+import { onCallSweetAlertMain } from '../../../utils/sweetAlert';
 
 export const Signin = () => {
   const handleClickRightLabel = (e: MouseEvent) => {
     e.preventDefault();
-    MySwal.fire({
-      html: <ForgotPassword onCloseSwal={() => MySwal.close()} />,
-      showConfirmButton: false,
-      customClass: {
-        popup: styles.myCustomModal,
-      },
-    });
+    onCallSweetAlertMain(ForgotPassword);
   };
 
   return (

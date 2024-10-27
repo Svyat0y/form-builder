@@ -5,7 +5,6 @@ import { ROUTES } from '../../../routes/routes';
 import { Icons } from '@components/CustomIcons/CustomIcons';
 import { Title } from '@components/Title';
 import { Input } from '@components/formElements/Input';
-import { Checkbox } from '@components/formElements/checkbox';
 import { Button } from '@components/ui/Button';
 import { Divider } from '@components/Devider';
 import { Layout } from '@components/Layout';
@@ -27,7 +26,6 @@ export const Signup = () => {
               type="password"
               autoComplete="current-password"
             />
-            <Checkbox label="I want to receive updates via email." />
             <Button variant="primary">Sign up</Button>
 
             <p className={styles.question}>
