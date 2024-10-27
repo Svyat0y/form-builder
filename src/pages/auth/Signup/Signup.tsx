@@ -36,10 +36,16 @@ export const Signup = () => {
             </p>
           </form>
           <Divider label="or" />
-          <Button variant="secondary" icon={<Icons.Google />}>
+          <Button
+            variant="secondary"
+            icon={<Icons.Google width={24} height={24} />}
+          >
             Sign in with Google
           </Button>
-          <Button variant="secondary" icon={<Icons.Facebook />}>
+          <Button
+            variant="secondary"
+            icon={<Icons.Facebook width={24} height={24} />}
+          >
             Sign in with Facebook
           </Button>
         </Card>
