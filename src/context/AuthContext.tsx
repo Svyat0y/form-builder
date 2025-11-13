@@ -1,6 +1,7 @@
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes';
+import { Ring } from 'react-spinners-css';
 
 interface IAuthContext {
   authToken: string | null;
@@ -70,7 +71,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
           height: '100vh',
         }}
       >
-        Loading...
+        <Ring color="hsl(210, 100%, 35%)" />
       </div>
     );
   }
