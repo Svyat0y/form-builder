@@ -1,4 +1,5 @@
 export enum StorageKey {
   Theme = 'theme',
-  AuthToken = 'authToken',
+  AccessToken = 'accessToken',
+  User = 'user',
 }
