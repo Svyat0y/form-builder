@@ -1,6 +1,6 @@
 {
   "name": "form-builder",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "private": true,
   "type": "commonjs",
   "dependencies": {
@@ -32,7 +32,8 @@
     "format": "prettier --write '**/*.{js,ts,tsx,json,css,md}'",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
-    "version:major": "npm version major"
+    "version:major": "npm version major",
+    "postversion": "git push --follow-tags"
   },
   "eslintConfig": {
     "extends": [
