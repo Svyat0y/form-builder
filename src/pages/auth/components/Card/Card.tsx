@@ -1,9 +1,9 @@
-import { FC, ReactNode } from 'react';
-import styles from './Card.module.scss';
-import { SwitchTheme } from '@components/SwitchTheme';
+import { FC, ReactNode } from 'react'
+import styles from './Card.module.scss'
+import { SwitchTheme } from '@components/SwitchTheme'
 
 interface CardProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const Card: FC<CardProps> = ({ children }) => {
@@ -12,5 +12,5 @@ export const Card: FC<CardProps> = ({ children }) => {
       <SwitchTheme />
       <div className={styles.card}>{children}</div>
     </div>
-  );
-};
+  )
+}

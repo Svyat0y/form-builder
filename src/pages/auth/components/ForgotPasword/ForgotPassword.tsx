@@ -1,25 +1,25 @@
-import { ChangeEvent, FC, useState } from 'react';
-import styles from './ForgotPassword.module.scss';
+import { ChangeEvent, FC, useState } from 'react'
+import styles from './ForgotPassword.module.scss'
 //components
-import { Input } from '@components/formElements/Input';
-import { Button } from '@components/ui/Button';
+import { Input } from '@components/formElements/Input'
+import { Button } from '@components/ui/Button'
 
 interface ForgotPasswordProps {
-  onClose?: () => void;
+  onClose?: () => void
 }
 
 export const ForgotPassword: FC<ForgotPasswordProps> = ({ onClose }) => {
-  const [state, setState] = useState('');
+  const [state, setState] = useState('')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setState(e.target.value);
-  };
+    setState(e.target.value)
+  }
 
   const handleReset = () => {
     if (onClose) {
-      setTimeout(() => onClose(), 2000);
+      setTimeout(() => onClose(), 2000)
     }
-  };
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -41,5 +41,5 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onClose }) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,2 +1,2 @@
-export * from './StorageKey';
-export * from './Theme';
+export * from './StorageKey'
+export * from './Theme'

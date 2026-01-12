@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import styles from './Header.module.scss';
+import { FC } from 'react'
+import styles from './Header.module.scss'
 //components
-import { Burger } from '@components/ui/Burger';
+import { Burger } from '@components/ui/Burger'
 
 export const Header: FC = () => {
   return (
@@ -11,5 +11,5 @@ export const Header: FC = () => {
         <Burger />
       </div>
     </header>
-  );
-};
+  )
+}

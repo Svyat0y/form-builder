@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react';
-import styles from './Title.module.scss';
-import classNames from 'classnames';
+import { FC, ReactNode } from 'react'
+import styles from './Title.module.scss'
+import classNames from 'classnames'
 
 interface ITitleProps {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  children: ReactNode;
-  className?: string;
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  children: ReactNode
+  className?: string
 }
 
 export const Title: FC<ITitleProps> = ({
@@ -26,5 +26,5 @@ export const Title: FC<ITitleProps> = ({
     >
       {children}
     </Tag>
-  );
-};
+  )
+}

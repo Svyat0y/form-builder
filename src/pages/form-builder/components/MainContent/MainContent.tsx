@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import styles from './MainContent.module.scss';
+import { FC } from 'react'
+import styles from './MainContent.module.scss'
 
 export const MainContent: FC = () => {
   return (
@@ -15,5 +15,5 @@ export const MainContent: FC = () => {
         </p>
       </div>
     </main>
-  );
-};
+  )
+}

@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'
 //components
-import { Container } from '@components/Container';
-import { Layout } from '@components/Layout';
+import { Container } from '@components/Container'
+import { Layout } from '@components/Layout'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Outlet />
       </Container>
     </Layout>
-  );
+  )
 }
 
-export default App;
+export default App

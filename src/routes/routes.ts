@@ -4,4 +4,4 @@ export const ROUTES = {
   signUp: '/signup',
   userForm: '/user-form',
   formBuilder: '/form-builder',
-};
+}

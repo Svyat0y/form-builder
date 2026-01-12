@@ -1,1 +1,1 @@
-export * from './useResizableSidebar';
+export * from './useResizableSidebar'

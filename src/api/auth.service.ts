@@ -1,104 +1,114 @@
-import { api } from '@api/axiosInstance';
-import { StorageKey } from '@app-types/enums';
-import { IUser } from '@app-types/interfaces/user.interface';
+import { api } from '@api/axiosInstance'
+import { StorageKey } from '@app-types/enums'
+import { IUser } from '@app-types/interfaces/user.interface'
 
 export interface LoginCredentials {
-  email: string;
-  password: string;
-  rememberMe?: boolean;
+  email: string
+  password: string
+  rememberMe?: boolean
 }
 
 export interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
+  name: string
+  email: string
+  password: string
 }
 
 export interface AuthResponse {
-  message: string;
+  message: string
   user: {
-    id: string;
-    email: string;
-    name: string;
-    createdAt: string;
-    accessToken: string;
-  };
+    id: string
+    email: string
+    name: string
+    createdAt: string
+    accessToken: string
+  }
 }
 
 class AuthService {
   async register(data: RegisterData): Promise<AuthResponse> {
-    const response = await api.post('/auth/register', data);
-    const { user } = response.data;
+    const response = await api.post('/auth/register', data)
 
-    this.setAccessToken(user.accessToken);
-    this.setUser({
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      createdAt: user.createdAt,
-    });
-
-    return response.data;
+    return response.data
   }
 
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response = await api.post('/auth/login', credentials);
-    const { user } = response.data;
+    const response = await api.post('/auth/login', credentials)
+    const { user } = response.data
 
-    this.setAccessToken(user.accessToken);
-    this.setUser({
+    this.setAccessTokenToLS(user.accessToken)
+    this.setUserToLs({
       id: user.id,
       email: user.email,
       name: user.name,
       createdAt: user.createdAt,
-    });
+    })
 
-    return response.data;
+    return response.data
   }
 
-  // async refreshTokens(): Promise<{ accessToken: string }> {
-  //   const response = await api.post('/auth/refresh', {});
-  //   const { user } = response.data;
-  //
-  //   this.setAccessToken(user.accessToken);
-  //
-  //   return {
-  //     accessToken: user.accessToken,
-  //   };
-  // }
+  async refreshTokens(): Promise<{ accessToken: string } | null> {
+    try {
+      const response = await api.post('/auth/refresh', {})
+
+      if (response.data.user?.accessToken) {
+        this.setAccessTokenToLS(response.data.user.accessToken)
+        this.setUserToLs(response.data.user)
+      }
+
+      return {
+        accessToken: response.data.user.accessToken,
+      }
+    } catch (error) {
+      console.log('Refresh failed - no valid refresh token', error)
+      this.clearTokensFromLS()
+      return null
+    }
+  }
+
+  async getProfile(): Promise<IUser | null> {
+    try {
+      const response = await api.get('/users/me')
+      return {
+        id: response.data.id,
+        email: response.data.email,
+        name: response.data.name,
+        createdAt: response.data.createdAt,
+      }
+    } catch (error) {
+      console.log('Failed to get user profile', error)
+      return null
+    }
+  }
 
   logout(): void {
-    this.clearTokens();
-    api.post('/auth/logout').catch(() => {});
+    this.clearTokensFromLS()
+    api.post('/auth/logout').catch(() => {})
   }
 
   // getters
-  getAccessToken(): string | null {
-    return localStorage.getItem(StorageKey.AccessToken);
+  getAccessTokenFromLS(): string | null {
+    return localStorage.getItem(StorageKey.AccessToken)
   }
 
-  getUser(): IUser | null {
-    const userStr = localStorage.getItem(StorageKey.User);
-    return userStr ? JSON.parse(userStr) : null;
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.getAccessToken();
+  getUserFormLS(): IUser | null {
+    const userStr = localStorage.getItem(StorageKey.User)
+    return userStr ? JSON.parse(userStr) : null
   }
 
   // setters
-  setAccessToken(token: string): void {
-    localStorage.setItem(StorageKey.AccessToken, token);
+  setAccessTokenToLS(token: string): void {
+    localStorage.setItem(StorageKey.AccessToken, token)
   }
 
-  setUser(user: IUser): void {
-    localStorage.setItem(StorageKey.User, JSON.stringify(user));
+  setUserToLs(user: IUser): void {
+    localStorage.setItem(StorageKey.User, JSON.stringify(user))
   }
 
-  clearTokens(): void {
-    localStorage.removeItem(StorageKey.AccessToken);
-    localStorage.removeItem(StorageKey.User);
+  clearTokensFromLS(): void {
+    localStorage.removeItem(StorageKey.AccessToken)
+    localStorage.removeItem(StorageKey.User)
   }
 }
 
-export const authService = new AuthService();
+export const authService = new AuthService()

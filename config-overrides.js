@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const path = require('path');
+const path = require('path')
 
 module.exports = function override(config) {
   config.resolve.alias = {
@@ -10,6 +10,6 @@ module.exports = function override(config) {
     '@helpers': path.resolve(__dirname, 'src/helpers'),
     '@hooks': path.resolve(__dirname, 'src/hooks'),
     '@app-types': path.resolve(__dirname, 'src/types'),
-  };
-  return config;
-};
+  }
+  return config
+}
