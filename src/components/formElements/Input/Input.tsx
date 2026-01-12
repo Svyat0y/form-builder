@@ -1,18 +1,18 @@
-import { ChangeEvent, FC, MouseEvent } from 'react';
-import styles from './Input.module.scss';
-import classNames from 'classnames';
+import { ChangeEvent, FC, MouseEvent } from 'react'
+import styles from './Input.module.scss'
+import classNames from 'classnames'
 
 interface IInputProps {
-  id: string;
-  label: string;
-  type: string;
-  autoComplete?: string;
-  className?: string;
-  isRightItemInLabel?: string;
-  handleClickRightLabel?: (e: MouseEvent<HTMLButtonElement>) => void;
-  placeholder?: string;
-  value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  id: string
+  label: string
+  type: string
+  autoComplete?: string
+  className?: string
+  isRightItemInLabel?: string
+  handleClickRightLabel?: (e: MouseEvent<HTMLButtonElement>) => void
+  placeholder?: string
+  value?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Input: FC<IInputProps> = ({
@@ -52,5 +52,5 @@ export const Input: FC<IInputProps> = ({
       </div>
       <span className={styles.helperText}></span>
     </div>
-  );
-};
+  )
+}

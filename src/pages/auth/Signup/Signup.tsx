@@ -1,60 +1,39 @@
-import { Link } from 'react-router-dom';
-import styles from './Signup.module.scss';
-import { ROUTES } from '../../../routes/routes';
+import { Link } from 'react-router-dom'
+import styles from './Signup.module.scss'
+import { ROUTES } from '../../../routes/routes'
 //components
-import { Icons } from '@components/CustomIcons/CustomIcons';
-import { Title } from '@components/Title';
-import { Input } from '@components/formElements/Input';
-import { Button } from '@components/ui/Button';
-import { Divider } from '@components/Devider';
-import { Layout } from '@components/Layout';
-import { Container } from '@components/Container';
-import { Card } from '../components/Card/Card';
-import { FormEvent, useState } from 'react';
-import { authService } from '@api/auth.service';
-import { showSimpleAlert } from '../../../utils/sweetAlert';
+import { Icons } from '@components/CustomIcons/CustomIcons'
+import { Title } from '@components/Title'
+import { Input } from '@components/formElements/Input'
+import { Button } from '@components/ui/Button'
+import { Divider } from '@components/Devider'
+import { Layout } from '@components/Layout'
+import { Container } from '@components/Container'
+import { Card } from '../components/Card/Card'
+import { FormEvent, useState } from 'react'
+import { showSimpleAlert } from '../../../utils/sweetAlert'
+import { useAuth } from '../../../context'
 
 export const Signup = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const { register, isLoading } = useAuth()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const onRegistration = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
 
     if (!name || !email || !password) {
-      await showSimpleAlert('error', 'Error', 'All fields are required');
-      return;
+      await showSimpleAlert('error', 'Error', 'All fields are required')
+      return
     }
-
-    setIsLoading(true);
 
     try {
-      await authService.register({
-        name,
-        email,
-        password,
-      });
-
-      await showSimpleAlert(
-        'success',
-        '',
-        'Registration completed successfully. You can now log in.',
-      );
-
-      setName('');
-      setEmail('');
-      setPassword('');
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message || 'Registration failed';
-
-      await showSimpleAlert('error', 'Error', errorMessage);
-    } finally {
-      setIsLoading(false);
+      await register({ name, email, password })
+    } catch (error) {
+      console.error('Registration error:', error)
     }
-  };
+  }
 
   return (
     <Layout>
@@ -89,7 +68,7 @@ export const Signup = () => {
             <Button
               disabled={isLoading}
               variant="primary"
-              onClick={onRegistration}
+              onClick={handleSubmit}
             >
               Sign up
             </Button>
@@ -117,5 +96,5 @@ export const Signup = () => {
         </Card>
       </Container>
     </Layout>
-  );
-};
+  )
+}

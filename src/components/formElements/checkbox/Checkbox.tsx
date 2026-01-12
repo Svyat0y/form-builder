@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import styles from './Checkbox.module.scss';
-import classNames from 'classnames';
-import { forwardRef } from 'react';
+import { useState } from 'react'
+import styles from './Checkbox.module.scss'
+import classNames from 'classnames'
+import { forwardRef } from 'react'
 
 interface ICheckboxProps {
-  label: string;
-  className?: string;
+  label: string
+  className?: string
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
   ({ label, className }, ref) => {
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(false)
 
     return (
       <div className={classNames(styles.wrapper, className)}>
@@ -20,7 +20,7 @@ export const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
               type="checkbox"
               ref={ref}
               onChange={() => {
-                setIsChecked(!isChecked);
+                setIsChecked(!isChecked)
               }}
             />
             <svg
@@ -39,8 +39,8 @@ export const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           </label>
         </div>
       </div>
-    );
+    )
   },
-);
+)
 
-Checkbox.displayName = 'Checkbox';
+Checkbox.displayName = 'Checkbox'

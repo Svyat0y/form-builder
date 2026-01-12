@@ -1,14 +1,14 @@
-import styles from './styles.module.scss';
-import { ComponentType } from 'react';
+import styles from './styles.module.scss'
+import { ComponentType } from 'react'
 //sweetalert
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-const MySwal = withReactContent(Swal);
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export const onCallSwalWithComponent = (
   NodeComponent: ComponentType<Partial<{ onClose: () => void }>>,
 ) => {
-  const closeAlert = () => MySwal.close();
+  const closeAlert = () => MySwal.close()
 
   MySwal.fire({
     html: <NodeComponent onClose={closeAlert} />,
@@ -16,8 +16,8 @@ export const onCallSwalWithComponent = (
     customClass: {
       popup: styles.myCustomModal,
     },
-  });
-};
+  })
+}
 
 export const showSimpleAlert = (
   icon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'info',
@@ -34,5 +34,5 @@ export const showSimpleAlert = (
       popup: styles.myCustomModal,
       confirmButton: styles.button,
     },
-  });
-};
+  })
+}

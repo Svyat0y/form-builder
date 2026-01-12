@@ -1,11 +1,11 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
-import styles from './Button.module.scss';
-import classNames from 'classnames';
+import { ButtonHTMLAttributes, FC, ReactNode } from 'react'
+import styles from './Button.module.scss'
+import classNames from 'classnames'
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode;
-  icon?: ReactNode;
-  variant: 'primary' | 'secondary';
+  children?: ReactNode
+  icon?: ReactNode
+  variant: 'primary' | 'secondary'
 }
 
 export const Button: FC<IButtonProps> = ({
@@ -25,5 +25,5 @@ export const Button: FC<IButtonProps> = ({
       {icon && icon}
       {children}
     </button>
-  );
-};
+  )
+}

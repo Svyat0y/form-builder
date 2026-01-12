@@ -1,8 +1,8 @@
 type SvgIconsProps = {
-  height?: number;
-  width?: number;
-  fill?: string;
-};
+  height?: number
+  width?: number
+  fill?: string
+}
 
 export const Icons = {
   Google: (props: SvgIconsProps) => (
@@ -62,4 +62,4 @@ export const Icons = {
       </defs>
     </svg>
   ),
-};
+}

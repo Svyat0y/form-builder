@@ -1,15 +1,15 @@
-import { FC } from 'react';
-import styles from './Burger.module.scss';
-import classNames from 'classnames';
+import { FC } from 'react'
+import styles from './Burger.module.scss'
+import classNames from 'classnames'
 //other
-import { useOpen } from '@hooks/useOpen';
+import { useOpen } from '@hooks/useOpen'
 
 export const Burger: FC = () => {
-  const { isOpen, onToggle } = useOpen();
+  const { isOpen, onToggle } = useOpen()
 
   const handleClickBurger = () => {
-    onToggle();
-  };
+    onToggle()
+  }
 
   return (
     <div
@@ -26,5 +26,5 @@ export const Burger: FC = () => {
         className={classNames(styles.line, { [styles.active]: isOpen })}
       ></div>
     </div>
-  );
-};
+  )
+}

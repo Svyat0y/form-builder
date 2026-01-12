@@ -1,67 +1,55 @@
-import { FormEvent, MouseEvent, useRef, useState } from 'react';
-import styles from './Signin.module.scss';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../../../routes/routes';
+import { FormEvent, MouseEvent, useRef, useState } from 'react'
+import styles from './Signin.module.scss'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../../../routes/routes'
 //components
-import { Icons } from '@components/CustomIcons/CustomIcons';
-import { Input } from '@components/formElements/Input';
-import { Checkbox } from '@components/formElements/checkbox';
-import { Divider } from '@components/Devider';
-import { Title } from '@components/Title';
-import { Button } from '@components/ui/Button';
-import { Layout } from '@components/Layout';
-import { Container } from '@components/Container';
-import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword';
-import { Card } from '../components/Card/Card';
+import { Icons } from '@components/CustomIcons/CustomIcons'
+import { Input } from '@components/formElements/Input'
+import { Checkbox } from '@components/formElements/checkbox'
+import { Divider } from '@components/Devider'
+import { Title } from '@components/Title'
+import { Button } from '@components/ui/Button'
+import { Layout } from '@components/Layout'
+import { Container } from '@components/Container'
+import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword'
+import { Card } from '../components/Card/Card'
 //sweetalert
 import {
   onCallSwalWithComponent,
   showSimpleAlert,
-} from '../../../utils/sweetAlert';
-import { authService } from '@api/auth.service';
+} from '../../../utils/sweetAlert'
+import { useAuth } from '../../../context'
 
 export const Signin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { login, isLoading } = useAuth()
 
-  const rememberMeRef = useRef<HTMLInputElement>(null);
+  const rememberMeRef = useRef<HTMLInputElement>(null)
 
   const handleClickRightLabel = (e: MouseEvent) => {
-    e.preventDefault();
-    onCallSwalWithComponent(ForgotPassword);
-  };
+    e.preventDefault()
+    onCallSwalWithComponent(ForgotPassword)
+  }
 
-  const onLogin = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
 
     if (!email || !password) {
-      await showSimpleAlert('error', 'Error', 'All fields are required');
-      return;
+      await showSimpleAlert('error', 'Error', 'All fields are required')
+      return
     }
-
-    setIsLoading(true);
 
     try {
-      const result = await authService.login({
+      await login({
         email,
         password,
-      });
-
-      console.log('Login success:', result);
-
-      setEmail('');
-      setPassword('');
-    } catch (error: any) {
-      console.error('Registration error:', error);
-
-      const errorMessage = error.response?.data?.message || 'Login failed';
-
-      await showSimpleAlert('error', 'Error', errorMessage);
-    } finally {
-      setIsLoading(false);
+        rememberMe: rememberMeRef.current?.checked || false,
+      })
+    } catch (error) {
+      console.error('Login error:', error)
     }
-  };
+  }
 
   return (
     <Layout>
@@ -88,7 +76,11 @@ export const Signin = () => {
               handleClickRightLabel={handleClickRightLabel}
             />
             <Checkbox label="Remember me" ref={rememberMeRef} />
-            <Button variant="primary" onClick={onLogin} disabled={isLoading}>
+            <Button
+              variant="primary"
+              onClick={handleSubmit}
+              disabled={isLoading}
+            >
               Sign in
             </Button>
 
@@ -109,5 +101,5 @@ export const Signin = () => {
         </Card>
       </Container>
     </Layout>
-  );
-};
+  )
+}
