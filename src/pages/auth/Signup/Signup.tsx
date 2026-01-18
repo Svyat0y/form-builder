@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Signup.module.scss'
 import { ROUTES } from '../../../routes/routes'
 //components
@@ -11,14 +11,20 @@ import { Layout } from '@components/Layout'
 import { Container } from '@components/Container'
 import { Card } from '../components/Card/Card'
 import { FormEvent, useState } from 'react'
-import { showSimpleAlert } from '../../../utils/sweetAlert'
-import { useAuth } from '../../../context'
+//sweetalert
+//redux
+import { useAppDispatch } from '@store/hooks/useAppDispatch'
+import { useAppSelector } from '@store/hooks/useAppSelector'
+import { register } from '@store/features/auth/authSlice'
+import { showSimpleAlert } from '@utils/sweetAlert'
 
 export const Signup = () => {
-  const { register, isLoading } = useAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const { isLoading } = useAppSelector((state) => state.auth)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -28,10 +34,10 @@ export const Signup = () => {
       return
     }
 
-    try {
-      await register({ name, email, password })
-    } catch (error) {
-      console.error('Registration error:', error)
+    const result = await dispatch(register({ name, email, password }))
+
+    if (register.fulfilled.match(result)) {
+      navigate('/signin')
     }
   }
 

@@ -1,9 +1,10 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../../context'
 import { ROUTES } from '../../routes/routes'
+import { useAuth } from '@store/hooks/useAuth'
+import { ReactNode } from 'react'
 
 interface ProtectedRouteProps {
-  children: React.ReactNode
+  children: ReactNode
   requireAuth?: boolean
   nested?: boolean
 }
@@ -13,8 +14,8 @@ export const ProtectedRoute = ({
   requireAuth = true,
   nested = false,
 }: ProtectedRouteProps) => {
-  const { isAuthenticated } = useAuth()
   const location = useLocation()
+  const { isAuthenticated } = useAuth()
 
   if (requireAuth && !isAuthenticated) {
     if (nested) {

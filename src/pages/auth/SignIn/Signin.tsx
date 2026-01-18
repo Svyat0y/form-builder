@@ -18,12 +18,16 @@ import {
   onCallSwalWithComponent,
   showSimpleAlert,
 } from '../../../utils/sweetAlert'
-import { useAuth } from '../../../context'
+//redux
+import { useAppDispatch } from '@store/hooks/useAppDispatch'
+import { useAppSelector } from '@store/hooks/useAppSelector'
+import { login } from '@store/features/auth/authSlice'
 
 export const Signin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { login, isLoading } = useAuth()
+  const dispatch = useAppDispatch()
+  const { isLoading } = useAppSelector((state) => state.auth)
 
   const rememberMeRef = useRef<HTMLInputElement>(null)
 
@@ -40,15 +44,13 @@ export const Signin = () => {
       return
     }
 
-    try {
-      await login({
+    await dispatch(
+      login({
         email,
         password,
         rememberMe: rememberMeRef.current?.checked || false,
-      })
-    } catch (error) {
-      console.error('Login error:', error)
-    }
+      }),
+    )
   }
 
   return (

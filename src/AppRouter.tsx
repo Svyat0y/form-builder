@@ -9,62 +9,65 @@ import { WelcomePage } from './pages/welcome-page'
 import { Signup } from './pages/auth/Signup'
 import { Signin } from './pages/auth/SignIn'
 import { ProtectedRoute } from '@components/ProtectedRoutes'
+import { RootLoader } from './RootLoader'
 
 export const AppRouter = () => {
   return (
-    <Routes>
-      <Route
-        path={ROUTES.home}
-        element={
-          <ProtectedRoute requireAuth={true}>
-            <App />
-          </ProtectedRoute>
-        }
-      >
+    <RootLoader>
+      <Routes>
         <Route
-          index
+          path={ROUTES.home}
           element={
-            <ProtectedRoute requireAuth={true} nested={true}>
-              <WelcomePage />
+            <ProtectedRoute requireAuth={true}>
+              <App />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path={ROUTES.formBuilder}
-          element={
-            <ProtectedRoute requireAuth={true} nested={true}>
-              <FormBuilder />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={ROUTES.userForm}
-          element={
-            <ProtectedRoute requireAuth={true} nested={true}>
-              <UserForm />
-            </ProtectedRoute>
-          }
-        />
-      </Route>
+        >
+          <Route
+            index
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <WelcomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.formBuilder}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <FormBuilder />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.userForm}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <UserForm />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
 
-      <Route
-        path={ROUTES.signUp}
-        element={
-          <ProtectedRoute requireAuth={false}>
-            <Signup />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.signIn}
-        element={
-          <ProtectedRoute requireAuth={false}>
-            <Signin />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path={ROUTES.signUp}
+          element={
+            <ProtectedRoute requireAuth={false}>
+              <Signup />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.signIn}
+          element={
+            <ProtectedRoute requireAuth={false}>
+              <Signin />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
+      </Routes>
+    </RootLoader>
   )
 }

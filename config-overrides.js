@@ -10,6 +10,8 @@ module.exports = function override(config) {
     '@helpers': path.resolve(__dirname, 'src/helpers'),
     '@hooks': path.resolve(__dirname, 'src/hooks'),
     '@app-types': path.resolve(__dirname, 'src/types'),
+    '@store': path.resolve(__dirname, 'src/store'),
+    '@utils': path.resolve(__dirname, 'src/utils'),
   }
   return config
 }

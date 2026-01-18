@@ -4,18 +4,20 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './styles/scss/_main.scss'
 //providers
 import { AppRouter } from './AppRouter'
-import { AuthProvider, ThemeProvider } from './context'
+import { ThemeProvider } from './context'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <Router>
-        <AuthProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <Router>
           <AppRouter />
-        </AuthProvider>
-      </Router>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
 )
 
