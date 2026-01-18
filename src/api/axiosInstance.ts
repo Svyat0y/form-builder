@@ -1,70 +1,89 @@
-import axios, { AxiosError, AxiosInstance } from 'axios'
-import { StorageKey } from '@app-types/enums'
+import axios from 'axios'
 
-const baseURL =
-  process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001/api/'
-
-if (!baseURL) {
-  console.error('REACT_APP_BACKEND_URL не задан в .env!')
+const getTokenFromStorage = (): string | null => {
+  return localStorage.getItem('accessToken')
 }
 
-export const api: AxiosInstance = axios.create({
-  baseURL,
-  timeout: 1000,
+const api = axios.create({
+  baseURL: process.env.REACT_APP_BACKEND_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
 })
+
+let isRefreshing = false
+let failedQueue: any[] = []
+
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error)
+    } else {
+      prom.resolve(token)
+    }
+  })
+  failedQueue = []
+}
 
 api.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem(StorageKey.AccessToken)
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`
+    const token = getTokenFromStorage()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
     }
     return config
   },
-  (error: AxiosError) => {
+  (error) => {
     return Promise.reject(error)
   },
 )
 
 api.interceptors.response.use(
   (response) => response,
-  async (error: AxiosError) => {
-    const originalRequest = error.config as any
+  async (error) => {
+    const originalRequest = error.config
 
-    if (
-      error.response?.status === 401 &&
-      originalRequest &&
-      !originalRequest._retry &&
-      !originalRequest.url?.includes('/auth/refresh') &&
-      !originalRequest.url?.includes('/auth/login') &&
-      !originalRequest.url?.includes('/auth/register')
-    ) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject })
+        })
+          .then(() => {
+            return api(originalRequest)
+          })
+          .catch((err) => Promise.reject(err))
+      }
+
       originalRequest._retry = true
+      isRefreshing = true
 
       try {
-        const refreshResponse = await api.post('/auth/refresh', {})
-        const { accessToken } = refreshResponse.data.user
+        const refreshResponse = await axios.post(
+          `${process.env.REACT_APP_API_URL}/auth/refresh`,
+          {},
+          { withCredentials: true },
+        )
 
-        localStorage.setItem(StorageKey.AccessToken, accessToken)
+        const newToken = refreshResponse.data.user.accessToken
+        originalRequest.headers.Authorization = `Bearer ${newToken}`
 
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        processQueue(null, newToken)
+
         return api(originalRequest)
       } catch (refreshError) {
-        localStorage.removeItem(StorageKey.AccessToken)
-        localStorage.removeItem(StorageKey.User)
+        processQueue(refreshError, null)
 
-        if (window.location.pathname !== '/signin') {
-          window.location.href = '/signin'
-        }
+        window.dispatchEvent(new CustomEvent('auth:logout'))
 
         return Promise.reject(refreshError)
+      } finally {
+        isRefreshing = false
       }
     }
 
     return Promise.reject(error)
   },
 )
+
+export default api

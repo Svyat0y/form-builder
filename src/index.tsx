@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './styles/scss/_main.scss'
 //providers
 import { AppRouter } from './AppRouter'
-import { AuthProvider, ThemeProvider } from './context'
+import { ThemeProvider } from './context'
 import { Provider } from 'react-redux'
 import { store } from './store'
 
@@ -14,9 +14,7 @@ root.render(
     <Provider store={store}>
       <ThemeProvider>
         <Router>
-          <AuthProvider>
-            <AppRouter />
-          </AuthProvider>
+          <AppRouter />
         </Router>
       </ThemeProvider>
     </Provider>
