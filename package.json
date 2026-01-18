@@ -5,6 +5,7 @@
   "type": "commonjs",
   "dependencies": {
     "@mui/icons-material": "^6.1.4",
+    "@reduxjs/toolkit": "^2.11.2",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
@@ -15,6 +16,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^6.26.2",
     "react-scripts": "^5.0.1",
     "react-spinners-css": "^2.0.2",

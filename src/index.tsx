@@ -5,17 +5,21 @@ import './styles/scss/_main.scss'
 //providers
 import { AppRouter } from './AppRouter'
 import { AuthProvider, ThemeProvider } from './context'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <Router>
-        <AuthProvider>
-          <AppRouter />
-        </AuthProvider>
-      </Router>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <Router>
+          <AuthProvider>
+            <AppRouter />
+          </AuthProvider>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
 )
 
