@@ -10,6 +10,5 @@ export const useAuth = () => {
     token,
     isLoading,
     error,
-    isAuthenticated: !!token,
   }
 }

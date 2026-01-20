@@ -5,9 +5,13 @@ import { LoginCredentials, RegisterData } from './types'
 import { IUser } from '@app-types/interfaces/user.interface'
 import { ALERT_MESSAGES } from '@store/features/auth/helpers/auth.constants'
 import {
+  cleanupAuth,
   handleApiError,
+  isTokenExpired,
   showSuccessAlert,
 } from '@store/features/auth/helpers/auth.helpers'
+import { showSimpleAlert } from '@utils/sweetAlert'
+import { STORAGE_KEYS } from '@constants/constants'
 
 interface AuthState {
   user: IUser | null
@@ -47,7 +51,6 @@ export const login = createAsyncThunk(
       const response = await authApi.login(credentials)
       const { user } = response.data
 
-      // Extract user data and token
       const userData = {
         id: user.id,
         email: user.email,
@@ -57,19 +60,28 @@ export const login = createAsyncThunk(
 
       const token = user.accessToken
 
-      // Save to localStorage
       authStorage.setToken(token)
       authStorage.setUser(userData)
+
+      if (credentials.rememberMe) {
+        localStorage.setItem(STORAGE_KEYS.REMEMBER_ME, 'true')
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
+      }
 
       return {
         user: userData,
         token,
       }
     } catch (error: any) {
-      const errorMessage = await handleApiError(
-        error,
-        ALERT_MESSAGES.LOGIN_FAILED,
-      )
+      let errorMessage = 'Login failed'
+
+      if (error.response?.status === 401) {
+        errorMessage = 'Invalid email or password'
+      }
+
+      await showSimpleAlert('error', 'Error', errorMessage)
+
       return rejectWithValue(errorMessage)
     }
   },
@@ -79,54 +91,59 @@ export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue }) => {
     try {
-      const { token: storedToken, user: storedUser } = authStorage.getAuthData()
+      const token = authStorage.getToken()
+      const user = authStorage.getUser()
 
-      if (storedToken && authStorage.isAuthenticated()) {
-        if (storedUser) {
-          return { token: storedToken, user: storedUser }
-        } else {
-          try {
-            const profileResponse = await authApi.getProfile()
-            const userData = {
-              id: profileResponse.data.id,
-              email: profileResponse.data.email,
-              name: profileResponse.data.name,
-              createdAt: profileResponse.data.createdAt,
-            }
+      if (!token) {
+        try {
+          const response = await authApi.refreshTokens()
+          const { user } = response.data
+          const newToken = user.accessToken
 
-            authStorage.setUser(userData)
+          authStorage.setToken(newToken)
+          authStorage.setUser(user)
 
-            return { token: storedToken, user: userData }
-          } catch (profileError) {
-            console.log('Failed to get profile:', profileError)
-          }
+          return { token: newToken, user }
+        } catch (error) {
+          console.log(error)
+          cleanupAuth()
+          return rejectWithValue('Session expired')
         }
       }
 
-      const refreshResponse = await authApi.refreshTokens()
-      const { user: refreshedUser } = refreshResponse.data
+      if (isTokenExpired(token)) {
+        try {
+          const response = await authApi.refreshTokens()
+          const { user: newUser } = response.data
+          const newToken = newUser.accessToken
 
-      const userData = {
-        id: refreshedUser.id,
-        email: refreshedUser.email,
-        name: refreshedUser.name,
-        createdAt: refreshedUser.createdAt,
+          authStorage.setToken(newToken)
+          authStorage.setUser(newUser)
+
+          return { token: newToken, user: newUser }
+        } catch (error) {
+          console.log(error)
+          return { token, user }
+        }
       }
 
-      const newToken = refreshedUser.accessToken
-
-      authStorage.setToken(newToken)
-      authStorage.setUser(userData)
-
-      return { token: newToken, user: userData }
+      return { token, user }
     } catch (error: any) {
-      console.log('Auth check completely failed:', error)
-
-      authStorage.clear()
-      return rejectWithValue('Authentication required')
+      console.log('Auth check failed:', error)
+      return rejectWithValue('Authentication check failed')
     }
   },
 )
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  try {
+    await authApi.logout()
+  } catch (error) {
+    console.log('Logout API error:', error)
+  } finally {
+    cleanupAuth()
+  }
+})
 
 const authSlice = createSlice({
   name: 'auth',
