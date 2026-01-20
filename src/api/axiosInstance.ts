@@ -1,34 +1,21 @@
 import axios from 'axios'
-
-const getTokenFromStorage = (): string | null => {
-  return localStorage.getItem('accessToken')
-}
+import { API_CONFIG, API_ENDPOINTS } from '@api/api.constants'
+import { store } from '@store/index'
+import { logout } from '@store/features/auth/authSlice'
+import { STORAGE_KEYS } from '@constants/constants'
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL,
-  withCredentials: true,
+  baseURL: API_CONFIG.BASE_URL,
+  withCredentials: API_CONFIG.WITH_CREDENTIALS,
+  timeout: API_CONFIG.TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-let isRefreshing = false
-let failedQueue: any[] = []
-
-const processQueue = (error: any, token: string | null = null) => {
-  failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error)
-    } else {
-      prom.resolve(token)
-    }
-  })
-  failedQueue = []
-}
-
 api.interceptors.request.use(
   (config) => {
-    const token = getTokenFromStorage()
+    const token = localStorage.getItem('accessToken')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -44,49 +31,33 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    if (originalRequest.url.includes('/auth/login')) {
-      return Promise.reject(error)
-    }
+    if (error.response?.status === 401) {
+      const url = originalRequest.url || ''
 
-    if (originalRequest.url.includes('/auth/register')) {
-      return Promise.reject(error)
-    }
-
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject })
-        })
-          .then(() => {
-            return api(originalRequest)
-          })
-          .catch((err) => Promise.reject(err))
+      if (
+        url.includes(API_ENDPOINTS.AUTH.REFRESH) ||
+        url.includes(API_ENDPOINTS.AUTH.LOGOUT)
+      ) {
+        store.dispatch(logout())
+        return Promise.reject(error)
       }
 
-      originalRequest._retry = true
-      isRefreshing = true
+      if (!originalRequest._retry) {
+        originalRequest._retry = true
 
-      try {
-        const refreshResponse = await axios.post(
-          `${process.env.REACT_APP_API_URL}/auth/refresh`,
-          {},
-          { withCredentials: true },
-        )
+        try {
+          const refreshResponse = await api.post(API_ENDPOINTS.AUTH.REFRESH)
+          const newToken = refreshResponse.data.user.accessToken
 
-        const newToken = refreshResponse.data.user.accessToken
-        originalRequest.headers.Authorization = `Bearer ${newToken}`
+          localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, newToken)
 
-        processQueue(null, newToken)
+          originalRequest.headers.Authorization = `Bearer ${newToken}`
 
-        return api(originalRequest)
-      } catch (refreshError) {
-        processQueue(refreshError, null)
-
-        window.dispatchEvent(new CustomEvent('auth:logout'))
-
-        return Promise.reject(refreshError)
-      } finally {
-        isRefreshing = false
+          return api(originalRequest)
+        } catch (refreshError) {
+          store.dispatch(logout())
+          return Promise.reject(refreshError)
+        }
       }
     }
 
@@ -94,4 +65,4 @@ api.interceptors.response.use(
   },
 )
 
-export default api
+export { api }
