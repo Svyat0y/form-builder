@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import styles from './FormBuilder.module.scss'
-//components
-import { Header } from '@components/Header'
+import { Header } from '@/widgets/header'
 import { Sidebar } from './components/Sidebar'
 import { MainContent } from './components/MainContent'
 

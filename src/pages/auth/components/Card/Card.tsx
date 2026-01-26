@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 import styles from './Card.module.scss'
-import { SwitchTheme } from '@components/SwitchTheme'
+import { SwitchTheme } from '@/shared/ui/switch-theme'
 
 interface CardProps {
   children: ReactNode

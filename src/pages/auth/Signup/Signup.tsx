@@ -1,22 +1,18 @@
+import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Signup.module.scss'
-import { ROUTES } from '../../../routes/routes'
-//components
-import { Icons } from '@components/CustomIcons/CustomIcons'
-import { Title } from '@components/Title'
-import { Input } from '@components/formElements/Input'
-import { Button } from '@components/ui/Button'
-import { Divider } from '@components/Devider'
-import { Layout } from '@components/Layout'
-import { Container } from '@components/Container'
+import { Icons } from '@/shared/ui/icons'
+import { Title } from '@/shared/ui/title'
+import { Input } from '@/shared/ui/input'
+import { Button } from '@/shared/ui/button'
+import { Divider } from '@/shared/ui/divider'
+import { Layout } from '@/shared/ui/layout'
+import { Container } from '@/shared/ui/container'
 import { Card } from '../components/Card/Card'
-import { FormEvent, useState } from 'react'
-//sweetalert
-//redux
-import { useAppDispatch } from '@store/hooks/useAppDispatch'
-import { useAppSelector } from '@store/hooks/useAppSelector'
-import { register } from '@store/features/auth/authSlice'
-import { showSimpleAlert } from '@utils/sweetAlert'
+import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
+import { register } from '@/features/auth/model'
+import { ROUTES } from '@/shared/config/routes'
 
 export const Signup = () => {
   const [name, setName] = useState('')

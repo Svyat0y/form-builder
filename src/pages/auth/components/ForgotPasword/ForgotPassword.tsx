@@ -1,8 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react'
 import styles from './ForgotPassword.module.scss'
-//components
-import { Input } from '@components/formElements/Input'
-import { Button } from '@components/ui/Button'
+import { Input } from '@/shared/ui/input'
+import { Button } from '@/shared/ui/button'
 
 interface ForgotPasswordProps {
   onClose?: () => void

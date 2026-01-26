@@ -1,0 +1,77 @@
+@import "@styles/vars";
+@import "@styles/mixins";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $margin3;
+
+  & label {
+    color: var(--text-color-primary);
+  }
+}
+
+.inputWrapper {
+  width: 100%;
+  border-radius: $borderRadius2;
+  border: 1px solid var(--border-color);
+  padding: $padding3 calc($padding3 * 1.5);
+  transition: $transition2;
+  background-color: var(--background-color);
+
+  &:focus-within {
+    @include focus-within-effect();
+  }
+
+  & input {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-size: $inputSize1;
+    background: transparent;
+    color: var(--text-color-primary);
+
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px var(--background-color) inset !important;
+      -webkit-text-fill-color: var(--text-color-primary) !important;
+    }
+  }
+}
+
+.rightItemInLabel {
+  border: none;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0;
+  line-height: $line-height1;
+  font-size: $font-size-body2;
+  color: var(--text-color-primary);
+
+  &:after {
+    position: absolute;
+    content: "";
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--border-color);
+    transition: $transition2 ease all;
+  }
+
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
+.helperText {
+  color: red;
+}
