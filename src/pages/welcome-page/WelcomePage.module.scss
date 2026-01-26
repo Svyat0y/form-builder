@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 20px;
 }
 
 .button {
@@ -12,4 +13,67 @@
   border: 1px solid white;
   border-radius: 5px;
   cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.8;
+  }
+}
+
+.sessionsSection {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.sessionsList {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.sessionsTitle {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.sessionItem {
+  padding: 12px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sessionDevice {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.sessionTime {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.noSessions {
+  margin-top: 20px;
+  padding: 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
 }

@@ -1,7 +1,6 @@
 import { FormEvent, MouseEvent, useRef, useState } from 'react'
-import styles from './Signin.module.scss'
 import { Link } from 'react-router-dom'
-import { ROUTES } from '../../../routes/routes'
+import styles from './Signin.module.scss'
 //components
 import { Icons } from '@components/CustomIcons/CustomIcons'
 import { Input } from '@components/formElements/Input'
@@ -13,15 +12,14 @@ import { Layout } from '@components/Layout'
 import { Container } from '@components/Container'
 import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword'
 import { Card } from '../components/Card/Card'
-//sweetalert
-import {
-  onCallSwalWithComponent,
-  showSimpleAlert,
-} from '../../../utils/sweetAlert'
-//redux
+//utils
+import { onCallSwalWithComponent, showSimpleAlert } from '@utils/sweetAlert'
+//store
 import { useAppDispatch } from '@store/hooks/useAppDispatch'
 import { useAppSelector } from '@store/hooks/useAppSelector'
 import { login } from '@store/features/auth/authSlice'
+//routes
+import { ROUTES } from '@routes/routes'
 
 export const Signin = () => {
   const [email, setEmail] = useState('')

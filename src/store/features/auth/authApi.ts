@@ -1,4 +1,8 @@
-import { LoginCredentials, RegisterData } from '@store/features/auth/types'
+import {
+  LoginCredentials,
+  RegisterData,
+  Session,
+} from '@store/features/auth/types'
 import { api } from '@api/index'
 import { API_ENDPOINTS } from '@api/api.constants'
 
@@ -13,4 +17,6 @@ export const authApi = {
   refreshTokens: () => api.post(API_ENDPOINTS.AUTH.REFRESH, {}),
 
   getProfile: () => api.get(API_ENDPOINTS.USERS.ME),
+
+  getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
 }

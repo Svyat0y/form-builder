@@ -1,14 +1,14 @@
-// AppRouter.tsx
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { ROUTES } from './routes/routes'
-import App from './App'
 //components
+import { ProtectedRoute } from '@components/ProtectedRoutes'
 import { UserForm } from './pages/user-form'
 import { FormBuilder } from './pages/form-builder'
 import { WelcomePage } from './pages/welcome-page'
 import { Signup } from './pages/auth/Signup'
 import { Signin } from './pages/auth/SignIn'
-import { ProtectedRoute } from '@components/ProtectedRoutes'
+//routes
+import { ROUTES } from './routes/routes'
+import App from './App'
 import { RootLoader } from './RootLoader'
 
 export const AppRouter = () => {

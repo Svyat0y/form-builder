@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { API_CONFIG, API_ENDPOINTS } from '@api/api.constants'
-import { store } from '@store/index'
-import { logout } from '@store/features/auth/authSlice'
 import { STORAGE_KEYS } from '@constants/constants'
 
 const api = axios.create({
@@ -31,17 +29,27 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
+    // Если нет originalRequest, значит это не повторяемый запрос
+    if (!originalRequest) {
+      return Promise.reject(error)
+    }
+
     if (error.response?.status === 401) {
       const url = originalRequest.url || ''
 
+      // Для logout и refresh - просто отклоняем, не вызываем logout() чтобы избежать цикла
       if (
         url.includes(API_ENDPOINTS.AUTH.REFRESH) ||
         url.includes(API_ENDPOINTS.AUTH.LOGOUT)
       ) {
-        store.dispatch(logout())
+        // Не вызываем logout() здесь, чтобы избежать бесконечного цикла
+        // Просто очищаем локальное хранилище напрямую
+        localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
+        localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
         return Promise.reject(error)
       }
 
+      // Попытка обновить токен только один раз
       if (!originalRequest._retry) {
         originalRequest._retry = true
 
@@ -55,9 +63,14 @@ api.interceptors.response.use(
 
           return api(originalRequest)
         } catch (refreshError) {
-          store.dispatch(logout())
+          // Если refresh не удался, очищаем хранилище напрямую, не вызывая logout()
+          localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
+          localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
           return Promise.reject(refreshError)
         }
+      } else {
+        // Если уже была попытка refresh, просто отклоняем
+        return Promise.reject(error)
       }
     }
 

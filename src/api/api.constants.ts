@@ -11,6 +11,7 @@ export const API_ENDPOINTS = {
     ME: '/users/me',
     ALL: '/users',
     DELETE: '/users/delete',
+    SESSIONS: '/users/me/sessions',
   },
 } as const
 

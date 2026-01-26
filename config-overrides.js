@@ -12,6 +12,7 @@ module.exports = function override(config) {
     '@app-types': path.resolve(__dirname, 'src/types'),
     '@store': path.resolve(__dirname, 'src/store'),
     '@utils': path.resolve(__dirname, 'src/utils'),
+    '@routes': path.resolve(__dirname, 'src/routes'),
     '@constants': path.resolve(__dirname, 'src/constants'),
   }
   return config

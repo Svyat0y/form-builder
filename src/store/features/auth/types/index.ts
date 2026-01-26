@@ -20,3 +20,13 @@ export interface AuthResponse {
     accessToken: string
   }
 }
+
+export interface Session {
+  id: string
+  deviceInfo: string | null
+  deviceFingerprint: string | null
+  lastUsed: string
+  createdAt: string
+  expiresAt: string
+  revoked: boolean
+}

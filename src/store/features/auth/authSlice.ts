@@ -76,8 +76,29 @@ export const login = createAsyncThunk(
     } catch (error: any) {
       let errorMessage = 'Login failed'
 
-      if (error.response?.status === 401) {
+      // Network error (CORS, connection refused, etc.)
+      if (!error.response) {
+        if (
+          error.code === 'ERR_NETWORK' ||
+          error.message?.includes('Network Error')
+        ) {
+          errorMessage =
+            'Cannot connect to server. Please check your connection and server URL.'
+        } else if (error.message?.includes('CORS')) {
+          errorMessage =
+            'CORS error: Server is not configured to accept requests from this origin.'
+        } else {
+          errorMessage = `Connection error: ${error.message || 'Unable to reach server'}`
+        }
+      } else if (error.response?.status === 401) {
         errorMessage = 'Invalid email or password'
+      } else if (error.response?.status === 0) {
+        errorMessage =
+          'Network error: Cannot connect to server. Check if server is running and CORS is configured.'
+      } else {
+        errorMessage =
+          error.response?.data?.message ||
+          `Login failed (${error.response?.status})`
       }
 
       await showSimpleAlert('error', 'Error', errorMessage)

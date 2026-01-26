@@ -1,6 +1,6 @@
+import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Signup.module.scss'
-import { ROUTES } from '../../../routes/routes'
 //components
 import { Icons } from '@components/CustomIcons/CustomIcons'
 import { Title } from '@components/Title'
@@ -10,13 +10,14 @@ import { Divider } from '@components/Devider'
 import { Layout } from '@components/Layout'
 import { Container } from '@components/Container'
 import { Card } from '../components/Card/Card'
-import { FormEvent, useState } from 'react'
-//sweetalert
-//redux
+//utils
+import { showSimpleAlert } from '@utils/sweetAlert'
+//store
 import { useAppDispatch } from '@store/hooks/useAppDispatch'
 import { useAppSelector } from '@store/hooks/useAppSelector'
 import { register } from '@store/features/auth/authSlice'
-import { showSimpleAlert } from '@utils/sweetAlert'
+//routes
+import { ROUTES } from '@routes/routes'
 
 export const Signup = () => {
   const [name, setName] = useState('')
