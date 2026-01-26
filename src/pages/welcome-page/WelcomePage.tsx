@@ -1,15 +1,12 @@
 import { FC, useState } from 'react'
 import styles from './WelcomePage.module.scss'
-//utils
-import { formatTimeAgo } from '@utils/dateHelpers'
-import { formatDeviceName } from '@utils/deviceHelpers'
-//store
-import { authApi } from '@store/features/auth/authApi'
-import { Session } from '@store/features/auth/types'
-import { useAppDispatch } from '@store/hooks/useAppDispatch'
-import { logout } from '@store/features/auth/authSlice'
-//routes
-import { ROUTES } from '@routes/routes'
+import { formatTimeAgo } from '@/shared/lib/utils/dateHelpers'
+import { formatDeviceName } from '@/shared/lib/utils/deviceHelpers'
+import { authApi } from '@/features/auth/model'
+import { Session } from '@/features/auth/model/types'
+import { useAppDispatch } from '@/shared/lib/hooks'
+import { logout } from '@/features/auth/model'
+import { ROUTES } from '@/shared/config/routes'
 
 export const WelcomePage: FC = () => {
   const [data, setData] = useState(null)
@@ -40,11 +37,9 @@ export const WelcomePage: FC = () => {
     setLogoutLoading(true)
     try {
       await dispatch(logout())
-      // Полная перезагрузка страницы для сброса всех состояний
       window.location.href = ROUTES.signIn
     } catch (error) {
       console.error('Logout error:', error)
-      // Даже при ошибке делаем редирект
       window.location.href = ROUTES.signIn
     }
   }

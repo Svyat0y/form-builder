@@ -1,25 +1,23 @@
 import { FormEvent, MouseEvent, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Signin.module.scss'
-//components
-import { Icons } from '@components/CustomIcons/CustomIcons'
-import { Input } from '@components/formElements/Input'
-import { Checkbox } from '@components/formElements/checkbox'
-import { Divider } from '@components/Devider'
-import { Title } from '@components/Title'
-import { Button } from '@components/ui/Button'
-import { Layout } from '@components/Layout'
-import { Container } from '@components/Container'
+import { Icons } from '@/shared/ui/icons'
+import { Input } from '@/shared/ui/input'
+import { Checkbox } from '@/shared/ui/checkbox'
+import { Divider } from '@/shared/ui/divider'
+import { Title } from '@/shared/ui/title'
+import { Button } from '@/shared/ui/button'
+import { Layout } from '@/shared/ui/layout'
+import { Container } from '@/shared/ui/container'
 import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword'
 import { Card } from '../components/Card/Card'
-//utils
-import { onCallSwalWithComponent, showSimpleAlert } from '@utils/sweetAlert'
-//store
-import { useAppDispatch } from '@store/hooks/useAppDispatch'
-import { useAppSelector } from '@store/hooks/useAppSelector'
-import { login } from '@store/features/auth/authSlice'
-//routes
-import { ROUTES } from '@routes/routes'
+import {
+  onCallSwalWithComponent,
+  showSimpleAlert,
+} from '@/shared/lib/utils/sweetAlert'
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
+import { login } from '@/features/auth/model'
+import { ROUTES } from '@/shared/config/routes'
 
 export const Signin = () => {
   const [email, setEmail] = useState('')
