@@ -8,11 +8,11 @@ import { Button } from '@/shared/ui/button'
 import { Divider } from '@/shared/ui/divider'
 import { Layout } from '@/shared/ui/layout'
 import { Container } from '@/shared/ui/container'
-import { Card } from '../components/Card/Card'
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { register } from '@/features/auth/model'
 import { ROUTES } from '@/shared/config/routes'
+import { Card } from '@/pages/auth/components/Card'
 
 export const Signup = () => {
   const [name, setName] = useState('')

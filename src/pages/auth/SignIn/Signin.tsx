@@ -9,8 +9,6 @@ import { Title } from '@/shared/ui/title'
 import { Button } from '@/shared/ui/button'
 import { Layout } from '@/shared/ui/layout'
 import { Container } from '@/shared/ui/container'
-import { ForgotPassword } from '../components/ForgotPasword/ForgotPassword'
-import { Card } from '../components/Card/Card'
 import {
   onCallSwalWithComponent,
   showSimpleAlert,
@@ -18,6 +16,8 @@ import {
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { login } from '@/features/auth/model'
 import { ROUTES } from '@/shared/config/routes'
+import { Card } from '@/pages/auth/components/Card'
+import { ForgotPassword } from '@/pages/auth/components/ForgotPasword'
 
 export const Signin = () => {
   const [email, setEmail] = useState('')
