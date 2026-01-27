@@ -119,13 +119,14 @@ export const checkAuth = createAsyncThunk(
           const response = await authApi.refreshTokens()
           const { user } = response.data
           const newToken = user.accessToken
-
           authStorage.setToken(newToken)
           authStorage.setUser(user)
 
+          localStorage.setItem(STORAGE_KEYS.REMEMBER_ME, 'true')
+
           return { token: newToken, user }
         } catch (error) {
-          console.log(error)
+          console.log('❌ Refresh failed (no token case):', error)
           cleanupAuth()
           return rejectWithValue('Session expired')
         }
@@ -142,14 +143,15 @@ export const checkAuth = createAsyncThunk(
 
           return { token: newToken, user: newUser }
         } catch (error) {
-          console.log(error)
-          return { token, user }
+          console.log('❌ Refresh failed (expired token case):', error)
+          cleanupAuth()
+          return rejectWithValue('Token expired and refresh failed')
         }
       }
 
       return { token, user }
     } catch (error: any) {
-      console.log('Auth check failed:', error)
+      console.log('❌ Auth check failed:', error)
       return rejectWithValue('Authentication check failed')
     }
   },

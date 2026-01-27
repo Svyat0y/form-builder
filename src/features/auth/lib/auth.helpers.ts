@@ -1,4 +1,5 @@
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
+import { STORAGE_KEYS } from '@/shared/config/constants'
 
 export const handleApiError = async (
   error: any,
@@ -14,9 +15,9 @@ export const showSuccessAlert = async (message: string) => {
 }
 
 export const cleanupAuth = () => {
-  localStorage.removeItem('accessToken')
-  localStorage.removeItem('user')
-  localStorage.removeItem('rememberMe')
+  localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
+  localStorage.removeItem(STORAGE_KEYS.USER)
+  localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
 }
 
 export const isTokenExpired = (token: string): boolean => {
