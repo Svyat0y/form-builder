@@ -20,8 +20,8 @@ export const authStorage = {
   },
 
   clear() {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('user')
-    localStorage.removeItem('rememberMe')
+    localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
+    localStorage.removeItem(STORAGE_KEYS.USER)
+    localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
   },
 }
