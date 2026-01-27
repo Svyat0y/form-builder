@@ -3,13 +3,14 @@ import { authStorage } from './authStorage'
 import { authApi } from './authApi'
 import { LoginCredentials, RegisterData } from './types'
 import { IUser } from '@/shared/types/interfaces/user.interface'
-import { ALERT_MESSAGES } from '../lib/auth.constants'
 import {
+  ALERT_MESSAGES,
   cleanupAuth,
   handleApiError,
   isTokenExpired,
   showSuccessAlert,
-} from '../lib/auth.helpers'
+} from '@/features/auth/lib'
+
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
 import { STORAGE_KEYS } from '@/shared/config/constants'
 
