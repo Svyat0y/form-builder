@@ -17,6 +17,7 @@ export interface AuthResponse {
     email: string
     name: string
     createdAt: string
+    role: string
     accessToken: string
   }
 }
@@ -29,4 +30,12 @@ export interface Session {
   createdAt: string
   expiresAt: string
   revoked: boolean
+}
+
+export interface User {
+  id: string
+  email: string
+  name: string
+  createdAt: string
+  role: string
 }

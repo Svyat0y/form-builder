@@ -22,7 +22,7 @@
     "@typescript-eslint/no-explicit-any": "warn",
     "no-console": "warn",
     "quotes": ["error", "single"],
-    "indent": ["error", 2],
+    "indent": "off",
     "react/react-in-jsx-scope": "off"
   },
   "settings": {

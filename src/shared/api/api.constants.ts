@@ -11,6 +11,7 @@ export const API_ENDPOINTS = {
     ME: '/users/me',
     ALL: '/users',
     DELETE: '/users/delete',
+    UPDATE_ROLE: '/users/update-role',
     SESSIONS: '/users/me/sessions',
   },
 } as const
