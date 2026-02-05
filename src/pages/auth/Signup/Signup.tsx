@@ -12,6 +12,7 @@ import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { register } from '@/features/auth/model'
 import { ROUTES } from '@/shared/config/routes'
+import { API_CONFIG } from '@/shared/api/api.constants'
 import { Card } from '@/pages/auth/components/Card'
 
 export const Signup = () => {
@@ -86,12 +87,18 @@ export const Signup = () => {
           <Button
             variant="secondary"
             icon={<Icons.Google width={24} height={24} />}
+            onClick={() => {
+              window.location.href = API_CONFIG.OAUTH_GOOGLE_URL
+            }}
           >
             Sign in with Google
           </Button>
           <Button
             variant="secondary"
             icon={<Icons.Facebook width={24} height={24} />}
+            onClick={() => {
+              window.location.href = API_CONFIG.OAUTH_FACEBOOK_URL
+            }}
           >
             Sign in with Facebook
           </Button>
