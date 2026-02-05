@@ -5,6 +5,8 @@ export const API_ENDPOINTS = {
     LOGOUT: '/auth/logout',
     REFRESH: '/auth/refresh',
     CHECK_SESSION: '/auth/check-session',
+    GOOGLE: '/auth/google',
+    FACEBOOK: '/auth/facebook',
   },
 
   USERS: {
@@ -16,8 +18,16 @@ export const API_ENDPOINTS = {
   },
 } as const
 
+const normalizeUrl = (url: string): string => {
+  return url?.endsWith('/') ? url.slice(0, -1) : url
+}
+
+const BASE_URL = normalizeUrl(process.env.REACT_APP_BACKEND_URL || '')
+
 export const API_CONFIG = {
-  BASE_URL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001/api',
+  BASE_URL,
+  OAUTH_GOOGLE_URL: `${BASE_URL}${API_ENDPOINTS.AUTH.GOOGLE}`,
+  OAUTH_FACEBOOK_URL: `${BASE_URL}${API_ENDPOINTS.AUTH.FACEBOOK}`,
   TIMEOUT: 30000,
   WITH_CREDENTIALS: true,
 } as const

@@ -8,6 +8,7 @@ import { Signin } from '@/pages/auth/SignIn'
 import { ROUTES } from '@/shared/config/routes'
 import App from '../App'
 import { RootLoader } from '../RootLoader'
+import { OAuthCallback } from '@/pages/auth/OAuthCallback/OAuthCallback'
 
 export const AppRouter = () => {
   return (
@@ -63,6 +64,7 @@ export const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/auth/callback" element={<OAuthCallback />} />
 
         <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
       </Routes>

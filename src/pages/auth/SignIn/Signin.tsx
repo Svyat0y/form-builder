@@ -16,6 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { login } from '@/features/auth/model'
 import { ROUTES } from '@/shared/config/routes'
+import { API_CONFIG } from '@/shared/api/api.constants'
 import { Card } from '@/pages/auth/components/Card'
 import { ForgotPassword } from '@/pages/auth/components/ForgotPasword'
 
@@ -90,10 +91,22 @@ export const Signin = () => {
             </p>
           </form>
           <Divider label="or" />
-          <Button variant="secondary" icon={<Icons.Google />}>
+          <Button
+            variant="secondary"
+            icon={<Icons.Google />}
+            onClick={() => {
+              window.location.href = API_CONFIG.OAUTH_GOOGLE_URL
+            }}
+          >
             Sign in with Google
           </Button>
-          <Button variant="secondary" icon={<Icons.Facebook />}>
+          <Button
+            variant="secondary"
+            icon={<Icons.Facebook />}
+            onClick={() => {
+              window.location.href = API_CONFIG.OAUTH_FACEBOOK_URL
+            }}
+          >
             Sign in with Facebook
           </Button>
         </Card>
