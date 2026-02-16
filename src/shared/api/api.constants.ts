@@ -7,6 +7,8 @@ export const API_ENDPOINTS = {
     CHECK_SESSION: '/auth/check-session',
     GOOGLE: '/auth/google',
     FACEBOOK: '/auth/facebook',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: '/auth/reset-password',
   },
 
   USERS: {

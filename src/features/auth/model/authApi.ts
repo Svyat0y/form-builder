@@ -15,4 +15,7 @@ export const authApi = {
   getProfile: () => api.get(API_ENDPOINTS.USERS.ME),
 
   getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
+
+  resetPassword: (token: string, password: string) =>
+    api.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, { token, password }),
 }

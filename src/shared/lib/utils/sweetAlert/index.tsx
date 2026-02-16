@@ -21,7 +21,7 @@ export const onCallSwalWithComponent = (
 export const showSimpleAlert = (
   icon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'info',
   title: string = '',
-  text: string,
+  text: string = '',
 ) => {
   return MySwal.fire({
     title,

@@ -40,4 +40,9 @@
     opacity: .8;
     box-shadow: none;
   }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .8;
+  }
 }

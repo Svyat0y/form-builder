@@ -12,14 +12,19 @@ export const Button: FC<IButtonProps> = ({
   children,
   icon,
   variant,
+  className,
   ...props
 }) => {
   return (
     <button
-      className={classNames(styles.wrapper, {
-        [styles.primary]: variant === 'primary',
-        [styles.secondary]: variant === 'secondary',
-      })}
+      className={classNames(
+        styles.wrapper,
+        {
+          [styles.primary]: variant === 'primary',
+          [styles.secondary]: variant === 'secondary',
+        },
+        className,
+      )}
       {...props}
     >
       {icon && icon}
