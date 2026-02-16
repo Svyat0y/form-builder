@@ -9,6 +9,7 @@ import { ROUTES } from '@/shared/config/routes'
 import App from '../App'
 import { RootLoader } from '../RootLoader'
 import { OAuthCallback } from '@/pages/auth/OAuthCallback/OAuthCallback'
+import { PasswordRecovery } from '@/pages/password-recovery'
 
 export const AppRouter = () => {
   return (
@@ -64,6 +65,9 @@ export const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route path={ROUTES.resetPassword} element={<PasswordRecovery />} />
+
         <Route path="/auth/callback" element={<OAuthCallback />} />
 
         <Route path="*" element={<Navigate to={ROUTES.home} replace />} />

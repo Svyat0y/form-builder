@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, MouseEvent } from 'react'
+import { ChangeEvent, FC, MouseEvent, FocusEvent } from 'react'
 import styles from './Input.module.scss'
 import classNames from 'classnames'
 
@@ -13,6 +13,10 @@ interface IInputProps {
   placeholder?: string
   value?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
+  error?: string
+  success?: string
+  disabled?: boolean
 }
 
 export const Input: FC<IInputProps> = ({
@@ -20,13 +24,21 @@ export const Input: FC<IInputProps> = ({
   label,
   type,
   autoComplete,
-  isRightItemInLabel = '',
   className,
+  isRightItemInLabel = '',
   handleClickRightLabel,
   value = '',
   onChange,
+  onBlur,
+  disabled,
+  error,
+  success,
   placeholder,
 }) => {
+  const hasMessage = !!error || !!success
+  const message = error || success || ''
+  const isError = !!error
+
   return (
     <div className={classNames(styles.wrapper, className)}>
       <div className={styles.labelWrapper}>
@@ -40,17 +52,29 @@ export const Input: FC<IInputProps> = ({
           </button>
         )}
       </div>
+
       <div className={styles.inputWrapper}>
         <input
           id={id}
           type={type}
           autoComplete={autoComplete}
           value={value}
+          onBlur={onBlur}
           onChange={onChange}
           placeholder={placeholder}
+          disabled={disabled}
         />
       </div>
-      <span className={styles.helperText}></span>
+
+      <span
+        className={classNames(styles.helperText, {
+          [styles.error]: isError,
+          [styles.success]: !isError,
+          [styles.visible]: hasMessage,
+        })}
+      >
+        {message}
+      </span>
     </div>
   )
 }

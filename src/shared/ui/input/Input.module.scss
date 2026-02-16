@@ -40,6 +40,11 @@
       box-shadow: 0 0 0 1000px var(--background-color) inset !important;
       -webkit-text-fill-color: var(--text-color-primary) !important;
     }
+
+    &:disabled {
+      opacity: .6;
+      pointer-events: none;
+    }
   }
 }
 
@@ -73,5 +78,24 @@
 }
 
 .helperText {
-  color: red;
+  display: block;
+  font-size: 13px;
+  margin-top: 0;
+  opacity: 0;
+  transition: $transition2 ease all;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    margin-top: 6px;
+    pointer-events: auto;
+  }
+
+  &.error {
+    color: var(--error, #dc3545);
+  }
+
+  &.success {
+    color: var(--success, #28a745);
+  }
 }
