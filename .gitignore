@@ -26,6 +26,7 @@
 
 # Documentation
 PROJECT_SUMMARY.md
+road_map.md
 
 npm-debug.log*
 yarn-debug.log*
