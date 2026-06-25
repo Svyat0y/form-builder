@@ -100,15 +100,15 @@ export const Signin = () => {
           >
             Sign in with Google
           </Button>
-          <Button
-            variant="secondary"
-            icon={<Icons.Facebook />}
-            onClick={() => {
-              window.location.href = API_CONFIG.OAUTH_FACEBOOK_URL
-            }}
-          >
-            Sign in with Facebook
-          </Button>
+          {/*<Button*/}
+          {/*  variant="secondary"*/}
+          {/*  icon={<Icons.Facebook />}*/}
+          {/*  onClick={() => {*/}
+          {/*    window.location.href = API_CONFIG.OAUTH_FACEBOOK_URL*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  Sign in with Facebook*/}
+          {/*</Button>*/}
         </Card>
       </Container>
     </Layout>
