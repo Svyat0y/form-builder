@@ -1,8 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from '@/widgets/protected-route'
-import { UserForm } from '@/pages/user-form'
 import { FormBuilder } from '@/pages/form-builder'
-import { WelcomePage } from '@/pages/welcome-page'
+import { Dashboard } from '@/pages/dashboard'
 import { Signup } from '@/pages/auth/Signup'
 import { Signin } from '@/pages/auth/SignIn'
 import { ROUTES } from '@/shared/config/routes'
@@ -23,27 +22,22 @@ export const AppRouter = () => {
             </ProtectedRoute>
           }
         >
+          {/* Dashboard — main page after login */}
           <Route
             index
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
-                <WelcomePage />
+                <Dashboard />
               </ProtectedRoute>
             }
           />
+
+          {/* Form builder — create and edit forms */}
           <Route
             path={ROUTES.formBuilder}
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
                 <FormBuilder />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={ROUTES.userForm}
-            element={
-              <ProtectedRoute requireAuth={true} nested={true}>
-                <UserForm />
               </ProtectedRoute>
             }
           />

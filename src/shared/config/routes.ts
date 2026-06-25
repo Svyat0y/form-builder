@@ -1,9 +1,14 @@
 export const ROUTES = {
   home: '/',
+  dashboard: '/',
   signIn: '/signin',
   signUp: '/signup',
-  userForm: '/user-form',
   formBuilder: '/form-builder',
-  welcome: '/welcome',
+  formBuilderNew: '/form-builder/new',
+  formBuilderEdit: '/form-builder/:id',
+  formResponses: '/forms/:id/responses',
+  publicForm: '/forms/:uuid',
+  admin: '/admin',
+  settings: '/settings',
   resetPassword: '/password-recovery',
 }
