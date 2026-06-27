@@ -16,6 +16,9 @@ export const authApi = {
 
   getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
 
+  forgotPassword: (email: string) =>
+    api.post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, { email }),
+
   resetPassword: (token: string, password: string) =>
     api.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, { token, password }),
 }
