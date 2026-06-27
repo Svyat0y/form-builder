@@ -17,6 +17,7 @@ interface IInputProps {
   error?: string
   success?: string
   disabled?: boolean
+  autoFocus?: boolean
 }
 
 export const Input: FC<IInputProps> = ({
@@ -34,6 +35,7 @@ export const Input: FC<IInputProps> = ({
   error,
   success,
   placeholder,
+  autoFocus,
 }) => {
   const hasMessage = !!error || !!success
   const message = error || success || ''
@@ -63,6 +65,7 @@ export const Input: FC<IInputProps> = ({
           onChange={onChange}
           placeholder={placeholder}
           disabled={disabled}
+          autoFocus={autoFocus}
         />
       </div>
 

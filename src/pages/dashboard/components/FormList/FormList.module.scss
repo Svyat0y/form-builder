@@ -1,0 +1,111 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrap {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow-x: auto;
+  overflow-y: visible;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(6px);
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: max-content;
+  min-width: max(100%, 560px);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 110px 130px 150px 140px;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-color-secondary);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 110px 130px 150px 140px;
+  gap: 14px;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background $transition1;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.badge_active { background: var(--badge-active-bg); color: var(--badge-active-fg); }
+.badge_draft  { background: var(--badge-draft-bg);  color: var(--badge-draft-fg); }
+.badge_closed { background: var(--badge-closed-bg); color: var(--badge-closed-fg); }
+
+.meta {
+  color: var(--text-color-secondary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  transition: background $transition1, color $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-color-primary);
+  }
+}
+
+.actionBtnDanger {
+  &:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+}
