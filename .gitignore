@@ -24,13 +24,11 @@
 # IDE / Editor
 .cursor/
 
-# Documentation / AI context
+# Documentation / AI context (not committed to repo)
 PROJECT_SUMMARY.md
 road_map.md
 CONTEXT.md
-
-# Design prompts
-/design
+/docs
 
 npm-debug.log*
 yarn-debug.log*
