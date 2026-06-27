@@ -1,0 +1,48 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+// ─── Popup ────────────────────────────────────────────────────────────────────
+
+.popup {
+  position: absolute;
+  z-index: 200;
+  // Styling is intentionally minimal here — consumers provide their own
+  // background, border, shadow via the content they pass in.
+}
+
+// Horizontal alignment
+.alignRight {
+  right: 0;
+  left: auto;
+}
+
+.alignLeft {
+  left: 0;
+  right: auto;
+}
+
+// Vertical direction
+.openDownward {
+  top: calc(100% + 4px);
+  bottom: auto;
+}
+
+.openUpward {
+  bottom: calc(100% + 4px);
+  top: auto;
+}
+
+// Visibility toggle — hidden during measurement to prevent flicker
+.invisible {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.visible {
+  visibility: visible;
+  pointer-events: auto;
+}

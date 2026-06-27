@@ -49,37 +49,6 @@
   font-size: 1rem;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 18px;
-
-  @media (max-width: 720px) {
-    display: none;
-  }
-}
-
-.navLink {
-  padding: 8px 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-color-secondary);
-  transition: background $transition1, color $transition1;
-
-  &:hover {
-    background: var(--hover-bg);
-    color: var(--text-color-primary);
-  }
-}
-
-.navLinkActive {
-  font-weight: 600;
-  color: var(--text-color-primary);
-  background: var(--hover-bg);
-}
 
 .headerRight {
   margin-left: auto;
@@ -194,6 +163,20 @@
   }
 }
 
+.dropdownItemDanger {
+  color: hsl(0, 72%, 50%);
+
+  &:hover {
+    background: hsla(0, 72%, 50%, 0.1);
+  }
+}
+
+.dropdownDivider {
+  height: 1px;
+  margin: 5px 6px;
+  background: var(--border-color);
+}
+
 // ─── Burger ───────────────────────────────────────────────────────────────────
 
 .burgerBtn {
@@ -298,24 +281,23 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  width: 100%;
   padding: 14px 16px;
+  border: none;
   border-radius: 12px;
-  text-decoration: none;
+  background: transparent;
+  font-family: inherit;
   font-size: 1.1rem;
   font-weight: 500;
   color: var(--text-color-secondary);
+  text-align: left;
+  cursor: pointer;
   transition: background $transition1, color $transition1;
 
   &:hover {
     background: var(--hover-bg);
     color: var(--text-color-primary);
   }
-}
-
-.mobileNavLinkActive {
-  font-weight: 600;
-  color: var(--text-color-primary);
-  background: var(--hover-bg);
 }
 
 .mobileBottom {
@@ -459,12 +441,19 @@
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(6px);
   transition: transform $transition2, box-shadow $transition2, border-color $transition2;
+  // Default stacking order — sits below open menus of other cards
+  z-index: 1;
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-card-hover);
     border-color: var(--primary-color);
   }
+}
+
+// When this card's menu is open, raise its stacking context above siblings
+.cardMenuOpen {
+  z-index: 10;
 }
 
 .cardTop {
@@ -535,6 +524,7 @@
 
 // ─── Dots menu ────────────────────────────────────────────────────────────────
 
+// Relative container — menu positions itself absolutely inside this
 .menuWrap {
   position: relative;
 }
@@ -560,10 +550,6 @@
 }
 
 .menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 4px);
-  z-index: 50;
   min-width: 188px;
   padding: 6px;
   background: var(--surface);
@@ -609,18 +595,30 @@
 
 // ─── List view ────────────────────────────────────────────────────────────────
 
-.listTable {
+// Outer wrapper: holds border-radius + shadow, clips scroll horizontally
+.listTableWrap {
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible; // allow portal menu to overflow vertically
   background: var(--card-bg);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(6px);
+  // Smooth scrollbar on macOS/iOS
+  -webkit-overflow-scrolling: touch;
+}
+
+// Inner table: min-width: 100% fills parent when wide enough,
+// min-width: 560px prevents columns from collapsing on narrow screens.
+// width: max-content lets it grow beyond parent so overflow-x kicks in.
+.listTable {
+  width: max-content;
+  min-width: max(100%, 560px);
 }
 
 .listHeader {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px 130px 150px 44px;
+  grid-template-columns: minmax(180px, 1fr) 110px 130px 150px 140px;
   gap: 14px;
   align-items: center;
   padding: 13px 20px;
@@ -634,7 +632,7 @@
 
 .listRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px 130px 150px 44px;
+  grid-template-columns: minmax(180px, 1fr) 110px 130px 150px 140px;
   gap: 14px;
   align-items: center;
   padding: 15px 20px;
@@ -662,22 +660,39 @@
 .listMeta {
   color: var(--text-color-secondary);
   font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .listActions {
-  position: relative;
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
-.colResponses {
-  @media (max-width: 720px) {
-    display: none;
+.listActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  transition: background $transition1, color $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-color-primary);
   }
 }
 
-.colDate {
-  @media (max-width: 520px) {
-    display: none;
+.listActionBtnDanger {
+  &:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
   }
 }
 
@@ -721,4 +736,111 @@
   color: var(--text-color-secondary);
   font-size: 0.98rem;
   max-width: 340px;
+}
+
+// ─── Create Form modal ─────────────────────────────────────────────────────────
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: hsla(220, 30%, 8%, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  padding: 28px 28px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: var(--shadow-dropdown);
+}
+
+.modalTitle {
+  margin: 0 0 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.modalInput {
+  display: block;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--main-bg-color);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: 0.98rem;
+  outline: none;
+  transition: border-color $transition1;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: var(--text-color-secondary);
+  }
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modalCancel {
+  padding: 9px 18px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background $transition1, color $transition1, border-color $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-color-primary);
+    border-color: var(--text-color-secondary);
+  }
+}
+
+.modalCreate {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity $transition1, transform $transition1;
+
+  &:hover:not(:disabled) {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 }
