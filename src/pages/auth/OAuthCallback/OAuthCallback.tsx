@@ -27,8 +27,7 @@ export const OAuthCallback = () => {
       authStorage.setUser(user)
 
       setTimeout(() => navigate(ROUTES.dashboard), 500)
-    } catch (err) {
-      console.error('OAuth callback error:', err)
+    } catch {
       setError('Authentication failed. Please try again.')
       setTimeout(() => navigate(ROUTES.signIn), 2000)
     }
