@@ -14,14 +14,15 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onClose }) => {
     setState(e.target.value)
   }
 
-  const handleReset = () => {
+  const handleReset = (e: React.FormEvent) => {
+    e.preventDefault()
     if (onClose) {
       setTimeout(() => onClose(), 2000)
     }
   }
 
   return (
-    <div className={styles.wrapper}>
+    <form className={styles.wrapper} onSubmit={handleReset}>
       <h2 className={styles.title}>Reset password</h2>
       <Input
         id="password"
@@ -32,13 +33,13 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onClose }) => {
         placeholder="Email address"
       />
       <div className={styles.navigation}>
-        <Button variant="secondary" onClick={onClose}>
+        <Button variant="secondary" type="button" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleReset}>
+        <Button variant="primary" type="submit">
           Continue
         </Button>
       </div>
-    </div>
+    </form>
   )
 }

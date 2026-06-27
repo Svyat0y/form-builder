@@ -1,0 +1,41 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(40px, 8vw, 90px) 20px;
+}
+
+.illustration {
+  width: 170px;
+  height: 120px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--hover-bg),
+    var(--hover-bg) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.text {
+  margin: 10px 0 24px;
+  color: var(--text-color-secondary);
+  font-size: 0.98rem;
+  max-width: 340px;
+}
