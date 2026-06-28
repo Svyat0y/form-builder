@@ -64,7 +64,21 @@ export const Header: FC = () => {
                   aria-label="Account menu"
                   aria-expanded={avatarOpen}
                 >
-                  <span className={styles.avatar}>{initials}</span>
+                  <span className={styles.avatar}>
+                    {user?.avatar ? (
+                      <img
+                        src={user.avatar}
+                        alt={user.name}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    ) : (
+                      initials
+                    )}
+                  </span>
                   <ChevronDownIcon />
                 </button>
               }
@@ -138,7 +152,17 @@ export const Header: FC = () => {
       {mobileMenuOpen && (
         <div className={styles.mobileMenu} onClick={(e) => e.stopPropagation()}>
           <div className={styles.mobileUser}>
-            <span className={styles.mobileAvatar}>{initials}</span>
+            <span className={styles.mobileAvatar}>
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                initials
+              )}
+            </span>
             <div>
               <div className={styles.mobileUserName}>
                 {user?.name || 'User'}

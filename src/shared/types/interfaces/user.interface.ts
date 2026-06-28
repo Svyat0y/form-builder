@@ -4,4 +4,5 @@ export interface IUser {
   name: string
   createdAt: string
   role?: string
+  avatar?: string | null
 }
