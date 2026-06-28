@@ -1,6 +1,6 @@
-@import "@styles/vars";
-@import "@styles/colors";
-@import "@styles/mixins";
+@use '@/shared/ui/styles/scss/vars' as *;
+@use '@/shared/ui/styles/scss/colors' as *;
+@use '@/shared/ui/styles/scss/mixins' as *;
 
 .wrapper {
   display: flex;
@@ -30,7 +30,7 @@
   align-items: center;
   gap: $gap2;
   cursor: pointer;
-  font-size: $font-size-body2;
+  font-size: $font-size-body-2;
 
   &:focus-within svg {
     @include focus-within-effect();

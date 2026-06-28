@@ -1,27 +1,65 @@
-// Font sizes
-$font-size-title-1: clamp(2.5rem, 5vw, 3rem);
-$font-size-title-2: clamp(2.25rem, 4vw, 2.5rem);
-$font-size-title-3: clamp(2rem, 3.5vw, 2.25rem);
-$font-size-title-4: clamp(1.75rem, 3vw, 2rem);
-$font-size-title-5: clamp(1.5rem, 2.5vw, 1.75rem);
-$font-size-title-6: clamp(1.25rem, 2vw, 1.5rem);
+// ============================================================
+//  TYPOGRAPHY
+// ============================================================
+//  Rules:
+//   • Large text (titles, subtitles, body) is ADAPTIVE via
+//     clamp(): it scales smoothly with the viewport width.
+//   • Small functional UI (buttons, captions, badges, inputs)
+//     is FIXED: no vw, so it never jumps or blows up.
+//   • Never hardcode font-size/weight/line-height in components —
+//     use these tokens only.
+// ------------------------------------------------------------
 
-$font-size-subtitle1: clamp(1.25rem, 2vw, 1.5rem);
-$font-size-subtitle2: clamp(1rem, 1.5vw, 1.25rem);
-$font-size-body1: clamp(1rem, 1.5vw, 1.125rem);
-$font-size-body2: clamp(0.875rem, 1.5vw, 1rem);
-$font-size-caption: clamp(0.75rem, 1vw, 0.875rem);
+// — Titles — adaptive. Pages / sections / cards.
+$font-size-title-1: clamp(2rem, 1.4rem + 2.2vw, 2.75rem); // 32 → 44px  hero
+$font-size-title-2: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem); // 28 → 36px  page title
+$font-size-title-3: clamp(1.5rem, 1.25rem + 1vw, 1.875rem); // 24 → 30px  section
+$font-size-title-4: clamp(1.375rem, 1.2rem + 0.7vw, 1.625rem); // 22 → 26px
+$font-size-title-5: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); // 20 → 24px  card / empty-state
+$font-size-title-6: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem); // 18 → 20px  small title / logo
 
-$inputSize1: 1rem;
+// — Subtitles — adaptive. Supporting headings.
+$font-size-subtitle-1: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem); // 17 → 19px
+$font-size-subtitle-2: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); // 16 → 18px  card title
 
-// Line-height options
-$line-height-normal: normal;
-$line-height1: 1;
-$line-height2: 1.5;
-$line-height3: 2;
+// — Body — adaptive. Reading text.
+$font-size-body-1: clamp(1rem, 0.97rem + 0.2vw, 1.0625rem); // 16 → 17px
+$font-size-body-2: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem); // 15 → 16px  default body
+
+// — Small / functional — FIXED. UI chrome.
+$font-size-button: 0.9375rem; // 15px  button text
+$font-size-input: 1rem; // 16px  input value
+$font-size-caption: 0.875rem; // 14px  secondary text, meta, list cells
+$font-size-caption-sm: 0.8125rem; // 13px  hints, dense meta
+$font-size-overline: 0.6875rem; // 11px  badges, uppercase labels
+
+// — Backward-compatibility alias (input value).
+$inputSize1: $font-size-input;
+
+// Font weights
+// NB: in fonts.scss weights 500/600/700 all map to Domine-Bold —
+// medium/semibold/bold look identical until extra faces are added.
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line-height
+$line-height-none: 1;
+$line-height-tight: 1.15; // large titles
+$line-height-snug: 1.3; // card titles
+$line-height-normal: 1.5; // body text
+$line-height-relaxed: 1.7; // long paragraphs
 
 // Letter spacing
-$letter-spacing-h1: -0.5px;
+$letter-spacing-tight: -0.02em; // large titles
+$letter-spacing-snug: -0.01em; // medium titles / names
+$letter-spacing-wide: 0.06em; // uppercase labels
+$letter-spacing-wider: 0.07em; // badges
+
+// ============================================================
+//  SPACING / SIZING
+// ============================================================
 
 // Padding sizes
 $padding1: 4px;
@@ -47,11 +85,11 @@ $gap4: 24px;
 $gap5: 32px;
 
 // Transition
-$transition1: .1s;
-$transition2: .3s;
-$transition3: .6s;
+$transition1: 0.1s;
+$transition2: 0.3s;
+$transition3: 0.6s;
 
-//Border radius
+// Border radius
 $borderRadius1: 4px;
 $borderRadius2: 8px;
 $borderRadius3: 12px;

@@ -1,4 +1,4 @@
-@import "@styles/colors";
+@use '@/shared/ui/styles/scss/colors' as *;
 
 .wrapper {
   grid-area: main;

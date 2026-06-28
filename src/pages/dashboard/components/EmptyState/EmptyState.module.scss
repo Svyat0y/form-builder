@@ -28,14 +28,14 @@
 
 .title {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: $font-size-title-5;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-snug;
 }
 
 .text {
   margin: 10px 0 24px;
   color: var(--text-color-secondary);
-  font-size: 0.98rem;
+  font-size: $font-size-body-2;
   max-width: 340px;
 }

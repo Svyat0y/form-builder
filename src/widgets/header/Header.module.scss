@@ -8,7 +8,6 @@
   align-items: center;
   gap: 20px;
   padding: 14px clamp(16px, 4vw, 40px);
-  background: var(--header-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-color);
@@ -18,9 +17,9 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: -0.01em;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-title-6;
+  letter-spacing: $letter-spacing-snug;
   white-space: nowrap;
   color: var(--text-color-primary);
   font-family: 'Domine', Georgia, serif;
@@ -35,7 +34,7 @@
   border-radius: 8px;
   background: var(--primary-color);
   color: #fff;
-  font-size: 1rem;
+  font-size: $font-size-body-1;
 }
 
 .headerRight {
@@ -79,8 +78,8 @@
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-color), hsl(265, 80%, 58%));
   color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: $font-size-caption-sm;
+  font-weight: $font-weight-semibold;
 }
 
 .avatarDropdown {
@@ -103,13 +102,13 @@
 }
 
 .avatarName {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-caption;
   color: var(--text-color-primary);
 }
 
 .avatarEmail {
-  font-size: 0.78rem;
+  font-size: $font-size-caption-sm;
   color: var(--text-color-secondary);
   margin-top: 2px;
 }
@@ -125,7 +124,7 @@
   background: transparent;
   color: var(--text-color-primary);
   font-family: inherit;
-  font-size: 0.88rem;
+  font-size: $font-size-caption;
   text-align: left;
   cursor: pointer;
   transition: background $transition1;
@@ -219,19 +218,19 @@
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-color), hsl(265, 80%, 58%));
   color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: $font-size-body-1;
+  font-weight: $font-weight-semibold;
   flex-shrink: 0;
 }
 
 .mobileUserName {
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-body-1;
   color: var(--text-color-primary);
 }
 
 .mobileUserEmail {
-  font-size: 0.82rem;
+  font-size: $font-size-caption-sm;
   color: var(--text-color-secondary);
   margin-top: 2px;
 }
@@ -253,8 +252,8 @@
   border-radius: 12px;
   background: transparent;
   font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: $font-size-subtitle-1;
+  font-weight: $font-weight-medium;
   color: var(--text-color-secondary);
   text-align: left;
   cursor: pointer;
@@ -282,8 +281,8 @@
   background: transparent;
   color: hsl(0, 72%, 50%);
   font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: $font-size-subtitle-1;
+  font-weight: $font-weight-medium;
   text-align: left;
   cursor: pointer;
   transition: background $transition1;
