@@ -1,7 +1,7 @@
-@import "@styles/media";
-@import "@styles/vars";
-@import "@styles/colors";
-@import "@styles/mixins";
+@use '@/shared/ui/styles/scss/media' as *;
+@use '@/shared/ui/styles/scss/vars' as *;
+@use '@/shared/ui/styles/scss/colors' as *;
+@use '@/shared/ui/styles/scss/mixins' as *;
 
 .form {
   display: flex;
@@ -46,10 +46,10 @@
   display: flex;
   justify-content: center;
   gap: $gap1;
-  font-size: $font-size-body2;
+  font-size: $font-size-body-2;
 
   span {
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     position: relative;
 
     &:before {

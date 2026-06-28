@@ -1,5 +1,5 @@
-@import "@styles/colors";
-@import "@styles/vars";
+@use '@/shared/ui/styles/scss/colors' as *;
+@use '@/shared/ui/styles/scss/vars' as *;
 
 .wrapper {
   position: absolute;

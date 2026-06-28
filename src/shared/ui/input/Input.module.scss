@@ -1,5 +1,5 @@
-@import "@styles/vars";
-@import "@styles/mixins";
+@use '@/shared/ui/styles/scss/vars' as *;
+@use '@/shared/ui/styles/scss/mixins' as *;
 
 .wrapper {
   display: flex;
@@ -32,7 +32,7 @@
     height: 100%;
     width: 100%;
     margin: 0;
-    font-size: $inputSize1;
+    font-size: $font-size-input;
     background: transparent;
     color: var(--text-color-primary);
 
@@ -55,8 +55,8 @@
   cursor: pointer;
   display: inline-block;
   padding: 0;
-  line-height: $line-height1;
-  font-size: $font-size-body2;
+  line-height: $line-height-none;
+  font-size: $font-size-caption;
   color: var(--text-color-primary);
 
   &:after {
@@ -79,7 +79,7 @@
 
 .helperText {
   display: block;
-  font-size: 13px;
+  font-size: $font-size-caption-sm;
   margin-top: 0;
   opacity: 0;
   transition: $transition2 ease all;

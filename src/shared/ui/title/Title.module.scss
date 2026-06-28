@@ -1,8 +1,10 @@
-@import "@styles/vars";
+@use '@/shared/ui/styles/scss/vars' as *;
 
 .title {
   margin: 0;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-snug;
 }
 
 .h1 {
