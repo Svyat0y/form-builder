@@ -56,7 +56,11 @@ export const Input: FC<IInputProps> = ({
         )}
       </div>
 
-      <div className={styles.inputWrapper}>
+      <div
+        className={classNames(styles.inputWrapper, {
+          [styles.inputWrapperError]: isError,
+        })}
+      >
         <input
           id={id}
           type={type}
