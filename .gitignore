@@ -29,6 +29,7 @@ PROJECT_SUMMARY.md
 road_map.md
 CONTEXT.md
 /docs
+/memory
 
 npm-debug.log*
 yarn-debug.log*
