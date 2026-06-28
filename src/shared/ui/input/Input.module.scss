@@ -28,6 +28,14 @@
     @include focus-within-effect();
   }
 
+  &.inputWrapperError {
+    border-color: var(--error, #dc3545);
+
+    &:focus-within {
+      @include focus-within-effect(rgba(220, 53, 69, 0.8), 0 0 4px 4px rgba(220, 53, 69, 0.15));
+    }
+  }
+
   & input {
     height: 100%;
     width: 100%;

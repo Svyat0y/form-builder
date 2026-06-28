@@ -3,7 +3,6 @@ import { checkAuth } from '@/features/auth/model'
 
 import { Ring } from 'react-spinners-css'
 import { useAppDispatch } from '@/shared/lib/hooks'
-import { useAppSelector } from '@/shared/lib/hooks'
 import { LOADING_STYLE, SPINNER_COLOR } from '@/shared/config/constants'
 
 interface RootLoaderProps {
@@ -12,15 +11,11 @@ interface RootLoaderProps {
 
 export const RootLoader = ({ children }: RootLoaderProps) => {
   const dispatch = useAppDispatch()
-  const { isLoading } = useAppSelector((state) => state.auth)
   const [initialCheckDone, setInitialCheckDone] = useState(false)
   const hasInitialized = useRef(false)
 
   useEffect(() => {
-    if (hasInitialized.current) {
-      setInitialCheckDone(true)
-      return
-    }
+    if (hasInitialized.current) return
 
     hasInitialized.current = true
 
@@ -37,7 +32,7 @@ export const RootLoader = ({ children }: RootLoaderProps) => {
     initAuth()
   }, [dispatch])
 
-  if (isLoading || !initialCheckDone) {
+  if (!initialCheckDone) {
     return (
       <div style={LOADING_STYLE}>
         <Ring color={SPINNER_COLOR} />

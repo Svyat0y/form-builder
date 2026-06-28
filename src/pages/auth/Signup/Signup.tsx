@@ -8,9 +8,14 @@ import { Button } from '@/shared/ui/button'
 import { Divider } from '@/shared/ui/divider'
 import { Layout } from '@/shared/ui/layout'
 import { Container } from '@/shared/ui/container'
-import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { register } from '@/features/auth/model'
+import {
+  registerSchema,
+  validateForm,
+  FormErrors,
+  RegisterFields,
+} from '@/features/auth/lib'
 import { ROUTES } from '@/shared/config/routes'
 import { API_CONFIG } from '@/shared/api/api.constants'
 import { Card } from '@/pages/auth/components/Card'
@@ -19,6 +24,7 @@ export const Signup = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState<FormErrors<RegisterFields>>({})
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { isLoading } = useAppSelector((state) => state.auth)
@@ -26,15 +32,18 @@ export const Signup = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    if (!name || !email || !password) {
-      await showSimpleAlert('error', 'Error', 'All fields are required')
+    const fieldErrors = validateForm(registerSchema, { name, email, password })
+    if (fieldErrors) {
+      setErrors(fieldErrors)
       return
     }
+
+    setErrors({})
 
     const result = await dispatch(register({ name, email, password }))
 
     if (register.fulfilled.match(result)) {
-      navigate('/signin')
+      navigate(ROUTES.signIn)
     }
   }
 
@@ -43,14 +52,19 @@ export const Signup = () => {
       <Container>
         <Card>
           <Title as="h1">Sign up</Title>
-          <form className={styles.form} action="#">
+          <form className={styles.form} onSubmit={handleSubmit}>
             <Input
               id="name"
               label="Name"
-              type="name"
+              type="text"
               autoComplete="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              error={errors.name}
+              onChange={(e) => {
+                setName(e.target.value)
+                if (errors.name)
+                  setErrors((prev) => ({ ...prev, name: undefined }))
+              }}
             />
             <Input
               id="email"
@@ -58,21 +72,27 @@ export const Signup = () => {
               type="email"
               autoComplete="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                if (errors.email)
+                  setErrors((prev) => ({ ...prev, email: undefined }))
+              }}
             />
             <Input
               id="password"
               label="Password"
               type="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                if (errors.password)
+                  setErrors((prev) => ({ ...prev, password: undefined }))
+              }}
             />
-            <Button
-              disabled={isLoading}
-              variant="primary"
-              onClick={handleSubmit}
-            >
+            <Button variant="primary" type="submit" disabled={isLoading}>
               Sign up
             </Button>
 
@@ -93,15 +113,6 @@ export const Signup = () => {
           >
             Sign in with Google
           </Button>
-          {/*<Button*/}
-          {/*  variant="secondary"*/}
-          {/*  icon={<Icons.Facebook width={24} height={24} />}*/}
-          {/*  onClick={() => {*/}
-          {/*    window.location.href = API_CONFIG.OAUTH_FACEBOOK_URL*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  Sign in with Facebook*/}
-          {/*</Button>*/}
         </Card>
       </Container>
     </Layout>
