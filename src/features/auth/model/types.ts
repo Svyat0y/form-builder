@@ -19,6 +19,7 @@ export interface AuthResponse {
     createdAt: string
     role: string
     accessToken: string
+    avatar?: string | null
   }
 }
 
@@ -38,4 +39,5 @@ export interface User {
   name: string
   createdAt: string
   role: string
+  avatar?: string | null
 }
