@@ -47,6 +47,7 @@ export const Input: FC<IInputProps> = ({
         <label htmlFor={id}>{label}</label>
         {!!isRightItemInLabel && (
           <button
+            type="button"
             onClick={handleClickRightLabel}
             className={styles.rightItemInLabel}
           >

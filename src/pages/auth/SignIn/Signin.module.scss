@@ -3,6 +3,24 @@
 @use '@/shared/ui/styles/scss/colors' as *;
 @use '@/shared/ui/styles/scss/mixins' as *;
 
+// Fullscreen overlay shown after successful login, before redirect to dashboard
+.redirectOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: var(--main-bg-color);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+// Button min-height preserved while spinner replaces text
+.btnLoading {
+  min-height: 40px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
