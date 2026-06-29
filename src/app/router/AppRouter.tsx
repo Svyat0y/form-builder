@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from '@/widgets/protected-route'
 import { FormBuilder } from '@/pages/form-builder'
 import { Dashboard } from '@/pages/dashboard'
+import { Settings } from '@/pages/settings'
 import { Signup } from '@/pages/auth/Signup'
 import { Signin } from '@/pages/auth/SignIn'
 import { ROUTES } from '@/shared/config/routes'
@@ -38,6 +39,16 @@ export const AppRouter = () => {
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
                 <FormBuilder />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Settings — profile, security, notifications, account */}
+          <Route
+            path={ROUTES.settings}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <Settings />
               </ProtectedRoute>
             }
           />

@@ -1,0 +1,54 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.tabbar {
+  display: flex;
+  gap: $gap1;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: $margin5;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: $gap2;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-button;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color $transition1, border-color $transition1;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+}
+
+.tabIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tabActive {
+  color: var(--text-color-primary);
+  font-weight: $font-weight-semibold;
+  border-bottom-color: var(--primary-color);
+}
+
+.tabDanger {
+  &.tabActive {
+    color: var(--badge-closed-fg);
+    border-bottom-color: var(--badge-closed-fg);
+  }
+}

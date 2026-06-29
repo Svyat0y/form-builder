@@ -20,6 +20,8 @@ export interface AuthResponse {
     role: string
     accessToken: string
     avatar?: string | null
+    // false for social-only accounts (Google/Facebook) with no local password
+    hasPassword?: boolean
   }
 }
 
@@ -40,4 +42,6 @@ export interface User {
   createdAt: string
   role: string
   avatar?: string | null
+  // false for social-only accounts (Google/Facebook) with no local password
+  hasPassword?: boolean
 }

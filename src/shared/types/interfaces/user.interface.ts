@@ -5,4 +5,6 @@ export interface IUser {
   createdAt: string
   role?: string
   avatar?: string | null
+  // false for social-only accounts (Google/Facebook) with no local password
+  hasPassword?: boolean
 }

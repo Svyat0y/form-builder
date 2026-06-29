@@ -1,0 +1,86 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $gap3;
+  margin-top: $margin4;
+}
+
+.rowTitle {
+  margin: 0 0 2px;
+  font-size: $font-size-caption;
+  font-weight: $font-weight-medium;
+  color: var(--text-color-primary);
+}
+
+.rowDesc {
+  margin: 0;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+}
+
+// ─── Toggle ───────────────────────────────────────────────────────────────────
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .track {
+    position: absolute;
+    inset: 0;
+    background: var(--border-color);
+    border-radius: 999px;
+    transition: background $transition1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform $transition1;
+    }
+  }
+
+  input:checked + .track {
+    background: var(--primary-color);
+  }
+
+  input:checked + .track::before {
+    transform: translateX(18px);
+  }
+
+  input:focus-visible + .track {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: $gap2;
+  margin: $margin4 0 0;
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption-sm;
+
+  svg {
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,60 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.popup {
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 $margin3;
+  font-size: $font-size-title-5;
+  font-weight: $font-weight-semibold;
+  color: var(--text-color-primary);
+}
+
+.text {
+  margin: 0 0 $margin5;
+  font-size: $font-size-caption;
+  line-height: $line-height-normal;
+  color: var(--text-color-secondary);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $gap2;
+}
+
+.cancelBtn {
+  padding: 0 18px;
+  height: 44px;
+  border: 1px solid var(--border-color);
+  border-radius: $borderRadius2;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-button;
+  cursor: pointer;
+  transition: background $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.deleteBtn {
+  padding: 0 18px;
+  height: 44px;
+  border: none;
+  border-radius: $borderRadius2;
+  background: var(--badge-closed-fg);
+  color: #fff;
+  font-family: inherit;
+  font-size: $font-size-button;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: opacity $transition1;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

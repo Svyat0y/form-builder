@@ -1,0 +1,43 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: $borderRadius3;
+  padding: $padding5;
+  box-shadow: var(--shadow-card);
+
+  & + & {
+    margin-top: $margin4;
+  }
+}
+
+.cardDanger {
+  border-color: var(--badge-closed-bg);
+  background: var(--badge-closed-bg);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $gap3;
+}
+
+.title {
+  margin: 0;
+  font-size: $font-size-subtitle-2;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+}
+
+.titleDanger {
+  color: var(--badge-closed-fg);
+}
+
+.description {
+  margin: $margin1 0 0;
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+  line-height: $line-height-normal;
+}
