@@ -1,0 +1,23 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.deleteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $gap2;
+  flex-shrink: 0;
+  padding: 9px 14px;
+  border: 1px solid var(--badge-closed-fg);
+  border-radius: $borderRadius2;
+  background: transparent;
+  color: var(--badge-closed-fg);
+  font-family: inherit;
+  font-size: $font-size-button;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: background $transition1;
+
+  &:hover {
+    background: var(--badge-closed-fg);
+    color: #fff;
+  }
+}
