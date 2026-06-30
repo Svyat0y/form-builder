@@ -1,6 +1,25 @@
 import axios from 'axios'
 import { API_CONFIG, API_ENDPOINTS } from './api.constants'
 import { STORAGE_KEYS } from '../config/constants'
+import { ROUTES } from '../config/routes'
+
+const clearAuthStorage = () => {
+  localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
+  localStorage.removeItem(STORAGE_KEYS.USER)
+  localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
+}
+
+// Session is gone (token revoked/expired AND refresh failed). Wipe local auth,
+// hard-redirect to sign-in, and halt the request chain with a never-resolving
+// promise so no stale error UI flashes before the page unloads.
+const forceLogout = (): Promise<never> => {
+  clearAuthStorage()
+  if (window.location.pathname !== ROUTES.signIn) {
+    window.location.assign(ROUTES.signIn)
+    return new Promise<never>(() => {})
+  }
+  return Promise.reject(new Error('Session expired'))
+}
 
 const api = axios.create({
   baseURL: API_CONFIG.BASE_URL,
@@ -45,8 +64,15 @@ api.interceptors.response.use(
         url.includes(API_ENDPOINTS.AUTH.REFRESH) ||
         url.includes(API_ENDPOINTS.AUTH.LOGOUT)
       ) {
-        localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
-        localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
+        clearAuthStorage()
+        return Promise.reject(error)
+      }
+
+      // A 401 without a stored session (e.g. wrong login credentials) is a
+      // legitimate API response, not an expired session — pass it through so
+      // the caller can show the real message instead of forcing a logout.
+      const hadSession = !!localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN)
+      if (!hadSession) {
         return Promise.reject(error)
       }
 
@@ -62,13 +88,12 @@ api.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${newToken}`
 
           return api(originalRequest)
-        } catch (refreshError) {
-          localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
-          localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME)
-          return Promise.reject(refreshError)
+        } catch {
+          // Refresh failed — the session was revoked or fully expired.
+          return forceLogout()
         }
       } else {
-        return Promise.reject(error)
+        return forceLogout()
       }
     }
 
