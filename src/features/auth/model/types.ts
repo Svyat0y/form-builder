@@ -33,6 +33,7 @@ export interface Session {
   createdAt: string
   expiresAt: string
   revoked: boolean
+  current: boolean
 }
 
 export interface User {

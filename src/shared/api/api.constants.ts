@@ -14,10 +14,12 @@ export const API_ENDPOINTS = {
   USERS: {
     ME: '/users/me',
     AVATAR: '/users/me/avatar',
+    PASSWORD: '/users/me/password',
     ALL: '/users',
     DELETE: '/users/delete',
     UPDATE_ROLE: '/users/update-role',
     SESSIONS: '/users/me/sessions',
+    REVOKE_OTHER_SESSIONS: '/users/me/sessions/revoke-others',
   },
 } as const
 

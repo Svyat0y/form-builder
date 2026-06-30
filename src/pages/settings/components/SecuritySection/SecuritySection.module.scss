@@ -1,19 +1,5 @@
 @use '@/shared/ui/styles/scss/vars' as *;
 
-.providerNote {
-  display: flex;
-  align-items: center;
-  gap: $gap2;
-  margin-top: $margin4;
-  color: var(--text-color-secondary);
-  font-size: $font-size-caption;
-  line-height: $line-height-normal;
-
-  svg {
-    flex-shrink: 0;
-  }
-}
-
 .changeBtn {
   display: inline-flex;
   align-items: center;

@@ -24,7 +24,22 @@ export const authApi = {
 
   deleteAvatar: () => api.delete(API_ENDPOINTS.USERS.AVATAR),
 
+  changePassword: (currentPassword: string, newPassword: string) =>
+    api.patch(API_ENDPOINTS.USERS.PASSWORD, {
+      currentPassword,
+      newPassword,
+    }),
+
+  setPassword: (newPassword: string) =>
+    api.post(API_ENDPOINTS.USERS.PASSWORD, { newPassword }),
+
   getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
+
+  revokeSession: (sessionId: string) =>
+    api.delete(`${API_ENDPOINTS.USERS.SESSIONS}/${sessionId}`),
+
+  revokeOtherSessions: () =>
+    api.post(API_ENDPOINTS.USERS.REVOKE_OTHER_SESSIONS),
 
   forgotPassword: (email: string) =>
     api.post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, { email }),
