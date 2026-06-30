@@ -41,6 +41,8 @@ export const authApi = {
   revokeOtherSessions: () =>
     api.post(API_ENDPOINTS.USERS.REVOKE_OTHER_SESSIONS),
 
+  deleteAccount: () => api.delete(API_ENDPOINTS.USERS.ME),
+
   forgotPassword: (email: string) =>
     api.post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, { email }),
 
