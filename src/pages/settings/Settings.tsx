@@ -9,7 +9,7 @@ import { NotificationsSection } from './components/NotificationsSection/Notifica
 import { DangerSection } from './components/DangerSection/DangerSection'
 import { UserIcon, LockIcon, BellIcon, AlertIcon } from './components/icons'
 import { SettingsTabKey, SettingsUser } from './types'
-import { MOCK_USER, MOCK_SESSIONS } from './mock/settings.mock'
+import { MOCK_USER } from './mock/settings.mock'
 
 const TABS: TabConfig[] = [
   { key: 'profile', label: 'Profile', icon: <UserIcon /> },
@@ -39,10 +39,7 @@ export const Settings: FC = () => {
         <div className={styles.panel}>
           {activeTab === 'profile' && <ProfileSection user={settingsUser} />}
           {activeTab === 'security' && (
-            <SecuritySection
-              sessions={MOCK_SESSIONS}
-              hasPassword={user?.hasPassword}
-            />
+            <SecuritySection hasPassword={user?.hasPassword} />
           )}
           {activeTab === 'notifications' && <NotificationsSection />}
           {activeTab === 'danger' && <DangerSection />}

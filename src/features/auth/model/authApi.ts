@@ -14,7 +14,34 @@ export const authApi = {
 
   getProfile: () => api.get(API_ENDPOINTS.USERS.ME),
 
+  updateProfile: (name: string) => api.patch(API_ENDPOINTS.USERS.ME, { name }),
+
+  uploadAvatar: (file: File) => {
+    const formData = new FormData()
+    formData.append('avatar', file)
+    return api.post<{ avatar: string }>(API_ENDPOINTS.USERS.AVATAR, formData)
+  },
+
+  deleteAvatar: () => api.delete(API_ENDPOINTS.USERS.AVATAR),
+
+  changePassword: (currentPassword: string, newPassword: string) =>
+    api.patch(API_ENDPOINTS.USERS.PASSWORD, {
+      currentPassword,
+      newPassword,
+    }),
+
+  setPassword: (newPassword: string) =>
+    api.post(API_ENDPOINTS.USERS.PASSWORD, { newPassword }),
+
   getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
+
+  revokeSession: (sessionId: string) =>
+    api.delete(`${API_ENDPOINTS.USERS.SESSIONS}/${sessionId}`),
+
+  revokeOtherSessions: () =>
+    api.post(API_ENDPOINTS.USERS.REVOKE_OTHER_SESSIONS),
+
+  deleteAccount: () => api.delete(API_ENDPOINTS.USERS.ME),
 
   forgotPassword: (email: string) =>
     api.post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, { email }),

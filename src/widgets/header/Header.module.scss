@@ -44,6 +44,46 @@
   gap: 10px;
 }
 
+// ─── Nav ──────────────────────────────────────────────────────────────────────
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color $transition1;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+}
+
+.navLinkActive {
+  color: var(--primary-color);
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
 // ─── Avatar ───────────────────────────────────────────────────────────────────
 
 .avatarDesktop {
@@ -140,6 +180,15 @@
 
   &:hover {
     background: hsla(0, 72%, 50%, 0.1);
+  }
+}
+
+.dropdownItemActive {
+  color: var(--primary-color);
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    background: var(--hover-bg);
   }
 }
 
@@ -264,6 +313,14 @@
   &:hover {
     background: var(--hover-bg);
     color: var(--text-color-primary);
+  }
+}
+
+.mobileNavLinkActive {
+  color: var(--primary-color);
+
+  &:hover {
+    color: var(--primary-color);
   }
 }
 
