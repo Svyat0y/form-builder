@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './Header.module.scss'
 import { SwitchTheme } from '@/shared/ui/switch-theme'
 import { Dropdown } from '@/shared/ui/dropdown'
@@ -7,12 +7,19 @@ import { ROUTES } from '@/shared/config/routes'
 import { useAuth } from '@/shared/lib/hooks/useAuth'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { logout } from '@/features/auth/model'
-import { SettingsIcon, AdminIcon, LogoutIcon, ChevronDownIcon } from './icons'
+import {
+  DashboardIcon,
+  SettingsIcon,
+  AdminIcon,
+  LogoutIcon,
+  ChevronDownIcon,
+} from './icons'
 
 const ADMIN_ROLES = ['ADMIN', 'SUPER_ADMIN']
 
 export const Header: FC = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const dispatch = useAppDispatch()
   const { user } = useAuth()
 
@@ -20,6 +27,8 @@ export const Header: FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isAdmin = ADMIN_ROLES.includes(user?.role ?? '')
+
+  const isActive = (route: string) => location.pathname === route
 
   const initials = user?.name
     ? user.name
@@ -48,6 +57,34 @@ export const Header: FC = () => {
           <span className={styles.logoIcon}>B</span>
           Builder
         </div>
+
+        <nav className={styles.nav}>
+          <button
+            className={`${styles.navLink} ${isActive(ROUTES.dashboard) ? styles.navLinkActive : ''}`}
+            onClick={() => navigate(ROUTES.dashboard)}
+          >
+            <DashboardIcon />
+            Dashboard
+          </button>
+
+          <button
+            className={`${styles.navLink} ${isActive(ROUTES.settings) ? styles.navLinkActive : ''}`}
+            onClick={() => navigate(ROUTES.settings)}
+          >
+            <SettingsIcon />
+            Settings
+          </button>
+
+          {isAdmin && (
+            <button
+              className={`${styles.navLink} ${isActive(ROUTES.admin) ? styles.navLinkActive : ''}`}
+              onClick={() => navigate(ROUTES.admin)}
+            >
+              <AdminIcon />
+              Admin Panel
+            </button>
+          )}
+        </nav>
 
         <div className={styles.headerRight}>
           <SwitchTheme inline />
@@ -92,7 +129,18 @@ export const Header: FC = () => {
                 </div>
 
                 <button
-                  className={styles.dropdownItem}
+                  className={`${styles.dropdownItem} ${isActive(ROUTES.dashboard) ? styles.dropdownItemActive : ''}`}
+                  onClick={() => {
+                    navigate(ROUTES.dashboard)
+                    closeAll()
+                  }}
+                >
+                  <DashboardIcon />
+                  Dashboard
+                </button>
+
+                <button
+                  className={`${styles.dropdownItem} ${isActive(ROUTES.settings) ? styles.dropdownItemActive : ''}`}
                   onClick={() => {
                     navigate(ROUTES.settings)
                     closeAll()
@@ -104,7 +152,7 @@ export const Header: FC = () => {
 
                 {isAdmin && (
                   <button
-                    className={styles.dropdownItem}
+                    className={`${styles.dropdownItem} ${isActive(ROUTES.admin) ? styles.dropdownItemActive : ''}`}
                     onClick={() => {
                       navigate(ROUTES.admin)
                       closeAll()
@@ -173,7 +221,18 @@ export const Header: FC = () => {
 
           <nav className={styles.mobileNav}>
             <button
-              className={styles.mobileNavLink}
+              className={`${styles.mobileNavLink} ${isActive(ROUTES.dashboard) ? styles.mobileNavLinkActive : ''}`}
+              onClick={() => {
+                navigate(ROUTES.dashboard)
+                closeAll()
+              }}
+            >
+              <DashboardIcon />
+              Dashboard
+            </button>
+
+            <button
+              className={`${styles.mobileNavLink} ${isActive(ROUTES.settings) ? styles.mobileNavLinkActive : ''}`}
               onClick={() => {
                 navigate(ROUTES.settings)
                 closeAll()
@@ -185,7 +244,7 @@ export const Header: FC = () => {
 
             {isAdmin && (
               <button
-                className={styles.mobileNavLink}
+                className={`${styles.mobileNavLink} ${isActive(ROUTES.admin) ? styles.mobileNavLinkActive : ''}`}
                 onClick={() => {
                   navigate(ROUTES.admin)
                   closeAll()
