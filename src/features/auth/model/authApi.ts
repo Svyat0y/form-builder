@@ -14,6 +14,16 @@ export const authApi = {
 
   getProfile: () => api.get(API_ENDPOINTS.USERS.ME),
 
+  updateProfile: (name: string) => api.patch(API_ENDPOINTS.USERS.ME, { name }),
+
+  uploadAvatar: (file: File) => {
+    const formData = new FormData()
+    formData.append('avatar', file)
+    return api.post<{ avatar: string }>(API_ENDPOINTS.USERS.AVATAR, formData)
+  },
+
+  deleteAvatar: () => api.delete(API_ENDPOINTS.USERS.AVATAR),
+
   getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
 
   forgotPassword: (email: string) =>

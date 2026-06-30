@@ -13,6 +13,7 @@ export const API_ENDPOINTS = {
 
   USERS: {
     ME: '/users/me',
+    AVATAR: '/users/me/avatar',
     ALL: '/users',
     DELETE: '/users/delete',
     UPDATE_ROLE: '/users/update-role',
