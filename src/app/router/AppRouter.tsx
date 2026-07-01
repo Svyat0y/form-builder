@@ -3,6 +3,7 @@ import { ProtectedRoute } from '@/widgets/protected-route'
 import { FormBuilder } from '@/pages/form-builder'
 import { Dashboard } from '@/pages/dashboard'
 import { Settings } from '@/pages/settings'
+import { AdminPanel } from '@/pages/admin'
 import { Signup } from '@/pages/auth/Signup'
 import { Signin } from '@/pages/auth/SignIn'
 import { ROUTES } from '@/shared/config/routes'
@@ -49,6 +50,20 @@ export const AppRouter = () => {
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
                 <Settings />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Admin Panel — user & forms management, ADMIN/SUPER_ADMIN only */}
+          <Route
+            path={ROUTES.admin}
+            element={
+              <ProtectedRoute
+                requireAuth={true}
+                nested={true}
+                allowedRoles={['ADMIN', 'SUPER_ADMIN']}
+              >
+                <AdminPanel />
               </ProtectedRoute>
             }
           />

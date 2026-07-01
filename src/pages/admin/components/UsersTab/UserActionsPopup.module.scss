@@ -1,0 +1,96 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.popup {
+  max-width: 100%;
+  padding: 4px;
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 $margin1;
+  font-size: $font-size-title-6;
+  font-weight: $font-weight-semibold;
+  color: var(--text-color-primary);
+}
+
+.subtitle {
+  margin: 0 0 $margin4;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  text-align: left;
+  cursor: pointer;
+  transition: background $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+
+  &:disabled {
+    color: var(--text-color-secondary);
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+.menuItemDanger {
+  color: var(--badge-closed-fg);
+}
+
+.menuDivider {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--border-color);
+}
+
+.soonTag {
+  margin-left: auto;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--surface);
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+}
+
+.cancelBtn {
+  display: block;
+  width: 100%;
+  margin-top: $margin3;
+  padding: 9px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-button;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}

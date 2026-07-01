@@ -1,0 +1,206 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.toolbar {
+  display: flex;
+  margin-bottom: $margin5;
+}
+
+.search {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color-secondary);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-input;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+
+  &::placeholder {
+    color: var(--text-color-secondary);
+  }
+}
+
+// Row actions open a SweetAlert modal (always centered, above everything) —
+// not a positioned popup — so a horizontal scroll wrapper here is safe and
+// doesn't risk clipping anything, unlike the old Dropdown-based menu.
+.wrap {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow-x: auto;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-card);
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: max-content;
+  min-width: max(100%, 640px);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.3fr) minmax(200px, 1.6fr) 110px 140px 56px;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: $font-size-overline;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  color: var(--text-color-secondary);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.3fr) minmax(200px, 1.6fr) 110px 140px 56px;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background $transition1;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.name {
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-body-1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+.badge_USER {
+  background: var(--surface);
+  color: var(--text-color-secondary);
+}
+
+.badge_ADMIN {
+  background: var(--badge-role-admin-bg);
+  color: var(--badge-role-admin-fg);
+}
+
+.badge_SUPER_ADMIN {
+  background: var(--badge-role-super-bg);
+  color: var(--badge-role-super-fg);
+}
+
+.actionsCell {
+  justify-self: end;
+}
+
+.dotsBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  transition: background $transition1, color $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-color-primary);
+  }
+}
+
+.empty {
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--text-color-secondary);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: $margin5;
+}
+
+.pageBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--card-bg);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  cursor: pointer;
+  transition: background $transition1;
+
+  &:hover:not(:disabled) {
+    background: var(--hover-bg);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.pageBtnActive {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #fff !important;
+}
