@@ -1,0 +1,21 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.page {
+  min-height: 100vh;
+  color: var(--text-color-primary);
+  font-family: 'Domine', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.main {
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 40px) 72px;
+}
+
+.title {
+  margin: 0 0 $margin5;
+  font-size: $font-size-title-2;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-tight;
+  line-height: $line-height-tight;
+}

@@ -46,3 +46,15 @@ export interface User {
   // false for social-only accounts (Google/Facebook) with no local password
   hasPassword?: boolean
 }
+
+// A session as seen by an admin inspecting another user's account —
+// there is no "current device" concept here, unlike the self-service `Session`.
+export interface AdminSession {
+  id: string
+  deviceInfo: string | null
+  deviceFingerprint: string | null
+  lastUsed: string
+  createdAt: string
+  expiresAt: string
+  revoked: boolean
+}

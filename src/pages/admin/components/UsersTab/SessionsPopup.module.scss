@@ -1,0 +1,140 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.popup {
+  width: 380px;
+  max-width: 100%;
+  padding: 4px;
+  text-align: left;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $gap2;
+  margin-bottom: $margin3;
+}
+
+.title {
+  margin: 0;
+  font-size: $font-size-title-5;
+  font-weight: $font-weight-semibold;
+  color: var(--text-color-primary);
+}
+
+.subtitle {
+  margin: 2px 0 0;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+}
+
+.revokeAllBtn {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: var(--badge-closed-fg);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  border-radius: $borderRadius1;
+  transition: background $transition1;
+
+  &:hover:not(:disabled) {
+    background: var(--badge-closed-bg);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.sessionList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.session {
+  display: flex;
+  align-items: center;
+  gap: $gap2;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.sessionIcon {
+  display: inline-flex;
+  color: var(--text-color-secondary);
+  flex-shrink: 0;
+}
+
+.sessionInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.sessionDevice {
+  margin: 0;
+  font-size: $font-size-caption;
+  color: var(--text-color-primary);
+}
+
+.sessionMeta {
+  margin: 2px 0 0;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+}
+
+.revokeBtn {
+  flex-shrink: 0;
+  padding: 7px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: $borderRadius2;
+  background: var(--surface);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: background $transition1, color $transition1;
+
+  &:hover:not(:disabled) {
+    background: var(--badge-closed-bg);
+    color: var(--badge-closed-fg);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.empty {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+}
+
+.closeBtn {
+  display: block;
+  width: 100%;
+  margin-top: $margin4;
+  padding: 9px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-button;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
