@@ -11,6 +11,7 @@ import {
   createForm,
   deleteForm,
   fetchForms,
+  updateForm,
   Form,
 } from '@/features/forms/model'
 import { Header } from '@/widgets/header'
@@ -52,6 +53,10 @@ export const Dashboard: FC = () => {
 
   const handleDeleteForm = (id: string) => {
     dispatch(deleteForm(id))
+  }
+
+  const handleRenameForm = (id: string, title: string) => {
+    dispatch(updateForm({ id, payload: { title } }))
   }
 
   const handleCreateForm = () => {
@@ -121,6 +126,7 @@ export const Dashboard: FC = () => {
                     onResponses={handleViewResponses}
                     onCopy={handleCopyLink}
                     onDelete={handleDeleteForm}
+                    onRename={handleRenameForm}
                   />
                 ))}
               </div>
@@ -133,6 +139,7 @@ export const Dashboard: FC = () => {
                 onResponses={handleViewResponses}
                 onCopy={handleCopyLink}
                 onDelete={handleDeleteForm}
+                onRename={handleRenameForm}
               />
             )}
           </>

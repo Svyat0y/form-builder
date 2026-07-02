@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { formsApi } from './formsApi'
-import { CreateFormPayload, Form } from './types'
+import { CreateFormPayload, Form, UpdateFormPayload } from './types'
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
 
 interface FormsState {
@@ -42,6 +42,23 @@ export const createForm = createAsyncThunk(
   },
 )
 
+export const updateForm = createAsyncThunk(
+  'forms/updateForm',
+  async (
+    { id, payload }: { id: string; payload: UpdateFormPayload },
+    { rejectWithValue },
+  ) => {
+    try {
+      const response = await formsApi.update(id, payload)
+      return response.data
+    } catch (error: any) {
+      const message = error.response?.data?.message || 'Failed to update form'
+      await showSimpleAlert('error', 'Error', message)
+      return rejectWithValue(message)
+    }
+  },
+)
+
 export const deleteForm = createAsyncThunk(
   'forms/deleteForm',
   async (id: string, { rejectWithValue }) => {
@@ -77,6 +94,11 @@ const formsSlice = createSlice({
 
     builder.addCase(createForm.fulfilled, (state, action) => {
       state.items.unshift(action.payload)
+    })
+
+    builder.addCase(updateForm.fulfilled, (state, action) => {
+      const index = state.items.findIndex((f) => f.id === action.payload.id)
+      if (index !== -1) state.items[index] = action.payload
     })
 
     builder.addCase(deleteForm.fulfilled, (state, action) => {

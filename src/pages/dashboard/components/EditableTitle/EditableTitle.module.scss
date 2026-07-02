@@ -1,0 +1,60 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+  margin-top: 10px;
+}
+
+.text {
+  min-width: 0;
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+.editBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity $transition1, background $transition1, color $transition1;
+
+  .wrap:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-color-primary);
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}

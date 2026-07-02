@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import styles from './FormList.module.scss'
+import { EditableTitle } from '../EditableTitle'
 import { FormItem, STATUS_LABELS } from '../../types'
 import { EditIcon, EyeIcon, LinkIcon, TrashIcon } from '../icons'
 
@@ -9,6 +10,7 @@ interface FormListProps {
   onResponses: (id: string) => void
   onCopy: (id: string) => void
   onDelete: (id: string) => void
+  onRename: (id: string, title: string) => void
 }
 
 export const FormList: FC<FormListProps> = ({
@@ -17,6 +19,7 @@ export const FormList: FC<FormListProps> = ({
   onResponses,
   onCopy,
   onDelete,
+  onRename,
 }) => (
   <div className={styles.wrap}>
     <div className={styles.table}>
@@ -30,7 +33,11 @@ export const FormList: FC<FormListProps> = ({
 
       {forms.map((form) => (
         <div key={form.id} className={styles.row}>
-          <div className={styles.title}>{form.title}</div>
+          <EditableTitle
+            className={styles.title}
+            value={form.title}
+            onSave={(title) => onRename(form.id, title)}
+          />
           <div>
             <span
               className={`${styles.badge} ${styles[`badge_${form.status}`]}`}

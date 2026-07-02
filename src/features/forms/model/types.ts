@@ -49,3 +49,10 @@ export interface Form {
 export interface CreateFormPayload {
   title: string
 }
+
+export interface UpdateFormPayload {
+  title?: string
+  description?: string
+  fields?: FormField[]
+  settings?: FormSettings
+}
