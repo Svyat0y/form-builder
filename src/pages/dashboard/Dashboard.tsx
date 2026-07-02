@@ -5,7 +5,7 @@ import styles from './Dashboard.module.scss'
 import { showSwalComponent } from '@/shared/lib/utils/sweetAlert'
 import { formatTimeAgo } from '@/shared/lib/utils/dateHelpers'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
-import { SPINNER_COLOR } from '@/shared/config/constants'
+import { SPINNER_COLOR, STORAGE_KEYS } from '@/shared/config/constants'
 import { CreateFormPopup } from '@/features/forms/ui/create-form-popup'
 import {
   createForm,
@@ -40,7 +40,15 @@ export const Dashboard: FC = () => {
   const dispatch = useAppDispatch()
   const { items, isLoading } = useAppSelector((state) => state.forms)
 
-  const [viewMode, setViewMode] = useState<ViewMode>('grid')
+  const [viewMode, setViewModeState] = useState<ViewMode>(() => {
+    const stored = localStorage.getItem(STORAGE_KEYS.DASHBOARD_VIEW_MODE)
+    return stored === 'grid' || stored === 'list' ? stored : 'grid'
+  })
+
+  const setViewMode = (mode: ViewMode) => {
+    setViewModeState(mode)
+    localStorage.setItem(STORAGE_KEYS.DASHBOARD_VIEW_MODE, mode)
+  }
 
   useEffect(() => {
     dispatch(fetchForms())
