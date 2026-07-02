@@ -58,6 +58,13 @@
   }
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 96px 0;
+}
+
 // ─── View toggle ──────────────────────────────────────────────────────────────
 
 .viewToggleRow {

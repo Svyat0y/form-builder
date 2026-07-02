@@ -21,6 +21,10 @@ export const API_ENDPOINTS = {
     SESSIONS: '/users/me/sessions',
     REVOKE_OTHER_SESSIONS: '/users/me/sessions/revoke-others',
   },
+
+  FORMS: {
+    BASE: '/forms',
+  },
 } as const
 
 const normalizeUrl = (url: string): string => {
@@ -40,3 +44,4 @@ export const API_CONFIG = {
 export type ApiEndpoint =
   | (typeof API_ENDPOINTS.AUTH)[keyof typeof API_ENDPOINTS.AUTH]
   | (typeof API_ENDPOINTS.USERS)[keyof typeof API_ENDPOINTS.USERS]
+  | (typeof API_ENDPOINTS.FORMS)[keyof typeof API_ENDPOINTS.FORMS]
