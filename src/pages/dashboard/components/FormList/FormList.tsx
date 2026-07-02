@@ -32,7 +32,7 @@ export const FormList: FC<FormListProps> = ({
       </div>
 
       {forms.map((form) => (
-        <div key={form.id} className={styles.row}>
+        <div key={form.id} className={`${styles.row} fb-hover-parent`}>
           <EditableTitle
             className={styles.title}
             value={form.title}

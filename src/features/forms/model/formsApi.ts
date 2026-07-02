@@ -5,6 +5,8 @@ import { API_ENDPOINTS } from '@/shared/api/api.constants'
 export const formsApi = {
   list: () => api.get<Form[]>(API_ENDPOINTS.FORMS.BASE),
 
+  getOne: (id: string) => api.get<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}`),
+
   create: (payload: CreateFormPayload) =>
     api.post<Form>(API_ENDPOINTS.FORMS.BASE, payload),
 
@@ -12,4 +14,10 @@ export const formsApi = {
     api.patch<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}`, payload),
 
   remove: (id: string) => api.delete(`${API_ENDPOINTS.FORMS.BASE}/${id}`),
+
+  publish: (id: string) =>
+    api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}/publish`),
+
+  unpublish: (id: string) =>
+    api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}/unpublish`),
 }

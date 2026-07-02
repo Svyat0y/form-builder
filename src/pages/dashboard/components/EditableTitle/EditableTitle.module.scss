@@ -31,7 +31,8 @@
   opacity: 0;
   transition: opacity $transition1, background $transition1, color $transition1;
 
-  .wrap:hover & {
+  .wrap:hover &,
+  :global(.fb-hover-parent):hover & {
     opacity: 1;
   }
 

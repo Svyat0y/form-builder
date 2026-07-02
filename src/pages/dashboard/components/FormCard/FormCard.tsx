@@ -39,7 +39,9 @@ export const FormCard: FC<FormCardProps> = ({
   const close = () => setMenuOpen(false)
 
   return (
-    <div className={`${styles.card} ${menuOpen ? styles.cardMenuOpen : ''}`}>
+    <div
+      className={`${styles.card} fb-hover-parent ${menuOpen ? styles.cardMenuOpen : ''}`}
+    >
       <div className={styles.cardTop}>
         <span className={`${styles.badge} ${styles[`badge_${form.status}`]}`}>
           {STATUS_LABELS[form.status]}

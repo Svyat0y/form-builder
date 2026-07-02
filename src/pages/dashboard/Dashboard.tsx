@@ -46,7 +46,7 @@ export const Dashboard: FC = () => {
     dispatch(fetchForms())
   }, [dispatch])
 
-  const handleEditForm = (id: string) => navigate(`/form-builder/${id}`)
+  const handleEditForm = (id: string) => navigate(`/forms/${id}/edit`)
   const handleViewResponses = (id: string) => navigate(`/forms/${id}/responses`)
   const handleCopyLink = (id: string) =>
     navigator.clipboard.writeText(`${window.location.origin}/forms/${id}`)

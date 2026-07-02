@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from '@/widgets/protected-route'
-import { FormBuilder } from '@/pages/form-builder'
+import { FormEditPage } from '@/pages/form-edit'
 import { Dashboard } from '@/pages/dashboard'
 import { Settings } from '@/pages/settings'
 import { AdminPanel } from '@/pages/admin'
@@ -34,12 +34,12 @@ export const AppRouter = () => {
             }
           />
 
-          {/* Form builder — create and edit forms */}
+          {/* Form editor — build/edit a single form's fields */}
           <Route
-            path={ROUTES.formBuilder}
+            path={ROUTES.formEdit}
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
-                <FormBuilder />
+                <FormEditPage />
               </ProtectedRoute>
             }
           />

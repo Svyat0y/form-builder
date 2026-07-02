@@ -1,0 +1,60 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--hover-bg);
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.tab {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+  cursor: default;
+}
+
+.tabActive {
+  background: var(--card-bg);
+  box-shadow: var(--shadow-card);
+  font-weight: $font-weight-bold;
+  color: var(--text-color-primary);
+}
+
+.spacer {
+  width: 170px;
+}
+
+@media (max-width: 640px) {
+  .backBtn span {
+    display: none;
+  }
+}
