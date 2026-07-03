@@ -11,6 +11,7 @@ import App from '../App'
 import { RootLoader } from '../RootLoader'
 import { OAuthCallback } from '@/pages/auth/OAuthCallback/OAuthCallback'
 import { PasswordRecovery } from '@/pages/password-recovery'
+import { PublicForm, FormSuccess, FormClosed } from '@/pages/public-form'
 
 export const AppRouter = () => {
   return (
@@ -87,6 +88,11 @@ export const AppRouter = () => {
         />
 
         <Route path={ROUTES.resetPassword} element={<PasswordRecovery />} />
+
+        {/* Public form — anonymous, no auth, no app shell */}
+        <Route path={ROUTES.publicForm} element={<PublicForm />} />
+        <Route path={ROUTES.publicFormSuccess} element={<FormSuccess />} />
+        <Route path={ROUTES.publicFormClosed} element={<FormClosed />} />
 
         <Route path="/auth/callback" element={<OAuthCallback />} />
 

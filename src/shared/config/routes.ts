@@ -6,6 +6,8 @@ export const ROUTES = {
   formEdit: '/forms/:id/edit',
   formResponses: '/forms/:id/responses',
   publicForm: '/forms/:uuid',
+  publicFormSuccess: '/forms/:uuid/success',
+  publicFormClosed: '/forms/:uuid/closed',
   admin: '/admin',
   settings: '/settings',
   resetPassword: '/password-recovery',

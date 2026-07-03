@@ -1,28 +1,39 @@
 import { FC } from 'react'
+import classNames from 'classnames'
 import styles from './FieldRenderer.module.scss'
 import { FormField } from '../../model/types'
+
+export type FieldValue = string | string[] | number | undefined
 
 interface FieldRendererProps {
   field: FormField
   // Read-only preview (editor canvas, editor Preview modal) vs a real,
-  // fillable public form — the latter lands with phase 5's PublicForm page.
+  // fillable public form (PublicForm page, phase 5).
   disabled?: boolean
+  value?: FieldValue
+  onChange?: (value: FieldValue) => void
 }
 
 // Renders a single FormField as an end-user would see it. Shared between the
-// editor's Preview modal today and the public form page later (phase 5) —
-// see docs/forms-realtime-architecture.md §14.
+// editor's Preview modal and the public form page — see
+// docs/forms-realtime-architecture.md §14.
 export const FieldRenderer: FC<FieldRendererProps> = ({
   field,
   disabled = true,
+  value,
+  onChange,
 }) => {
+  const interactiveClass = !disabled && styles.interactive
+
   switch (field.type) {
     case 'textarea':
       return (
         <textarea
-          className={styles.textarea}
+          className={classNames(styles.textarea, interactiveClass)}
           placeholder={field.placeholder}
           disabled={disabled}
+          value={(value as string) ?? ''}
+          onChange={(e) => onChange?.(e.target.value)}
         />
       )
 
@@ -30,29 +41,60 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
       return (
         <div className={styles.optionList}>
           {(field.options || []).map((option) => (
-            <label key={option} className={styles.optionRow}>
-              <input type="radio" name={field.id} disabled={disabled} />
+            <label
+              key={option}
+              className={classNames(styles.optionRow, interactiveClass)}
+            >
+              <input
+                type="radio"
+                name={field.id}
+                disabled={disabled}
+                checked={value === option}
+                onChange={() => onChange?.(option)}
+              />
               {option}
             </label>
           ))}
         </div>
       )
 
-    case 'checkbox':
+    case 'checkbox': {
+      const selected = Array.isArray(value) ? value : []
       return (
         <div className={styles.optionList}>
           {(field.options || []).map((option) => (
-            <label key={option} className={styles.optionRow}>
-              <input type="checkbox" disabled={disabled} />
+            <label
+              key={option}
+              className={classNames(styles.optionRow, interactiveClass)}
+            >
+              <input
+                type="checkbox"
+                disabled={disabled}
+                checked={selected.includes(option)}
+                onChange={() => {
+                  if (!onChange) return
+                  onChange(
+                    selected.includes(option)
+                      ? selected.filter((o) => o !== option)
+                      : [...selected, option],
+                  )
+                }}
+              />
               {option}
             </label>
           ))}
         </div>
       )
+    }
 
     case 'select':
       return (
-        <select className={styles.select} disabled={disabled} defaultValue="">
+        <select
+          className={classNames(styles.select, interactiveClass)}
+          disabled={disabled}
+          value={(value as string) ?? ''}
+          onChange={(e) => onChange?.(e.target.value)}
+        >
           <option value="" disabled>
             Select an option
           </option>
@@ -66,11 +108,19 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
 
     case 'rating': {
       const max = field.max ?? 5
+      const current = typeof value === 'number' ? value : 0
       return (
-        <div className={styles.ratingRow}>
-          {Array.from({ length: max }, (_, i) => (
-            <span key={i} className={styles.star}>
-              ☆
+        <div className={classNames(styles.ratingRow, interactiveClass)}>
+          {Array.from({ length: max }, (_, i) => i + 1).map((n) => (
+            <span
+              key={n}
+              className={classNames(styles.star, {
+                [styles.starActive]: n <= current,
+              })}
+              onClick={disabled ? undefined : () => onChange?.(n)}
+              role={disabled ? undefined : 'button'}
+            >
+              {n <= current ? '★' : '☆'}
             </span>
           ))}
         </div>
@@ -107,8 +157,11 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
               <button
                 key={step}
                 type="button"
-                className={styles.scaleStep}
+                className={classNames(styles.scaleStep, interactiveClass, {
+                  [styles.scaleStepActive]: value === step,
+                })}
                 disabled={disabled}
+                onClick={() => onChange?.(step)}
               >
                 {step}
               </button>
@@ -121,11 +174,13 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
     case 'date':
       return (
         <input
-          className={styles.input}
+          className={classNames(styles.input, interactiveClass)}
           type="date"
           min={field.minDate}
           max={field.maxDate}
           disabled={disabled}
+          value={(value as string) ?? ''}
+          onChange={(e) => onChange?.(e.target.value)}
         />
       )
 
@@ -136,10 +191,12 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
     default:
       return (
         <input
-          className={styles.input}
+          className={classNames(styles.input, interactiveClass)}
           type="text"
           placeholder={field.placeholder}
           disabled={disabled}
+          value={(value as string) ?? ''}
+          onChange={(e) => onChange?.(e.target.value)}
         />
       )
   }

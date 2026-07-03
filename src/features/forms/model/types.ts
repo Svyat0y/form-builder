@@ -69,3 +69,20 @@ export interface UpdateFormPayload {
   fields?: FormField[]
   settings?: FormSettings
 }
+
+// GET /:id/public shape — a trimmed-down Form for anonymous submitters, see
+// backend docs/forms-realtime-architecture.md §5.
+export interface PublicForm {
+  id: string
+  title: string
+  description: string
+  fields: FormField[]
+  successMessage?: string
+  allowMultipleResponses: boolean
+}
+
+export type SubmitAnswers = Record<string, string | string[] | number>
+
+export interface SubmitResponsePayload {
+  answers: SubmitAnswers
+}

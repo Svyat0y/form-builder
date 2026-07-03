@@ -19,6 +19,18 @@
   resize: vertical;
 }
 
+// Full opacity + real interactivity — the public form and any other
+// fillable (non-preview) usage of FieldRenderer.
+.interactive {
+  opacity: 1;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
 .select {
   @extend .input;
   cursor: pointer;
@@ -43,6 +55,15 @@
   font-size: $font-size-caption;
   color: var(--text-color-primary);
   opacity: 0.7;
+
+  &.interactive {
+    opacity: 1;
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+    }
+  }
 }
 
 .ratingRow {
@@ -55,6 +76,19 @@
 
 .star {
   line-height: 1;
+}
+
+.ratingRow.interactive .star {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
+.starActive {
+  color: var(--primary-color);
 }
 
 .scaleWrap {
@@ -82,6 +116,16 @@
   color: var(--text-color-primary);
   font-family: inherit;
   font-size: $font-size-caption-sm;
+
+  &.interactive {
+    cursor: pointer;
+  }
+}
+
+.scaleStepActive {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: #fff;
 }
 
 .fileStub {
