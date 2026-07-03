@@ -1,5 +1,6 @@
 export * from './useAppDispatch'
 export * from './useAppSelector'
 export * from './useAuth'
+export * from './useDebouncedValue'
 export * from './useMediaQuery'
 export * from './useOpen'

@@ -1,9 +1,16 @@
-import { CreateFormPayload, Form, UpdateFormPayload } from './types'
+import {
+  CreateFormPayload,
+  Form,
+  ListFormsParams,
+  PaginatedForms,
+  UpdateFormPayload,
+} from './types'
 import { api } from '@/shared/api'
 import { API_ENDPOINTS } from '@/shared/api/api.constants'
 
 export const formsApi = {
-  list: () => api.get<Form[]>(API_ENDPOINTS.FORMS.BASE),
+  list: (params: ListFormsParams = {}) =>
+    api.get<PaginatedForms>(API_ENDPOINTS.FORMS.BASE, { params }),
 
   getOne: (id: string) => api.get<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}`),
 

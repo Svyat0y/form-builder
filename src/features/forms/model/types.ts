@@ -50,6 +50,19 @@ export interface CreateFormPayload {
   title: string
 }
 
+export interface ListFormsParams {
+  page?: number
+  limit?: number
+  search?: string
+}
+
+export interface PaginatedForms {
+  items: Form[]
+  total: number
+  page: number
+  limit: number
+}
+
 export interface UpdateFormPayload {
   title?: string
   description?: string
