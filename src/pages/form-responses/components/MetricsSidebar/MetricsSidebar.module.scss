@@ -1,0 +1,77 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 260px;
+  flex-shrink: 0;
+  padding: 20px;
+  border-left: 1px solid var(--border-color);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.label {
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+}
+
+.value {
+  font-size: $font-size-title-4;
+  font-weight: $font-weight-bold;
+  color: var(--text-color-primary);
+}
+
+.exportBtn {
+  margin-top: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-button;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--hover-bg);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .metric {
+    flex: 1;
+    min-width: 100px;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .exportBtn {
+    width: 100%;
+  }
+}

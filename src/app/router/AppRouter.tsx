@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from '@/widgets/protected-route'
 import { FormEditPage } from '@/pages/form-edit'
+import { FormResponsesPage } from '@/pages/form-responses'
 import { Dashboard } from '@/pages/dashboard'
 import { Settings } from '@/pages/settings'
 import { AdminPanel } from '@/pages/admin'
@@ -41,6 +42,16 @@ export const AppRouter = () => {
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
                 <FormEditPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Form responses — answers + analytics for a single form */}
+          <Route
+            path={ROUTES.formResponses}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <FormResponsesPage />
               </ProtectedRoute>
             }
           />

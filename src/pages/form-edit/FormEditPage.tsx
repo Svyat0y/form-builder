@@ -26,7 +26,7 @@ import {
   unpublishForm,
   updateField,
 } from '@/features/form-builder/model'
-import { Toolbar } from './components/Toolbar'
+import { FormPageToolbar } from '@/widgets/form-page-toolbar'
 import { Sidebar, SidebarTab } from './components/Sidebar'
 import { Canvas } from './components/Canvas'
 import { PreviewModal } from './components/PreviewModal'
@@ -211,7 +211,15 @@ export const FormEditPage: FC = () => {
     <div className={styles.page}>
       <Header />
 
-      <Toolbar onBack={() => navigate(ROUTES.dashboard)} />
+      <FormPageToolbar
+        active="edit"
+        onBack={() => navigate(ROUTES.dashboard)}
+        onNavigate={(tab) =>
+          tab === 'responses' &&
+          formId &&
+          navigate(`/forms/${formId}/responses`)
+        }
+      />
 
       <div className={styles.body}>
         <Canvas

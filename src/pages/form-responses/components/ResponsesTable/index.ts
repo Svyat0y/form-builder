@@ -1,0 +1,1 @@
+export { ResponsesTable } from './ResponsesTable'

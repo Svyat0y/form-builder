@@ -36,10 +36,17 @@
 
 .tab {
   padding: 6px 14px;
+  border: none;
   border-radius: 6px;
+  background: transparent;
+  font-family: inherit;
   font-size: $font-size-caption-sm;
   color: var(--text-color-secondary);
-  cursor: default;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
 }
 
 .tabActive {
@@ -47,6 +54,10 @@
   box-shadow: var(--shadow-card);
   font-weight: $font-weight-bold;
   color: var(--text-color-primary);
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
 }
 
 .spacer {

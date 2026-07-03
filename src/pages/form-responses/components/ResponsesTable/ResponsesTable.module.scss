@@ -1,0 +1,86 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tableScroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-caption;
+
+  th,
+  td {
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
+    color: var(--text-color-secondary);
+    font-weight: $font-weight-medium;
+    font-size: $font-size-caption-sm;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  tbody tr:hover td {
+    background: var(--hover-bg);
+  }
+}
+
+.dateCell {
+  color: var(--text-color-secondary);
+}
+
+.emptyCell {
+  text-align: center;
+  color: var(--text-color-secondary);
+  padding: 24px 0;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: $font-size-caption;
+  color: var(--text-color-secondary);
+
+  button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-color-primary);
+    font-family: inherit;
+    font-size: $font-size-caption;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--hover-bg);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}

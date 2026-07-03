@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from '@/features/auth/model'
 import { formsReducer } from '@/features/forms/model'
 import { formBuilderReducer } from '@/features/form-builder/model'
+import { formResponsesReducer } from '@/features/form-responses/model'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     forms: formsReducer,
     formBuilder: formBuilderReducer,
+    formResponses: formResponsesReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 })
