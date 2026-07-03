@@ -11,6 +11,17 @@ export type FieldType =
   | 'date'
   | 'file'
 
+// Fields with a finite set of answers — the only ones the editor's
+// trackStats toggle applies to (see docs/forms-realtime-architecture.md
+// §5.1). Mirrors backend src/forms/form-field.types.ts.
+export const CHOICE_FIELD_TYPES: FieldType[] = [
+  'radio',
+  'checkbox',
+  'select',
+  'rating',
+  'scale',
+]
+
 export interface FormField {
   id: string
   type: FieldType

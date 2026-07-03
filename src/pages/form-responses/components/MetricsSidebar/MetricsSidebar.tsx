@@ -4,15 +4,22 @@ import { ResponseStats } from '@/features/form-responses/model'
 
 interface MetricsSidebarProps {
   stats: ResponseStats | null
-  isExporting: boolean
+  isExportingCsv: boolean
+  isExportingPdf: boolean
   onExportCsv: () => void
+  onExportPdf: () => void
 }
 
 export const MetricsSidebar: FC<MetricsSidebarProps> = ({
   stats,
-  isExporting,
+  isExportingCsv,
+  isExportingPdf,
   onExportCsv,
+  onExportPdf,
 }) => {
+  const hasResponses = !!stats && stats.total > 0
+  const exportDisabled = isExportingCsv || isExportingPdf || !hasResponses
+
   return (
     <aside className={styles.wrapper}>
       <div className={styles.metric}>
@@ -30,13 +37,22 @@ export const MetricsSidebar: FC<MetricsSidebarProps> = ({
         </span>
       </div>
 
-      <button
-        className={styles.exportBtn}
-        onClick={onExportCsv}
-        disabled={isExporting || !stats || stats.total === 0}
-      >
-        {isExporting ? 'Exporting…' : 'Export CSV'}
-      </button>
+      <div className={styles.exportGroup}>
+        <button
+          className={styles.exportBtn}
+          onClick={onExportCsv}
+          disabled={exportDisabled}
+        >
+          {isExportingCsv ? 'Exporting…' : 'Export CSV'}
+        </button>
+        <button
+          className={styles.exportBtn}
+          onClick={onExportPdf}
+          disabled={exportDisabled}
+        >
+          {isExportingPdf ? 'Exporting…' : 'Export PDF'}
+        </button>
+      </div>
     </aside>
   )
 }

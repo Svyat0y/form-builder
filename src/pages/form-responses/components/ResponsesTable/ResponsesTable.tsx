@@ -1,7 +1,14 @@
 import { FC } from 'react'
+import classNames from 'classnames'
 import styles from './ResponsesTable.module.scss'
+import { formatAnswerValue } from '../../lib/formatAnswer'
 import { FormResponseItem } from '@/features/form-responses/model'
 import { FormField } from '@/features/forms/model'
+import { showSwalComponent } from '@/shared/lib/utils/sweetAlert'
+import { FastTooltip } from '@/shared/ui/fast-tooltip'
+import { AnswerModal } from '../AnswerModal'
+
+const MODAL_HINT = 'Click a cell in this column to view the full answer.'
 
 interface ResponsesTableProps {
   fields: FormField[]
@@ -11,12 +18,6 @@ interface ResponsesTableProps {
   total: number
   isLoading: boolean
   onPageChange: (page: number) => void
-}
-
-const formatAnswer = (value: string | string[] | number | undefined) => {
-  if (value === undefined || value === '') return '—'
-  if (Array.isArray(value)) return value.length ? value.join(', ') : '—'
-  return String(value)
 }
 
 const formatDate = (iso: string) =>
@@ -36,6 +37,10 @@ export const ResponsesTable: FC<ResponsesTableProps> = ({
 }) => {
   const pageCount = Math.max(1, Math.ceil(total / limit))
 
+  const openAnswerModal = (label: string, answer: string) => {
+    showSwalComponent(AnswerModal, { label, answer })
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.tableScroll}>
@@ -44,7 +49,15 @@ export const ResponsesTable: FC<ResponsesTableProps> = ({
             <tr>
               <th>Submitted</th>
               {fields.map((field) => (
-                <th key={field.id}>{field.label}</th>
+                <th key={field.id}>
+                  {field.label}
+                  {/* Only textarea answers can run long enough to need the
+                      full-text modal — a single-line `text` field (like a
+                      name) just gets a native title tooltip on its cell. */}
+                  {field.type === 'textarea' && (
+                    <FastTooltip text={MODAL_HINT} />
+                  )}
+                </th>
               ))}
             </tr>
           </thead>
@@ -61,11 +74,28 @@ export const ResponsesTable: FC<ResponsesTableProps> = ({
                   <td className={styles.dateCell}>
                     {formatDate(item.createdAt)}
                   </td>
-                  {fields.map((field) => (
-                    <td key={field.id}>
-                      {formatAnswer(item.answers[field.id])}
-                    </td>
-                  ))}
+                  {fields.map((field) => {
+                    const value = formatAnswerValue(item.answers[field.id])
+                    const isTextarea = field.type === 'textarea'
+                    const isModalTrigger = isTextarea && value !== '—'
+
+                    return (
+                      <td
+                        key={field.id}
+                        className={classNames({
+                          [styles.modalCell]: isModalTrigger,
+                        })}
+                        title={isTextarea ? undefined : value}
+                        onClick={
+                          isModalTrigger
+                            ? () => openAnswerModal(field.label, value)
+                            : undefined
+                        }
+                      >
+                        {value}
+                      </td>
+                    )
+                  })}
                 </tr>
               ))
             )}

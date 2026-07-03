@@ -61,18 +61,71 @@
   color: var(--text-color-secondary);
 }
 
-.latestList {
+// recharts renders this inside its own tooltip wrapper — fixed padding
+// keeps it the same size on every chart (pie, vertical bar, horizontal
+// bar), instead of recharts' per-chart auto-sizing.
+.chartTooltip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card-hover);
+  font-size: $font-size-caption-sm;
+  white-space: nowrap;
+}
+
+.chartTooltipName {
+  color: var(--text-color-secondary);
+}
+
+.chartTooltipValue {
+  color: var(--text-color-primary);
+  font-weight: $font-weight-bold;
+}
+
+.pieRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 220px;
-  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+  min-width: 0;
 }
 
-.latestItem {
-  padding: 8px 10px;
-  background: var(--hover-bg);
-  border-radius: 7px;
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: $font-size-caption;
+}
+
+.legendSwatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.legendName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--text-color-primary);
+}
+
+.legendPercent {
+  flex-shrink: 0;
+  color: var(--text-color-secondary);
 }

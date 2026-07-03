@@ -1,0 +1,1 @@
+export { FastTooltip } from './FastTooltip'

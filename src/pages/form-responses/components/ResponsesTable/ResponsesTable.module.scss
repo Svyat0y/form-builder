@@ -50,6 +50,15 @@
   color: var(--text-color-secondary);
 }
 
+.modalCell {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+}
+
 .emptyCell {
   text-align: center;
   color: var(--text-color-secondary);

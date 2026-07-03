@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './FormResponsesPage.module.scss'
 import { Header } from '@/widgets/header'
@@ -6,21 +6,17 @@ import { FormPageToolbar } from '@/widgets/form-page-toolbar'
 import { ROUTES } from '@/shared/config/routes'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
-import { Form, formsApi } from '@/features/forms/model'
+import { CHOICE_FIELD_TYPES, Form, formsApi } from '@/features/forms/model'
 import {
   fetchResponses,
   fetchStats,
   resetResponses,
-  responsesApi,
-  FormResponseItem,
 } from '@/features/form-responses/model'
 import { FieldChart } from './components/FieldChart'
 import { ResponsesTable } from './components/ResponsesTable'
 import { MetricsSidebar } from './components/MetricsSidebar'
 import { buildResponsesCsv } from './lib/buildResponsesCsv'
-
-const EXPORT_PAGE_LIMIT = 100
-const EXPORT_PAGE_CAP = 50 // safety cap — 5000 responses, plenty for MVP scale
+import { fetchAllResponses } from './lib/fetchAllResponses'
 
 export const FormResponsesPage: FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -33,7 +29,10 @@ export const FormResponsesPage: FC = () => {
 
   const [form, setForm] = useState<Form | null>(null)
   const [formLoadError, setFormLoadError] = useState(false)
-  const [isExporting, setIsExporting] = useState(false)
+  const [isExportingCsv, setIsExportingCsv] = useState(false)
+  const [isExportingPdf, setIsExportingPdf] = useState(false)
+
+  const chartsGridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!id) return
@@ -74,18 +73,9 @@ export const FormResponsesPage: FC = () => {
 
   const handleExportCsv = async () => {
     if (!id || !form) return
-    setIsExporting(true)
+    setIsExportingCsv(true)
     try {
-      const all: FormResponseItem[] = []
-      for (let p = 1; p <= EXPORT_PAGE_CAP; p++) {
-        const response = await responsesApi.list(id, {
-          page: p,
-          limit: EXPORT_PAGE_LIMIT,
-        })
-        all.push(...response.data.items)
-        if (all.length >= response.data.total) break
-      }
-
+      const all = await fetchAllResponses(id)
       const csv = buildResponsesCsv(form.fields, all)
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
       const url = URL.createObjectURL(blob)
@@ -97,7 +87,35 @@ export const FormResponsesPage: FC = () => {
     } catch {
       showSimpleAlert('error', 'Error', 'Failed to export responses.')
     } finally {
-      setIsExporting(false)
+      setIsExportingCsv(false)
+    }
+  }
+
+  // Only choice-type fields with trackStats on get a chart — text/textarea
+  // (and anything without the toggle) stay in the raw table only. See
+  // docs/pages/form-editor.md §5.1.
+  const chartFields =
+    form?.fields.filter(
+      (field) => CHOICE_FIELD_TYPES.includes(field.type) && field.trackStats,
+    ) ?? []
+
+  const handleExportPdf = async () => {
+    if (!id || !form) return
+    setIsExportingPdf(true)
+    try {
+      const all = await fetchAllResponses(id)
+      const { exportResponsesPdf } = await import('./lib/buildResponsesPdf')
+      await exportResponsesPdf({
+        form,
+        chartFields,
+        stats,
+        chartsElement: chartsGridRef.current,
+        responses: all,
+      })
+    } catch {
+      showSimpleAlert('error', 'Error', 'Failed to export responses.')
+    } finally {
+      setIsExportingPdf(false)
     }
   }
 
@@ -109,10 +127,6 @@ export const FormResponsesPage: FC = () => {
       </div>
     )
   }
-
-  const trackedFields = form.fields.filter((field) =>
-    stats?.fields.some((f) => f.fieldId === field.id),
-  )
 
   return (
     <div className={styles.page}>
@@ -130,9 +144,9 @@ export const FormResponsesPage: FC = () => {
         <div className={styles.main}>
           <h1 className={styles.title}>{form.title}</h1>
 
-          {trackedFields.length > 0 && (
-            <div className={styles.chartsGrid}>
-              {trackedFields.map((field) => {
+          {chartFields.length > 0 && (
+            <div className={styles.chartsGrid} ref={chartsGridRef}>
+              {chartFields.map((field) => {
                 const fieldStats = stats?.fields.find(
                   (f) => f.fieldId === field.id,
                 )
@@ -156,8 +170,10 @@ export const FormResponsesPage: FC = () => {
 
         <MetricsSidebar
           stats={stats}
-          isExporting={isExporting}
+          isExportingCsv={isExportingCsv}
+          isExportingPdf={isExportingPdf}
           onExportCsv={handleExportCsv}
+          onExportPdf={handleExportPdf}
         />
       </div>
     </div>
