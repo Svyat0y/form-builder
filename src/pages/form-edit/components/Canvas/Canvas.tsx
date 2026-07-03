@@ -14,12 +14,38 @@ import { MAX_FIELDS_PER_FORM } from '@/features/form-builder/model'
 import { FieldCard } from '../FieldCard'
 import { PlusIcon, TextFieldIcon, PencilIcon } from '../icons'
 
-interface TitleFieldProps {
+// Inline title/subtitle editing: pencil switches to an input, Enter/blur
+// commits, Escape cancels. Variants differ only in styling and empty-value
+// handling — the title falls back to a default label and never commits an
+// empty string; the subtitle shows an "Add subtitle" button and may be
+// cleared back to empty.
+const INLINE_EDIT_VARIANTS = {
+  title: {
+    rowClass: 'titleRow',
+    textClass: 'title',
+    inputClass: 'titleInput',
+    ariaLabel: 'Edit form title',
+    maxLength: 120,
+    allowEmpty: false,
+  },
+  subtitle: {
+    rowClass: 'descriptionRow',
+    textClass: 'description',
+    inputClass: 'descriptionInput',
+    ariaLabel: 'Edit form subtitle',
+    maxLength: 300,
+    allowEmpty: true,
+  },
+} as const
+
+interface InlineEditProps {
   value: string
   onSave: (value: string) => void
+  variant: keyof typeof INLINE_EDIT_VARIANTS
 }
 
-const TitleField: FC<TitleFieldProps> = ({ value, onSave }) => {
+const InlineEdit: FC<InlineEditProps> = ({ value, onSave, variant }) => {
+  const config = INLINE_EDIT_VARIANTS[variant]
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState(value)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -31,74 +57,15 @@ const TitleField: FC<TitleFieldProps> = ({ value, onSave }) => {
     }
   }, [isEditing])
 
-  const commit = () => {
-    const trimmed = draft.trim()
-    setIsEditing(false)
-    if (trimmed && trimmed !== value) onSave(trimmed)
+  const startEditing = () => {
+    setDraft(value)
+    setIsEditing(true)
   }
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      inputRef.current?.blur()
-    } else if (e.key === 'Escape') {
-      e.preventDefault()
-      setDraft(value)
-      setIsEditing(false)
-    }
-  }
-
-  if (isEditing) {
-    return (
-      <input
-        ref={inputRef}
-        className={styles.titleInput}
-        value={draft}
-        onChange={(e) => setDraft(e.target.value)}
-        onBlur={commit}
-        onKeyDown={handleKeyDown}
-        maxLength={120}
-      />
-    )
-  }
-
-  return (
-    <div className={styles.titleRow}>
-      <h1 className={styles.title}>{value || 'Untitled form'}</h1>
-      <button
-        className={styles.editBtn}
-        aria-label="Edit form title"
-        onClick={() => {
-          setDraft(value)
-          setIsEditing(true)
-        }}
-      >
-        <PencilIcon />
-      </button>
-    </div>
-  )
-}
-
-interface DescriptionFieldProps {
-  value: string
-  onSave: (value: string) => void
-}
-
-const DescriptionField: FC<DescriptionFieldProps> = ({ value, onSave }) => {
-  const [isEditing, setIsEditing] = useState(false)
-  const [draft, setDraft] = useState(value)
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (isEditing) {
-      inputRef.current?.focus()
-      inputRef.current?.select()
-    }
-  }, [isEditing])
 
   const commit = () => {
     const trimmed = draft.trim()
     setIsEditing(false)
+    if (!config.allowEmpty && !trimmed) return
     if (trimmed !== value) onSave(trimmed)
   }
 
@@ -113,27 +80,22 @@ const DescriptionField: FC<DescriptionFieldProps> = ({ value, onSave }) => {
     }
   }
 
-  const startEditing = () => {
-    setDraft(value)
-    setIsEditing(true)
-  }
-
   if (isEditing) {
     return (
       <input
         ref={inputRef}
-        className={styles.descriptionInput}
+        className={styles[config.inputClass]}
         value={draft}
         onChange={(e) => setDraft(e.target.value)}
         onBlur={commit}
         onKeyDown={handleKeyDown}
-        placeholder="Subtitle"
-        maxLength={300}
+        placeholder={variant === 'subtitle' ? 'Subtitle' : undefined}
+        maxLength={config.maxLength}
       />
     )
   }
 
-  if (!value) {
+  if (variant === 'subtitle' && !value) {
     return (
       <button className={styles.addSubtitleBtn} onClick={startEditing}>
         <PlusIcon />
@@ -143,11 +105,15 @@ const DescriptionField: FC<DescriptionFieldProps> = ({ value, onSave }) => {
   }
 
   return (
-    <div className={styles.descriptionRow}>
-      <p className={styles.description}>{value}</p>
+    <div className={styles[config.rowClass]}>
+      {variant === 'title' ? (
+        <h1 className={styles.title}>{value || 'Untitled form'}</h1>
+      ) : (
+        <p className={styles.description}>{value}</p>
+      )}
       <button
         className={styles.editBtn}
-        aria-label="Edit form subtitle"
+        aria-label={config.ariaLabel}
         onClick={startEditing}
       >
         <PencilIcon />
@@ -206,8 +172,12 @@ export const Canvas: FC<CanvasProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      <TitleField value={title} onSave={onTitleChange} />
-      <DescriptionField value={description} onSave={onDescriptionChange} />
+      <InlineEdit variant="title" value={title} onSave={onTitleChange} />
+      <InlineEdit
+        variant="subtitle"
+        value={description}
+        onSave={onDescriptionChange}
+      />
 
       {fields.length === 0 ? (
         <div className={styles.empty}>
@@ -246,7 +216,7 @@ export const Canvas: FC<CanvasProps> = ({
           className={styles.addBtn}
           onClick={onAddQuestion}
           disabled={atLimit}
-          title={atLimit ? 'Достигнут лимит полей' : ''}
+          title={atLimit ? 'Field limit reached' : ''}
         >
           <PlusIcon />
           Add question

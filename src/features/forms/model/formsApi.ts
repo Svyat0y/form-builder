@@ -13,7 +13,8 @@ export const formsApi = {
   update: (id: string, payload: UpdateFormPayload) =>
     api.patch<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}`, payload),
 
-  remove: (id: string) => api.delete(`${API_ENDPOINTS.FORMS.BASE}/${id}`),
+  remove: (id: string) =>
+    api.delete<{ message: string }>(`${API_ENDPOINTS.FORMS.BASE}/${id}`),
 
   publish: (id: string) =>
     api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}/publish`),

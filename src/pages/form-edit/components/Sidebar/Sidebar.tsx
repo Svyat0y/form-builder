@@ -13,7 +13,7 @@ interface SidebarProps {
   fieldsCount: number
   atLimit: boolean
   onAddField: (type: FieldType) => void
-  onFieldChange: (key: keyof FormField, value: unknown) => void
+  onFieldChange: (patch: Partial<FormField>) => void
   saveStatus: SaveStatus
   onManualSave: () => void
   onPreview: () => void

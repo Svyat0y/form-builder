@@ -22,9 +22,9 @@ export const FieldPalette: FC<FieldPaletteProps> = ({ onAdd, disabled }) => {
             disabled={isDisabled}
             title={
               !meta.enabled
-                ? 'Скоро'
+                ? 'Coming soon'
                 : disabled
-                  ? 'Достигнут лимит полей'
+                  ? 'Field limit reached'
                   : undefined
             }
             onClick={() => meta.enabled && !disabled && onAdd(meta.type)}

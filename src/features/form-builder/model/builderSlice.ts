@@ -141,24 +141,13 @@ const builderSlice = createSlice({
       state.isDirty = true
     },
 
-    insertField: (
+    updateField: (
       state,
-      action: { payload: { type: FieldType; index: number } },
-    ) => {
-      if (state.fields.length >= MAX_FIELDS_PER_FORM) return
-      const field = defaultField(action.payload.type)
-      state.fields.splice(action.payload.index, 0, field)
-      state.activeFieldId = field.id
-      state.isDirty = true
-    },
-
-    updateFieldProp: (
-      state,
-      action: { payload: { id: string; key: keyof FormField; value: unknown } },
+      action: { payload: { id: string; patch: Partial<FormField> } },
     ) => {
       const field = state.fields.find((f) => f.id === action.payload.id)
       if (!field) return
-      ;(field as any)[action.payload.key] = action.payload.value
+      Object.assign(field, action.payload.patch)
       state.isDirty = true
     },
 
@@ -237,8 +226,7 @@ export const {
   setTitle,
   setDescription,
   addField,
-  insertField,
-  updateFieldProp,
+  updateField,
   deleteField,
   duplicateField,
   reorderFields,

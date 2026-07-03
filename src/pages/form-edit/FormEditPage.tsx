@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from '@/shared/lib/hooks'
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
-import { FieldType } from '@/features/forms/model'
+import { FieldType, FormField } from '@/features/forms/model'
 import {
   addField,
   deleteField,
@@ -23,7 +23,7 @@ import {
   setDescription,
   setTitle,
   unpublishForm,
-  updateFieldProp,
+  updateField,
 } from '@/features/form-builder/model'
 import { Toolbar } from './components/Toolbar'
 import { Sidebar, SidebarTab } from './components/Sidebar'
@@ -59,10 +59,27 @@ export const FormEditPage: FC = () => {
   const isFirstLoad = useRef(true)
   const autosaveTimer = useRef<ReturnType<typeof setTimeout>>()
 
+  // Latest editor state, readable from unmount cleanup without re-running
+  // the effect — used to flush a pending debounced save on SPA navigation
+  // (beforeunload only covers tab close, not client-side route changes).
+  const latest = useRef({ formId, title, description, fields, isDirty })
+  latest.current = { formId, title, description, fields, isDirty }
+
   useEffect(() => {
     if (!id) return
     dispatch(fetchFormForEdit(id))
     return () => {
+      const pending = latest.current
+      if (pending.isDirty && pending.formId) {
+        dispatch(
+          saveFormChanges({
+            id: pending.formId,
+            title: pending.title,
+            description: pending.description,
+            fields: pending.fields,
+          }),
+        )
+      }
       dispatch(resetBuilder())
     }
   }, [id, dispatch])
@@ -160,6 +177,24 @@ export const FormEditPage: FC = () => {
     setIsPublishing(false)
   }
 
+  // Shared between the persistent desktop sidebar and the mobile drawer —
+  // the drawer additionally gets onClose/initialTab below.
+  const sidebarProps = {
+    activeField,
+    fieldsCount: fields.length,
+    atLimit,
+    onAddField: handleAddField,
+    onFieldChange: (patch: Partial<FormField>) => {
+      if (activeField) dispatch(updateField({ id: activeField.id, patch }))
+    },
+    saveStatus,
+    onManualSave: handleManualSave,
+    onPreview: () => setPreviewOpen(true),
+    onPublishToggle: handlePublishToggle,
+    status,
+    isPublishing,
+  }
+
   if (isLoading && !formId) {
     return (
       <div className={styles.page}>
@@ -194,44 +229,14 @@ export const FormEditPage: FC = () => {
           onEditField={isDesktop ? undefined : handleEditFieldMobile}
         />
 
-        {isDesktop && (
-          <Sidebar
-            activeField={activeField}
-            fieldsCount={fields.length}
-            atLimit={atLimit}
-            onAddField={handleAddField}
-            onFieldChange={(key, value) =>
-              activeField &&
-              dispatch(updateFieldProp({ id: activeField.id, key, value }))
-            }
-            saveStatus={saveStatus}
-            onManualSave={handleManualSave}
-            onPreview={() => setPreviewOpen(true)}
-            onPublishToggle={handlePublishToggle}
-            status={status}
-            isPublishing={isPublishing}
-          />
-        )}
+        {isDesktop && <Sidebar {...sidebarProps} />}
       </div>
 
       {!isDesktop && mobileSidebarOpen && (
         <div className={styles.drawerOverlay}>
           <div className={styles.drawer}>
             <Sidebar
-              activeField={activeField}
-              fieldsCount={fields.length}
-              atLimit={atLimit}
-              onAddField={handleAddField}
-              onFieldChange={(key, value) =>
-                activeField &&
-                dispatch(updateFieldProp({ id: activeField.id, key, value }))
-              }
-              saveStatus={saveStatus}
-              onManualSave={handleManualSave}
-              onPreview={() => setPreviewOpen(true)}
-              onPublishToggle={handlePublishToggle}
-              status={status}
-              isPublishing={isPublishing}
+              {...sidebarProps}
               onClose={() => setMobileSidebarOpen(false)}
               initialTab={mobileSidebarTab}
             />

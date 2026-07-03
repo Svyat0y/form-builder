@@ -63,7 +63,7 @@ export const SaveBar: FC<SaveBarProps> = ({
         disabled={publishDisabled}
         title={
           !isActive && fieldsCount === 0
-            ? 'Добавьте хотя бы одно поле, чтобы опубликовать'
+            ? 'Add at least one question to publish'
             : ''
         }
         onClick={onPublishToggle}

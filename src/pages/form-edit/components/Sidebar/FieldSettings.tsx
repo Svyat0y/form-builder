@@ -4,7 +4,7 @@ import { FormField } from '@/features/forms/model'
 
 interface FieldSettingsProps {
   field: FormField | null
-  onChange: (key: keyof FormField, value: unknown) => void
+  onChange: (patch: Partial<FormField>) => void
 }
 
 export const FieldSettings: FC<FieldSettingsProps> = ({ field, onChange }) => {
@@ -24,7 +24,7 @@ export const FieldSettings: FC<FieldSettingsProps> = ({ field, onChange }) => {
           className={styles.input}
           type="text"
           value={field.label}
-          onChange={(e) => onChange('label', e.target.value)}
+          onChange={(e) => onChange({ label: e.target.value })}
         />
       </div>
 
@@ -34,7 +34,7 @@ export const FieldSettings: FC<FieldSettingsProps> = ({ field, onChange }) => {
           className={styles.input}
           type="text"
           value={field.placeholder || ''}
-          onChange={(e) => onChange('placeholder', e.target.value)}
+          onChange={(e) => onChange({ placeholder: e.target.value })}
         />
       </div>
 
@@ -44,7 +44,7 @@ export const FieldSettings: FC<FieldSettingsProps> = ({ field, onChange }) => {
           <input
             type="checkbox"
             checked={field.required}
-            onChange={(e) => onChange('required', e.target.checked)}
+            onChange={(e) => onChange({ required: e.target.checked })}
           />
           <span className={styles.switchTrack} />
         </label>
