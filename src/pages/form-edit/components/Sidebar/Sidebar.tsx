@@ -13,6 +13,7 @@ interface SidebarProps {
   fieldsCount: number
   atLimit: boolean
   onAddField: (type: FieldType) => void
+  onImportFields: (fields: FormField[]) => void
   onFieldChange: (patch: Partial<FormField>) => void
   saveStatus: SaveStatus
   onManualSave: () => void
@@ -32,6 +33,7 @@ export const Sidebar: FC<SidebarProps> = ({
   fieldsCount,
   atLimit,
   onAddField,
+  onImportFields,
   onFieldChange,
   saveStatus,
   onManualSave,
@@ -75,7 +77,11 @@ export const Sidebar: FC<SidebarProps> = ({
 
       <div className={styles.panel}>
         {activeTab === 'fields' ? (
-          <FieldPalette onAdd={onAddField} disabled={atLimit} />
+          <FieldPalette
+            onAdd={onAddField}
+            onImport={onImportFields}
+            disabled={atLimit}
+          />
         ) : (
           <FieldSettings field={activeField} onChange={onFieldChange} />
         )}

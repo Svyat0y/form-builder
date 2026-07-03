@@ -1,0 +1,94 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  opacity: 0.6;
+}
+
+.textarea {
+  @extend .input;
+  min-height: 70px;
+  resize: vertical;
+}
+
+.select {
+  @extend .input;
+  cursor: pointer;
+  padding-right: 32px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $font-size-caption;
+  color: var(--text-color-primary);
+  opacity: 0.7;
+}
+
+.ratingRow {
+  display: flex;
+  gap: 4px;
+  font-size: 22px;
+  color: var(--text-color-secondary);
+  opacity: 0.7;
+}
+
+.star {
+  line-height: 1;
+}
+
+.scaleWrap {
+  opacity: 0.7;
+}
+
+.scaleHint {
+  margin-bottom: 8px;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+}
+
+.scaleRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.scaleStep {
+  min-width: 32px;
+  padding: 6px 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption-sm;
+}
+
+.fileStub {
+  padding: 10px;
+  border: 1px dashed var(--border-color);
+  border-radius: 7px;
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+  text-align: center;
+}

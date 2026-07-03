@@ -88,7 +88,7 @@
 }
 
 .field {
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 }
 
 .fieldLabel {
@@ -100,17 +100,4 @@
 .required {
   margin-left: 4px;
   color: hsl(0, 72%, 50%);
-}
-
-.fieldInput {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 8px 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 7px;
-  background: transparent;
-  color: var(--text-color-primary);
-  font-family: inherit;
-  font-size: $font-size-caption;
-  opacity: 0.6;
 }

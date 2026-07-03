@@ -108,6 +108,61 @@
   text-transform: uppercase;
 }
 
+// ─── JSON import ────────────────────────────────────────────────────────────
+
+.jsonImport {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.jsonTextarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 76px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: $font-size-caption-sm;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
+.jsonError {
+  margin-top: 6px;
+  color: hsl(0, 72%, 50%);
+  font-size: $font-size-caption-sm;
+}
+
+.applyJsonBtn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption-sm;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    border-color: var(--primary-color);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
 // ─── Field settings ─────────────────────────────────────────────────────────
 
 .settingsEmpty {
@@ -190,6 +245,94 @@
     background: #fff;
     border-radius: 50%;
     transition: transform $transition1;
+  }
+}
+
+// ─── Options editor (radio/checkbox/select) ─────────────────────────────────
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.optionMoveBtns {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.optionMoveBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    color: var(--text-color-primary);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.optionRemoveBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--hover-bg);
+    color: hsl(0, 72%, 50%);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.addOptionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 7px;
+  border: 1px dashed var(--border-color);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-caption-sm;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--primary-color);
+    color: var(--text-color-primary);
   }
 }
 

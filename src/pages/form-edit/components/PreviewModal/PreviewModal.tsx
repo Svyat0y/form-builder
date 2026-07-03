@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import styles from './PreviewModal.module.scss'
 import { FormField } from '@/features/forms/model'
+import { FieldRenderer } from '@/features/forms/ui/field-renderer'
 
 interface PreviewModalProps {
   title: string
@@ -40,18 +41,13 @@ export const PreviewModal: FC<PreviewModalProps> = ({
               <form onSubmit={(e) => e.preventDefault()}>
                 {fields.map((field) => (
                   <div key={field.id} className={styles.field}>
-                    <label className={styles.fieldLabel} htmlFor={field.id}>
+                    <div className={styles.fieldLabel}>
                       {field.label}
                       {field.required && (
                         <span className={styles.required}>*</span>
                       )}
-                    </label>
-                    <input
-                      id={field.id}
-                      className={styles.fieldInput}
-                      placeholder={field.placeholder}
-                      disabled
-                    />
+                    </div>
+                    <FieldRenderer field={field} />
                   </div>
                 ))}
               </form>

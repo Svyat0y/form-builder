@@ -21,6 +21,7 @@ import {
   saveFormChanges,
   selectField,
   setDescription,
+  setFields,
   setTitle,
   unpublishForm,
   updateField,
@@ -184,6 +185,8 @@ export const FormEditPage: FC = () => {
     fieldsCount: fields.length,
     atLimit,
     onAddField: handleAddField,
+    onImportFields: (importedFields: FormField[]) =>
+      dispatch(setFields(importedFields)),
     onFieldChange: (patch: Partial<FormField>) => {
       if (activeField) dispatch(updateField({ id: activeField.id, patch }))
     },

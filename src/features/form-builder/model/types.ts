@@ -6,19 +6,30 @@ export interface FieldTypeMeta {
   enabled: boolean
 }
 
-// Only `text` is wired up for now (phase 3, first cut). The rest render in
-// the palette as disabled "Soon" tiles until their settings/renderer land —
-// see docs/pages/form-editor.md.
+// `file` needs an object storage decision first (see docs/modules/users.md
+// re: avatars) — stays disabled ("Soon") until that lands. Every other type
+// is wired up: palette, per-type Settings, and FieldRenderer preview.
 export const FIELD_TYPE_META: FieldTypeMeta[] = [
   { type: 'text', label: 'Text', enabled: true },
-  { type: 'textarea', label: 'Textarea', enabled: false },
-  { type: 'radio', label: 'Radio', enabled: false },
-  { type: 'checkbox', label: 'Checkbox', enabled: false },
-  { type: 'select', label: 'Select', enabled: false },
-  { type: 'rating', label: 'Rating', enabled: false },
-  { type: 'scale', label: 'Scale', enabled: false },
-  { type: 'date', label: 'Date', enabled: false },
+  { type: 'textarea', label: 'Textarea', enabled: true },
+  { type: 'radio', label: 'Radio', enabled: true },
+  { type: 'checkbox', label: 'Checkbox', enabled: true },
+  { type: 'select', label: 'Select', enabled: true },
+  { type: 'rating', label: 'Rating', enabled: true },
+  { type: 'scale', label: 'Scale', enabled: true },
+  { type: 'date', label: 'Date', enabled: true },
   { type: 'file', label: 'File', enabled: false },
+]
+
+// Choice-type fields support opt-in stats aggregation (trackStats) — see
+// forms-realtime-architecture.md §5.1. Mirrors the backend's
+// CHOICE_FIELD_TYPES (src/forms/form-field.types.ts).
+export const CHOICE_FIELD_TYPES: FieldType[] = [
+  'radio',
+  'checkbox',
+  'select',
+  'rating',
+  'scale',
 ]
 
 export const MAX_FIELDS_PER_FORM = 50

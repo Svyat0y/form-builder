@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { formsApi } from '@/features/forms/model'
 import { FieldType, Form, FormField, FormStatus } from '@/features/forms/model'
 import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
-import { MAX_FIELDS_PER_FORM, SaveStatus } from './types'
+import { CHOICE_FIELD_TYPES, MAX_FIELDS_PER_FORM, SaveStatus } from './types'
 
 interface BuilderState {
   formId: string | null
@@ -36,13 +36,41 @@ const newFieldId = () =>
     ? crypto.randomUUID()
     : `field-${Date.now()}-${Math.random().toString(16).slice(2)}`
 
-const defaultField = (type: FieldType): FormField => ({
-  id: newFieldId(),
-  type,
-  label: 'Untitled question',
-  placeholder: '',
-  required: false,
-})
+const defaultField = (type: FieldType): FormField => {
+  const base: FormField = {
+    id: newFieldId(),
+    type,
+    label: 'Untitled question',
+    placeholder: '',
+    required: false,
+  }
+
+  if (CHOICE_FIELD_TYPES.includes(type)) {
+    base.trackStats = true
+  }
+
+  switch (type) {
+    case 'radio':
+    case 'checkbox':
+    case 'select':
+      base.options = ['Option 1', 'Option 2']
+      break
+    case 'rating':
+      base.min = 1
+      base.max = 5
+      break
+    case 'scale':
+      base.min = 1
+      base.max = 10
+      base.minLabel = ''
+      base.maxLabel = ''
+      break
+    default:
+      break
+  }
+
+  return base
+}
 
 export const fetchFormForEdit = createAsyncThunk(
   'formBuilder/fetchFormForEdit',
@@ -179,6 +207,14 @@ const builderSlice = createSlice({
     selectField: (state, action: { payload: string | null }) => {
       state.activeFieldId = action.payload
     },
+
+    // JSON import (Fields tab) — replaces the whole schema wholesale, same
+    // as pasting a new form definition. Caller validates shape/limit first.
+    setFields: (state, action: { payload: FormField[] }) => {
+      state.fields = action.payload
+      state.activeFieldId = null
+      state.isDirty = true
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -231,6 +267,7 @@ export const {
   duplicateField,
   reorderFields,
   selectField,
+  setFields,
 } = builderSlice.actions
 
 export default builderSlice.reducer
