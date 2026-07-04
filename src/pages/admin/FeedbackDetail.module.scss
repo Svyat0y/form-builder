@@ -1,0 +1,142 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.page {
+  min-height: 100vh;
+  color: var(--text-color-primary);
+  font-family: 'Domine', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 40px) 72px;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: $margin4;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fromName {
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-title-6;
+}
+
+.fromEmail {
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.badge_NEW {
+  background: var(--badge-draft-bg);
+  color: var(--badge-draft-fg);
+}
+
+.badge_IN_PROGRESS {
+  background: var(--badge-role-admin-bg);
+  color: var(--badge-role-admin-fg);
+}
+
+.badge_RESOLVED {
+  background: var(--badge-active-bg);
+  color: var(--badge-active-fg);
+}
+
+.meta {
+  margin-top: $margin3;
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+}
+
+.message {
+  margin: $margin5 0 0;
+  color: var(--text-color-primary);
+  font-size: $font-size-body-2;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap2;
+  margin-top: $margin5;
+  padding-top: $margin4;
+  border-top: 1px solid var(--border-color);
+}
+
+.statusBtn {
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.deleteBtn {
+  padding: 8px 14px;
+  margin-left: auto;
+  border: none;
+  border-radius: 8px;
+  background: var(--badge-closed-fg);
+  color: #fff;
+  font-family: inherit;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-caption;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.empty {
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--text-color-secondary);
+}

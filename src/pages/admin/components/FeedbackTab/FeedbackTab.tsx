@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import styles from './FeedbackTab.module.scss'
 import {
@@ -8,6 +9,8 @@ import {
 } from '@/features/feedback/model'
 import { handleApiError, showSuccessAlert } from '@/features/auth/lib'
 import { showSwalComponent } from '@/shared/lib/utils/sweetAlert'
+import { subscribeToSocketEvent } from '@/shared/api'
+import { ROUTES } from '@/shared/config/routes'
 import { FeedbackActionsPopup } from './FeedbackActionsPopup'
 import { DotsIcon } from '../icons'
 
@@ -18,6 +21,7 @@ const STATUS_LABEL: Record<FeedbackStatus, string> = {
 }
 
 export const FeedbackTab: FC = () => {
+  const navigate = useNavigate()
   const [items, setItems] = useState<Feedback[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [sort, setSort] = useState<'ASC' | 'DESC'>('DESC')
@@ -36,6 +40,15 @@ export const FeedbackTab: FC = () => {
 
   useEffect(() => {
     load(sort)
+  }, [sort])
+
+  // FeedbackService emits feedback.created on submit; RealtimeGateway pushes
+  // it to every connected admin — refetch instead of reload so a new
+  // submission shows up live in the list.
+  useEffect(() => {
+    return subscribeToSocketEvent('feedback:new', () => {
+      load(sort)
+    })
   }, [sort])
 
   const handleSetStatus = async (id: string, status: FeedbackStatus) => {
@@ -57,12 +70,17 @@ export const FeedbackTab: FC = () => {
     }
   }
 
-  const handleOpenActions = (entry: Feedback) => {
+  const handleOpenActions = (e: React.MouseEvent, entry: Feedback) => {
+    e.stopPropagation()
     showSwalComponent(FeedbackActionsPopup, {
       status: entry.status,
       onSetStatus: (status) => handleSetStatus(entry.id, status),
       onDelete: () => handleDelete(entry.id),
     })
+  }
+
+  const openDetail = (id: string) => {
+    navigate(ROUTES.adminFeedbackDetail.replace(':id', id))
   }
 
   return (
@@ -92,7 +110,11 @@ export const FeedbackTab: FC = () => {
             <div className={styles.empty}>No feedback yet.</div>
           ) : (
             items.map((entry) => (
-              <div key={entry.id} className={styles.row}>
+              <div
+                key={entry.id}
+                className={classNames(styles.row, styles.rowClickable)}
+                onClick={() => openDetail(entry.id)}
+              >
                 <div className={styles.from}>
                   <div className={styles.fromName}>
                     {entry.user?.name || 'Unknown user'}
@@ -122,7 +144,7 @@ export const FeedbackTab: FC = () => {
                   <button
                     className={styles.dotsBtn}
                     aria-label="Feedback options"
-                    onClick={() => handleOpenActions(entry)}
+                    onClick={(e) => handleOpenActions(e, entry)}
                   >
                     <DotsIcon />
                   </button>

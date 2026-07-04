@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import styles from './AdminPanel.module.scss'
 import { Header } from '@/widgets/header'
 import { User } from '@/features/auth/model'
@@ -17,7 +18,12 @@ const TABS: AdminTabConfig[] = [
 ]
 
 export const AdminPanel: FC = () => {
-  const [activeTab, setActiveTab] = useState<AdminTabKey>('users')
+  const location = useLocation()
+  // FeedbackDetail navigates back here with { state: { tab: 'feedback' } }
+  // so returning from a feedback entry lands back on the right tab.
+  const initialTab =
+    (location.state as { tab?: AdminTabKey } | null)?.tab ?? 'users'
+  const [activeTab, setActiveTab] = useState<AdminTabKey>(initialTab)
   // Set via "View forms" for a specific user (from UsersTab). Persists across
   // tab switches within the session — switching to Users and back to Forms
   // keeps showing the same user's context until another "View forms" is used.

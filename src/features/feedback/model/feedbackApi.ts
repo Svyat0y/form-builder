@@ -14,6 +14,9 @@ export const feedbackApi = {
   list: (params: ListFeedbackParams) =>
     api.get<PaginatedFeedback>(API_ENDPOINTS.FEEDBACK.BASE, { params }),
 
+  getById: (id: string) =>
+    api.get<Feedback>(`${API_ENDPOINTS.FEEDBACK.BASE}/${id}`),
+
   updateStatus: (id: string, status: FeedbackStatus) =>
     api.patch<Feedback>(`${API_ENDPOINTS.FEEDBACK.BASE}/${id}/status`, {
       status,

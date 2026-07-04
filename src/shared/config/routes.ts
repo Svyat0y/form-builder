@@ -9,6 +9,7 @@ export const ROUTES = {
   publicFormSuccess: '/forms/:uuid/success',
   publicFormClosed: '/forms/:uuid/closed',
   admin: '/admin',
+  adminFeedbackDetail: '/admin/feedback/:id',
   settings: '/settings',
   feedback: '/feedback',
   resetPassword: '/password-recovery',

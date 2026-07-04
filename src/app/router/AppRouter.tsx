@@ -5,7 +5,7 @@ import { FormResponsesPage } from '@/pages/form-responses'
 import { Dashboard } from '@/pages/dashboard'
 import { Settings } from '@/pages/settings'
 import { Feedback } from '@/pages/feedback'
-import { AdminPanel } from '@/pages/admin'
+import { AdminPanel, FeedbackDetail } from '@/pages/admin'
 import { Signup } from '@/pages/auth/Signup'
 import { Signin } from '@/pages/auth/SignIn'
 import { ROUTES } from '@/shared/config/routes'
@@ -87,6 +87,20 @@ export const AppRouter = () => {
                 allowedRoles={['ADMIN', 'SUPER_ADMIN']}
               >
                 <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Feedback detail — full message + status/delete controls */}
+          <Route
+            path={ROUTES.adminFeedbackDetail}
+            element={
+              <ProtectedRoute
+                requireAuth={true}
+                nested={true}
+                allowedRoles={['ADMIN', 'SUPER_ADMIN']}
+              >
+                <FeedbackDetail />
               </ProtectedRoute>
             }
           />
