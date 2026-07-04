@@ -7,10 +7,12 @@ import { ROUTES } from '@/shared/config/routes'
 import { useAuth } from '@/shared/lib/hooks/useAuth'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { logout } from '@/features/auth/model'
+import { NotificationBell } from '@/features/notifications/ui'
 import {
   DashboardIcon,
   SettingsIcon,
   AdminIcon,
+  FeedbackIcon,
   LogoutIcon,
   ChevronDownIcon,
 } from './icons'
@@ -89,6 +91,8 @@ export const Header: FC = () => {
         <div className={styles.headerRight}>
           <SwitchTheme inline />
 
+          <NotificationBell />
+
           {/* Avatar dropdown — desktop only */}
           <div className={styles.avatarDesktop}>
             <Dropdown
@@ -162,6 +166,17 @@ export const Header: FC = () => {
                     Admin Panel
                   </button>
                 )}
+
+                <button
+                  className={`${styles.dropdownItem} ${isActive(ROUTES.feedback) ? styles.dropdownItemActive : ''}`}
+                  onClick={() => {
+                    navigate(ROUTES.feedback)
+                    closeAll()
+                  }}
+                >
+                  <FeedbackIcon />
+                  Feedback
+                </button>
 
                 <div className={styles.dropdownDivider} />
 
@@ -254,6 +269,17 @@ export const Header: FC = () => {
                 Admin Panel
               </button>
             )}
+
+            <button
+              className={`${styles.mobileNavLink} ${isActive(ROUTES.feedback) ? styles.mobileNavLinkActive : ''}`}
+              onClick={() => {
+                navigate(ROUTES.feedback)
+                closeAll()
+              }}
+            >
+              <FeedbackIcon />
+              Feedback
+            </button>
           </nav>
 
           <div className={styles.mobileBottom}>

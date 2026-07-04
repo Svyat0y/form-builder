@@ -19,6 +19,7 @@ interface UserActionsPopupProps {
   onViewSessions: () => void
   onChangeRole: (newRole: 'USER' | 'ADMIN') => void
   onViewForms: () => void
+  onSendNotification: () => void
   onDelete: () => void
   onClose?: () => void
 }
@@ -33,6 +34,7 @@ export const UserActionsPopup: FC<UserActionsPopupProps> = ({
   onViewSessions,
   onChangeRole,
   onViewForms,
+  onSendNotification,
   onDelete,
   onClose,
 }) => {
@@ -83,9 +85,13 @@ export const UserActionsPopup: FC<UserActionsPopupProps> = ({
           <FormsIcon /> View forms
         </button>
 
-        <button className={styles.menuItem} disabled>
+        {/* No onClose() here: onSendNotification() opens another
+            showSwalComponent (SendNotificationPopup) on the same shared
+            SweetAlert2 instance. Closing this popup right after would race
+            with — and can immediately dismiss — the one that just opened.
+            Same reasoning as "Delete user" below. */}
+        <button className={styles.menuItem} onClick={onSendNotification}>
           <BellPlusIcon /> Send notification
-          <span className={styles.soonTag}>Soon</span>
         </button>
 
         {canDelete && (

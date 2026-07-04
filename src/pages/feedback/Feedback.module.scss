@@ -1,0 +1,49 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.page {
+  min-height: 100vh;
+  color: var(--text-color-primary);
+}
+
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 40px) 72px;
+}
+
+.title {
+  margin: 0 0 $margin3;
+  font-size: $font-size-title-2;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-tight;
+  line-height: $line-height-tight;
+}
+
+.subtitle {
+  margin: 0 0 $margin5;
+  color: var(--text-color-secondary);
+  font-size: $font-size-body-2;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-body-2;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $margin4;
+}

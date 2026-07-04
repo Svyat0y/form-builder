@@ -1,0 +1,131 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.card {
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: $font-size-subtitle-2;
+  font-weight: $font-weight-bold;
+  color: var(--text-color-primary);
+}
+
+.average {
+  flex-shrink: 0;
+  font-size: $font-size-caption-sm;
+  color: var(--text-color-secondary);
+}
+
+.toggle {
+  display: flex;
+  gap: 2px;
+  background: var(--hover-bg);
+  padding: 2px;
+  border-radius: 6px;
+
+  button {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--text-color-secondary);
+    font-family: inherit;
+    font-size: $font-size-overline;
+    cursor: pointer;
+  }
+}
+
+.toggleActive {
+  background: var(--surface);
+  color: var(--text-color-primary);
+  font-weight: $font-weight-medium;
+}
+
+.empty {
+  margin: 0;
+  padding: 24px 0;
+  text-align: center;
+  font-size: $font-size-caption;
+  color: var(--text-color-secondary);
+}
+
+// recharts renders this inside its own tooltip wrapper — fixed padding
+// keeps it the same size on every chart (pie, vertical bar, horizontal
+// bar), instead of recharts' per-chart auto-sizing.
+.chartTooltip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card-hover);
+  font-size: $font-size-caption-sm;
+  white-space: nowrap;
+}
+
+.chartTooltipName {
+  color: var(--text-color-secondary);
+}
+
+.chartTooltipValue {
+  color: var(--text-color-primary);
+  font-weight: $font-weight-bold;
+}
+
+.pieRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $font-size-caption;
+}
+
+.legendSwatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.legendName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-color-primary);
+}
+
+.legendPercent {
+  flex-shrink: 0;
+  color: var(--text-color-secondary);
+}

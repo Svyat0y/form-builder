@@ -1,0 +1,302 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.bellBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-color-primary);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.badgeDot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--badge-closed-fg);
+  border: 1.5px solid var(--surface);
+}
+
+// --surface (not --card-bg): --card-bg is semi-transparent in dark mode by
+// design for in-flow cards over a page background — this panel floats above
+// the header instead, so it needs a fully opaque surface or the header's
+// border bleeds through underneath it.
+.panel {
+  width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: 640px;
+  transition: transform 0.25s ease;
+}
+
+.pane {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: $font-size-body-2;
+  font-weight: $font-weight-semibold;
+  color: var(--text-color-primary);
+}
+
+.clearAllBtn {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color-primary);
+    text-decoration: underline;
+  }
+}
+
+.rows {
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 54px 10px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+
+  &:hover .rowDeleteBtn {
+    opacity: 1;
+  }
+}
+
+.rowDeleteBtn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-medium;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    color: var(--badge-closed-fg);
+    text-decoration: underline;
+  }
+}
+
+.rowIcon {
+  margin-top: 2px;
+  color: var(--text-color-secondary);
+  flex-shrink: 0;
+}
+
+.rowBody {
+  min-width: 0;
+  flex: 1;
+}
+
+.rowTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.rowTitle {
+  font-size: $font-size-caption;
+  color: var(--text-color-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rowTime {
+  flex-shrink: 0;
+  font-size: $font-size-overline;
+  color: var(--text-color-secondary);
+}
+
+.rowSnippet {
+  margin-top: 2px;
+  font-size: $font-size-overline;
+  color: var(--text-color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unreadDot {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+}
+
+// Sits in the same fixed header row as Back, so it stays visible even when
+// a form has enough responses to make the thread below it scroll. Same
+// filled style as .actionBtn, just smaller to fit the header row.
+.viewResponsesBtn {
+  flex-shrink: 0;
+  margin-right: 12px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: inherit;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.detail {
+  padding: 14px 16px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.detailTitle {
+  font-size: $font-size-body-2;
+  font-weight: $font-weight-semibold;
+  color: var(--text-color-primary);
+  margin-bottom: 6px;
+}
+
+.detailTime {
+  font-size: $font-size-overline;
+  color: var(--text-color-secondary);
+  margin-bottom: 10px;
+}
+
+.detailBody {
+  font-size: $font-size-caption;
+  color: var(--text-color-secondary);
+  line-height: 1.6;
+}
+
+.actionBtn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: inherit;
+  font-size: $font-size-caption;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.threadEntry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border-color);
+  font-size: $font-size-caption;
+  color: var(--text-color-secondary);
+}
+
+.threadDeleteBtn {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-color-secondary);
+  font-family: inherit;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--badge-closed-fg);
+    text-decoration: underline;
+  }
+}

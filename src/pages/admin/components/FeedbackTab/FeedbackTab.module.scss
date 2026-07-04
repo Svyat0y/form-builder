@@ -1,0 +1,165 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $margin5;
+}
+
+.sortBtn {
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-caption;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.wrap {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow-x: auto;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-card);
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: max-content;
+  min-width: max(100%, 720px);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(260px, 2fr) 130px 110px 56px;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: $font-size-overline;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  color: var(--text-color-secondary);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(260px, 2fr) 130px 110px 56px;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+.from {
+  min-width: 0;
+}
+
+.fromName {
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-body-1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fromEmail {
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message {
+  color: var(--text-color-primary);
+  font-size: $font-size-caption;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  color: var(--text-color-secondary);
+  font-size: $font-size-caption;
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+.badge_NEW {
+  background: var(--badge-draft-bg);
+  color: var(--badge-draft-fg);
+}
+
+.badge_IN_PROGRESS {
+  background: var(--badge-role-admin-bg);
+  color: var(--badge-role-admin-fg);
+}
+
+.badge_RESOLVED {
+  background: var(--badge-active-bg);
+  color: var(--badge-active-fg);
+}
+
+.handledBy {
+  margin-top: 4px;
+  color: var(--text-color-secondary);
+  font-size: $font-size-overline;
+}
+
+.actionsCell {
+  justify-self: end;
+}
+
+.dotsBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  transition: background $transition1, color $transition1;
+
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-color-primary);
+  }
+}
+
+.empty {
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--text-color-secondary);
+}

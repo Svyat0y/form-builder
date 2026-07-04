@@ -1,9 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from '@/widgets/protected-route'
-import { FormBuilder } from '@/pages/form-builder'
+import { FormEditPage } from '@/pages/form-edit'
+import { FormResponsesPage } from '@/pages/form-responses'
 import { Dashboard } from '@/pages/dashboard'
 import { Settings } from '@/pages/settings'
-import { AdminPanel } from '@/pages/admin'
+import { Feedback } from '@/pages/feedback'
+import { AdminPanel, FeedbackDetail } from '@/pages/admin'
 import { Signup } from '@/pages/auth/Signup'
 import { Signin } from '@/pages/auth/SignIn'
 import { ROUTES } from '@/shared/config/routes'
@@ -11,6 +13,7 @@ import App from '../App'
 import { RootLoader } from '../RootLoader'
 import { OAuthCallback } from '@/pages/auth/OAuthCallback/OAuthCallback'
 import { PasswordRecovery } from '@/pages/password-recovery'
+import { PublicForm, FormSuccess, FormClosed } from '@/pages/public-form'
 
 export const AppRouter = () => {
   return (
@@ -34,12 +37,22 @@ export const AppRouter = () => {
             }
           />
 
-          {/* Form builder — create and edit forms */}
+          {/* Form editor — build/edit a single form's fields */}
           <Route
-            path={ROUTES.formBuilder}
+            path={ROUTES.formEdit}
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
-                <FormBuilder />
+                <FormEditPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Form responses — answers + analytics for a single form */}
+          <Route
+            path={ROUTES.formResponses}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <FormResponsesPage />
               </ProtectedRoute>
             }
           />
@@ -54,6 +67,16 @@ export const AppRouter = () => {
             }
           />
 
+          {/* Feedback — any authenticated user can submit a message */}
+          <Route
+            path={ROUTES.feedback}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <Feedback />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Admin Panel — user & forms management, ADMIN/SUPER_ADMIN only */}
           <Route
             path={ROUTES.admin}
@@ -64,6 +87,20 @@ export const AppRouter = () => {
                 allowedRoles={['ADMIN', 'SUPER_ADMIN']}
               >
                 <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Feedback detail — full message + status/delete controls */}
+          <Route
+            path={ROUTES.adminFeedbackDetail}
+            element={
+              <ProtectedRoute
+                requireAuth={true}
+                nested={true}
+                allowedRoles={['ADMIN', 'SUPER_ADMIN']}
+              >
+                <FeedbackDetail />
               </ProtectedRoute>
             }
           />
@@ -87,6 +124,11 @@ export const AppRouter = () => {
         />
 
         <Route path={ROUTES.resetPassword} element={<PasswordRecovery />} />
+
+        {/* Public form — anonymous, no auth, no app shell */}
+        <Route path={ROUTES.publicForm} element={<PublicForm />} />
+        <Route path={ROUTES.publicFormSuccess} element={<FormSuccess />} />
+        <Route path={ROUTES.publicFormClosed} element={<FormClosed />} />
 
         <Route path="/auth/callback" element={<OAuthCallback />} />
 

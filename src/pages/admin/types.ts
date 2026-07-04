@@ -1,6 +1,6 @@
 // Local types for the Admin Panel page
 
-export type AdminTabKey = 'users' | 'forms'
+export type AdminTabKey = 'users' | 'forms' | 'feedback'
 
 export interface AdminTab {
   key: AdminTabKey

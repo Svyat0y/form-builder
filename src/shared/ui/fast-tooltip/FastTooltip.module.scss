@@ -1,0 +1,35 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--hover-bg);
+  color: var(--text-color-secondary);
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  cursor: help;
+  outline: none;
+}
+
+.bubble {
+  position: fixed;
+  transform: translate(-50%, -100%);
+  max-width: 240px;
+  width: max-content;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card-hover);
+  color: var(--text-color-primary);
+  font-size: $font-size-caption-sm;
+  font-weight: $font-weight-regular;
+  text-align: left;
+  white-space: normal;
+  pointer-events: none;
+  z-index: 1000;
+}

@@ -1,0 +1,99 @@
+export type FormStatus = 'DRAFT' | 'ACTIVE' | 'CLOSED'
+
+export type FieldType =
+  | 'text'
+  | 'textarea'
+  | 'radio'
+  | 'checkbox'
+  | 'select'
+  | 'rating'
+  | 'scale'
+  | 'date'
+  | 'file'
+
+// Fields with a finite set of answers — the only ones the editor's
+// trackStats toggle applies to (see docs/forms-realtime-architecture.md
+// §5.1). Mirrors backend src/forms/form-field.types.ts.
+export const CHOICE_FIELD_TYPES: FieldType[] = [
+  'radio',
+  'checkbox',
+  'select',
+  'rating',
+  'scale',
+]
+
+export interface FormField {
+  id: string
+  type: FieldType
+  label: string
+  placeholder?: string
+  required: boolean
+  options?: string[]
+  min?: number
+  max?: number
+  minLabel?: string
+  maxLabel?: string
+  minDate?: string
+  maxDate?: string
+  trackStats?: boolean
+}
+
+export interface FormSettings {
+  successMessage?: string
+  allowMultipleResponses?: boolean
+}
+
+export interface Form {
+  id: string
+  ownerId: string
+  title: string
+  description: string
+  status: FormStatus
+  fields: FormField[]
+  settings: FormSettings
+  responsesCount: number
+  publishedAt: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CreateFormPayload {
+  title: string
+}
+
+export interface ListFormsParams {
+  page?: number
+  limit?: number
+  search?: string
+}
+
+export interface PaginatedForms {
+  items: Form[]
+  total: number
+  page: number
+  limit: number
+}
+
+export interface UpdateFormPayload {
+  title?: string
+  description?: string
+  fields?: FormField[]
+  settings?: FormSettings
+}
+
+// GET /:id/public shape — a trimmed-down Form for anonymous submitters, see
+// backend docs/forms-realtime-architecture.md §5.
+export interface PublicForm {
+  id: string
+  title: string
+  description: string
+  fields: FormField[]
+  successMessage?: string
+  allowMultipleResponses: boolean
+}
+
+export type SubmitAnswers = Record<string, string | string[] | number>
+
+export interface SubmitResponsePayload {
+  answers: SubmitAnswers
+}

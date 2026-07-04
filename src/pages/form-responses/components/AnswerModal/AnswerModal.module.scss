@@ -1,0 +1,36 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.wrapper {
+  // SweetAlert2's popup lays its content out as a grid/flex item, which
+  // defaults to min-width: auto — that let long unbroken repeated text
+  // size this box to its content instead of wrapping, blowing out the
+  // modal's right edge. min-width: 0 forces it to respect the width above.
+  width: min(520px, 80vw);
+  max-width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: var(--text-color-primary);
+  font-size: $font-size-title-5;
+}
+
+.answer {
+  margin: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text-color-primary);
+  font-size: $font-size-body-2;
+  line-height: $line-height-relaxed;
+}
+
+.actions {
+  margin-top: $margin4;
+  display: flex;
+  justify-content: flex-end;
+}

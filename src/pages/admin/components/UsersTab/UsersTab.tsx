@@ -3,12 +3,12 @@ import classNames from 'classnames'
 import styles from './UsersTab.module.scss'
 import { adminApi, User } from '@/features/auth/model'
 import { handleApiError, showSuccessAlert } from '@/features/auth/lib'
-import { useAuth } from '@/shared/lib/hooks'
+import { useAuth, useDebouncedValue } from '@/shared/lib/hooks'
 import { showSwalComponent } from '@/shared/lib/utils/sweetAlert'
-import { useDebouncedValue } from '../../lib/useDebouncedValue'
 import { DeleteUserPopup } from './DeleteUserPopup'
 import { SessionsPopup } from './SessionsPopup'
 import { UserActionsPopup } from './UserActionsPopup'
+import { SendNotificationPopup } from './SendNotificationPopup'
 import { SearchIcon, DotsIcon } from '../icons'
 
 const PAGE_SIZE = 20
@@ -104,6 +104,26 @@ export const UsersTab: FC<UsersTabProps> = ({ onViewForms }) => {
     })
   }
 
+  const handleSendNotification = (target: User) => {
+    showSwalComponent(SendNotificationPopup, {
+      userName: target.name,
+      onConfirm: async (title, body, actionLabel, actionUrl) => {
+        try {
+          await adminApi.sendNotification(
+            target.id,
+            title,
+            body,
+            actionLabel,
+            actionUrl,
+          )
+          await showSuccessAlert(`Notification sent to ${target.name}`)
+        } catch (error) {
+          await handleApiError(error, 'Failed to send notification')
+        }
+      },
+    })
+  }
+
   const handleViewSessions = (target: User) => {
     showSwalComponent(SessionsPopup, {
       userId: target.id,
@@ -122,6 +142,7 @@ export const UsersTab: FC<UsersTabProps> = ({ onViewForms }) => {
       onViewSessions: () => handleViewSessions(target),
       onChangeRole: (newRole) => handleChangeRole(target, newRole),
       onViewForms: () => onViewForms(target),
+      onSendNotification: () => handleSendNotification(target),
       onDelete: () => handleDelete(target),
     })
   }

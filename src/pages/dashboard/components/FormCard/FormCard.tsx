@@ -1,6 +1,7 @@
 import { FC, useCallback, useState } from 'react'
 import styles from './FormCard.module.scss'
 import { Dropdown } from '@/shared/ui/dropdown'
+import { EditableTitle } from '../EditableTitle'
 import { FormItem, STATUS_LABELS } from '../../types'
 import {
   DotsIcon,
@@ -17,6 +18,7 @@ interface FormCardProps {
   onResponses: (id: string) => void
   onCopy: (id: string) => void
   onDelete: (id: string) => void
+  onRename: (id: string, title: string) => void
 }
 
 export const FormCard: FC<FormCardProps> = ({
@@ -25,6 +27,7 @@ export const FormCard: FC<FormCardProps> = ({
   onResponses,
   onCopy,
   onDelete,
+  onRename,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -36,7 +39,9 @@ export const FormCard: FC<FormCardProps> = ({
   const close = () => setMenuOpen(false)
 
   return (
-    <div className={`${styles.card} ${menuOpen ? styles.cardMenuOpen : ''}`}>
+    <div
+      className={`${styles.card} fb-hover-parent ${menuOpen ? styles.cardMenuOpen : ''}`}
+    >
       <div className={styles.cardTop}>
         <span className={`${styles.badge} ${styles[`badge_${form.status}`]}`}>
           {STATUS_LABELS[form.status]}
@@ -94,7 +99,12 @@ export const FormCard: FC<FormCardProps> = ({
         </Dropdown>
       </div>
 
-      <h3 className={styles.cardTitle}>{form.title}</h3>
+      <EditableTitle
+        as="h3"
+        className={styles.cardTitle}
+        value={form.title}
+        onSave={(title) => onRename(form.id, title)}
+      />
 
       <div className={styles.cardFooter}>
         <div className={styles.cardResponses}>

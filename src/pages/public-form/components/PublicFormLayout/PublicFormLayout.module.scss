@@ -1,0 +1,52 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+// The app shell normally provides the scrollable region (html/body are
+// `overflow: hidden` globally, see shared/ui/styles/scss/_main.scss) — this
+// page lives outside that shell (public, no auth), so it has to scroll
+// itself or tall forms get clipped with no way to reach the Submit button.
+.page {
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--main-bg-color);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  padding: 14px clamp(16px, 4vw, 40px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-title-6;
+  letter-spacing: $letter-spacing-snug;
+  color: var(--text-color-primary);
+  font-family: 'Domine', Georgia, serif;
+}
+
+.logoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: $font-size-body-1;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  padding: clamp(24px, 6vw, 64px) 16px;
+}
