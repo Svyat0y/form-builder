@@ -62,7 +62,7 @@ export const FormEditPage: FC = () => {
 
   // Latest editor state, readable from unmount cleanup without re-running
   // the effect — used to flush a pending debounced save on SPA navigation
-  // (beforeunload only covers tab close, not client-side route changes).
+  // (beforeunload only covers tab close, not client-side route changes)
   const latest = useRef({ formId, title, description, fields, isDirty })
   latest.current = { formId, title, description, fields, isDirty }
 
