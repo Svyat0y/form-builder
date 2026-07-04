@@ -193,13 +193,6 @@ export const NotificationBell: FC = () => {
             </button>
           </div>
         ))}
-        <button
-          type="button"
-          className={styles.actionBtn}
-          onClick={() => handleAction(`/forms/${selected.formId}/responses`)}
-        >
-          View responses
-        </button>
       </>
     )
   }
@@ -260,9 +253,22 @@ export const NotificationBell: FC = () => {
           </div>
 
           <div className={styles.pane}>
-            <button type="button" className={styles.backBtn} onClick={goBack}>
-              <ArrowLeftIcon /> Back
-            </button>
+            <div className={styles.detailHeader}>
+              <button type="button" className={styles.backBtn} onClick={goBack}>
+                <ArrowLeftIcon /> Back
+              </button>
+              {selected?.kind === 'group' && (
+                <button
+                  type="button"
+                  className={styles.viewResponsesBtn}
+                  onClick={() =>
+                    handleAction(`/forms/${selected.formId}/responses`)
+                  }
+                >
+                  View responses
+                </button>
+              )}
+            </div>
             <div className={styles.detail}>{renderDetail()}</div>
           </div>
         </div>

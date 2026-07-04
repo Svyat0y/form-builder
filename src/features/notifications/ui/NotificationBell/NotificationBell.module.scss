@@ -184,22 +184,46 @@
   font-size: $font-size-caption;
 }
 
+.detailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
 .backBtn {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
   border: none;
-  border-bottom: 1px solid var(--border-color);
   background: transparent;
   color: var(--text-color-secondary);
   font-family: inherit;
   font-size: $font-size-caption;
   cursor: pointer;
-  width: 100%;
 
   &:hover {
     color: var(--text-color-primary);
+  }
+}
+
+// Sits in the same fixed header row as Back, so it stays visible even when
+// a form has enough responses to make the thread below it scroll.
+.viewResponsesBtn {
+  flex-shrink: 0;
+  padding: 0 16px 0 0;
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  font-family: inherit;
+  font-size: $font-size-overline;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
 
