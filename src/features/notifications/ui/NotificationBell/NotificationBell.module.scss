@@ -210,20 +210,23 @@
 }
 
 // Sits in the same fixed header row as Back, so it stays visible even when
-// a form has enough responses to make the thread below it scroll.
+// a form has enough responses to make the thread below it scroll. Same
+// filled style as .actionBtn, just smaller to fit the header row.
 .viewResponsesBtn {
   flex-shrink: 0;
-  padding: 0 16px 0 0;
+  margin-right: 12px;
+  padding: 6px 12px;
   border: none;
-  background: transparent;
-  color: var(--primary-color);
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
   font-family: inherit;
   font-size: $font-size-overline;
   font-weight: $font-weight-semibold;
   cursor: pointer;
 
   &:hover {
-    text-decoration: underline;
+    opacity: 0.9;
   }
 }
 
