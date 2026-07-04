@@ -10,5 +10,6 @@ export const ROUTES = {
   publicFormClosed: '/forms/:uuid/closed',
   admin: '/admin',
   settings: '/settings',
+  feedback: '/feedback',
   resetPassword: '/password-recovery',
 }

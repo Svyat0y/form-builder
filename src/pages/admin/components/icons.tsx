@@ -77,6 +77,12 @@ export const BellPlusIcon: FC = () => (
   </svg>
 )
 
+export const FeedbackIcon: FC = () => (
+  <svg width="18" height="18" {...base}>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" />
+  </svg>
+)
+
 export const TrashIcon: FC = () => (
   <svg width="16" height="16" {...base}>
     <path d="M4 7h16" />

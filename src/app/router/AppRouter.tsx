@@ -4,6 +4,7 @@ import { FormEditPage } from '@/pages/form-edit'
 import { FormResponsesPage } from '@/pages/form-responses'
 import { Dashboard } from '@/pages/dashboard'
 import { Settings } from '@/pages/settings'
+import { Feedback } from '@/pages/feedback'
 import { AdminPanel } from '@/pages/admin'
 import { Signup } from '@/pages/auth/Signup'
 import { Signin } from '@/pages/auth/SignIn'
@@ -62,6 +63,16 @@ export const AppRouter = () => {
             element={
               <ProtectedRoute requireAuth={true} nested={true}>
                 <Settings />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Feedback — any authenticated user can submit a message */}
+          <Route
+            path={ROUTES.feedback}
+            element={
+              <ProtectedRoute requireAuth={true} nested={true}>
+                <Feedback />
               </ProtectedRoute>
             }
           />

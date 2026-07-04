@@ -25,6 +25,16 @@ export const API_ENDPOINTS = {
   FORMS: {
     BASE: '/forms',
   },
+
+  NOTIFICATIONS: {
+    BASE: '/notifications',
+    SEND: '/notifications/send',
+    BROADCAST: '/notifications/broadcast',
+  },
+
+  FEEDBACK: {
+    BASE: '/feedback',
+  },
 } as const
 
 const normalizeUrl = (url: string): string => {
@@ -45,3 +55,5 @@ export type ApiEndpoint =
   | (typeof API_ENDPOINTS.AUTH)[keyof typeof API_ENDPOINTS.AUTH]
   | (typeof API_ENDPOINTS.USERS)[keyof typeof API_ENDPOINTS.USERS]
   | (typeof API_ENDPOINTS.FORMS)[keyof typeof API_ENDPOINTS.FORMS]
+  | (typeof API_ENDPOINTS.NOTIFICATIONS)[keyof typeof API_ENDPOINTS.NOTIFICATIONS]
+  | (typeof API_ENDPOINTS.FEEDBACK)[keyof typeof API_ENDPOINTS.FEEDBACK]

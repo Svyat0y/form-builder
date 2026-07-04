@@ -104,14 +104,22 @@ const formsSlice = createSlice({
   initialState,
   reducers: {
     // Dispatched by RealtimeProvider on the `response:new` WS event —
-    // keeps the dashboard counter live without a refetch.
+    // keeps the dashboard counter and "Updated ... ago" text live without a
+    // refetch. `updatedAt` is set from the event's `createdAt` (the moment
+    // the submit committed server-side, which is also when the form row's
+    // real updatedAt bumped) rather than left stale until the next fetch.
     responseReceived: (
       state,
-      action: PayloadAction<{ formId: string; responsesCount: number }>,
+      action: PayloadAction<{
+        formId: string
+        responsesCount: number
+        updatedAt: string
+      }>,
     ) => {
       const form = state.items.find((f) => f.id === action.payload.formId)
       if (form) {
         form.responsesCount = action.payload.responsesCount
+        form.updatedAt = action.payload.updatedAt
       }
     },
   },

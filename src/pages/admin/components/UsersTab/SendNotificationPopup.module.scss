@@ -1,0 +1,104 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.popup {
+  max-width: 380px;
+  padding: 4px;
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 $margin3;
+  font-size: $font-size-title-5;
+  font-weight: $font-weight-semibold;
+  color: var(--text-color-primary);
+}
+
+.bodyLabel {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--text-color-primary);
+  font-size: $font-size-body-2;
+  font-weight: $font-weight-medium;
+}
+
+.bodyInput {
+  width: 100%;
+  margin: 0 0 $margin5;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-body-2;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
+.linkFields {
+  display: flex;
+  flex-direction: column;
+  gap: $gap2;
+  margin: 0 0 $margin4;
+}
+
+.addLinkBtn {
+  margin: 0 0 $margin4;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  font-family: inherit;
+  font-size: $font-size-body-2;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $gap2;
+}
+
+.cancelBtn {
+  padding: 9px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-button;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.sendBtn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: inherit;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-button;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

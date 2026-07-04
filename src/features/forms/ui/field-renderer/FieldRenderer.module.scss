@@ -19,6 +19,27 @@
   resize: vertical;
 }
 
+.dateWrapper {
+  cursor: pointer;
+}
+
+.dateInput {
+  cursor: pointer;
+
+  // Bigger, clearer indicator than the browser default, and inverted in
+  // dark mode so it doesn't render as a near-invisible dark glyph on a
+  // dark field background.
+  &::-webkit-calendar-picker-indicator {
+    padding: 3px;
+    cursor: pointer;
+    transform: scale(1.3);
+  }
+
+  [data-theme='dark'] &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
 // Full opacity + real interactivity — the public form and any other
 // fillable (non-preview) usage of FieldRenderer.
 .interactive {

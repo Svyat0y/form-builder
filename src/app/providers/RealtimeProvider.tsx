@@ -7,6 +7,7 @@ import {
   subscribeToSocketEvent,
 } from '@/shared/api'
 import { responseReceived } from '@/features/forms/model'
+import { fetchNotifications } from '@/features/notifications/model'
 
 interface ResponseNewPayload {
   formId: string
@@ -46,10 +47,21 @@ export const RealtimeProvider: FC<{ children: ReactNode }> = ({ children }) => {
           responseReceived({
             formId: payload.formId,
             responsesCount: payload.responsesCount,
+            updatedAt: payload.createdAt,
           }),
         )
       },
     )
+  }, [dispatch])
+
+  useEffect(() => {
+    // The WS event carries no reliable per-recipient id (broadcasts share one
+    // payload across every user's own row), so instead of patching Redux
+    // in place we just refetch — same "WS accelerates, GET is truth"
+    // principle as response:new.
+    return subscribeToSocketEvent('notification:new', () => {
+      dispatch(fetchNotifications())
+    })
   }, [dispatch])
 
   return <>{children}</>

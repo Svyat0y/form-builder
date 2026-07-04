@@ -19,4 +19,32 @@ export const adminApi = {
 
   revokeAllUserSessions: (userId: string) =>
     api.post(`${API_ENDPOINTS.USERS.ALL}/${userId}/sessions/revoke-all`),
+
+  sendNotification: (
+    userId: string,
+    title: string,
+    body: string,
+    actionLabel?: string,
+    actionUrl?: string,
+  ) =>
+    api.post(API_ENDPOINTS.NOTIFICATIONS.SEND, {
+      userId,
+      title,
+      body,
+      actionLabel,
+      actionUrl,
+    }),
+
+  broadcastNotification: (
+    title: string,
+    body: string,
+    actionLabel?: string,
+    actionUrl?: string,
+  ) =>
+    api.post(API_ENDPOINTS.NOTIFICATIONS.BROADCAST, {
+      title,
+      body,
+      actionLabel,
+      actionUrl,
+    }),
 }

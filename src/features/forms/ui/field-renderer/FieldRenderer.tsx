@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import classNames from 'classnames'
 import styles from './FieldRenderer.module.scss'
 import { FormField } from '../../model/types'
@@ -24,6 +24,7 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
   onChange,
 }) => {
   const interactiveClass = !disabled && styles.interactive
+  const dateInputRef = useRef<HTMLInputElement>(null)
 
   switch (field.type) {
     case 'textarea':
@@ -173,15 +174,28 @@ export const FieldRenderer: FC<FieldRendererProps> = ({
 
     case 'date':
       return (
-        <input
-          className={classNames(styles.input, interactiveClass)}
-          type="date"
-          min={field.minDate}
-          max={field.maxDate}
-          disabled={disabled}
-          value={(value as string) ?? ''}
-          onChange={(e) => onChange?.(e.target.value)}
-        />
+        <div
+          className={classNames(styles.dateWrapper, interactiveClass)}
+          // The native calendar icon is the only part of a bare
+          // <input type="date"> that opens the picker — showPicker() lets
+          // a click anywhere in the field do the same.
+          onClick={() => !disabled && dateInputRef.current?.showPicker?.()}
+        >
+          <input
+            ref={dateInputRef}
+            className={classNames(
+              styles.input,
+              styles.dateInput,
+              interactiveClass,
+            )}
+            type="date"
+            min={field.minDate}
+            max={field.maxDate}
+            disabled={disabled}
+            value={(value as string) ?? ''}
+            onChange={(e) => onChange?.(e.target.value)}
+          />
+        </div>
       )
 
     case 'file':
