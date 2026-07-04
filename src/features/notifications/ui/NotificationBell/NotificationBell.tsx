@@ -193,6 +193,13 @@ export const NotificationBell: FC = () => {
             </button>
           </div>
         ))}
+        <button
+          type="button"
+          className={styles.actionBtn}
+          onClick={() => handleAction(`/forms/${selected.formId}/responses`)}
+        >
+          View responses
+        </button>
       </>
     )
   }
