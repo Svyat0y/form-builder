@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { formsApi } from './formsApi'
 import {
   CreateFormPayload,
@@ -102,7 +102,19 @@ export const deleteForm = createAsyncThunk(
 const formsSlice = createSlice({
   name: 'forms',
   initialState,
-  reducers: {},
+  reducers: {
+    // Dispatched by RealtimeProvider on the `response:new` WS event —
+    // keeps the dashboard counter live without a refetch.
+    responseReceived: (
+      state,
+      action: PayloadAction<{ formId: string; responsesCount: number }>,
+    ) => {
+      const form = state.items.find((f) => f.id === action.payload.formId)
+      if (form) {
+        form.responsesCount = action.payload.responsesCount
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchForms.pending, (state, action) => {
@@ -155,5 +167,7 @@ const formsSlice = createSlice({
     })
   },
 })
+
+export const { responseReceived } = formsSlice.actions
 
 export default formsSlice.reducer
