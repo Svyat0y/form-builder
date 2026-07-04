@@ -11,6 +11,7 @@ import {
 } from '@/shared/lib/hooks'
 import { SPINNER_COLOR, STORAGE_KEYS } from '@/shared/config/constants'
 import { CreateFormPopup } from '@/features/forms/ui/create-form-popup'
+import { DeleteFormPopup } from '@/features/forms/ui/delete-form-popup'
 import {
   createForm,
   deleteForm,
@@ -118,7 +119,11 @@ export const Dashboard: FC = () => {
     navigator.clipboard.writeText(`${window.location.origin}/forms/${id}`)
 
   const handleDeleteForm = (id: string) => {
-    dispatch(deleteForm(id))
+    const target = items.find((f) => f.id === id)
+    showSwalComponent(DeleteFormPopup, {
+      formTitle: target?.title ?? 'this form',
+      onConfirm: () => dispatch(deleteForm(id)),
+    })
   }
 
   const handleRenameForm = (id: string, title: string) => {
