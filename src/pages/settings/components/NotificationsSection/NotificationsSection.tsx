@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import { SectionCard } from '../SectionCard/SectionCard'
-import { InfoIcon } from '../icons'
 import styles from './NotificationsSection.module.scss'
 
 export const NotificationsSection: FC = () => {
@@ -28,11 +27,6 @@ export const NotificationsSection: FC = () => {
           <span className={styles.track} />
         </label>
       </div>
-
-      <p className={styles.note}>
-        <InfoIcon />
-        Depends on the forms/responses backend — wired once available.
-      </p>
     </SectionCard>
   )
 }
