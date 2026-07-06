@@ -8,7 +8,15 @@ import { showSwalComponent } from '@/shared/lib/utils/sweetAlert'
 import { useDebouncedValue } from '@/shared/lib/hooks'
 import { formatTimeAgo } from '@/shared/lib/utils/dateHelpers'
 import { FormPreviewPopup } from './FormPreviewPopup'
-import { FormsIcon, SearchIcon, EyeIcon, EyeOffIcon, TrashIcon } from '../icons'
+import { UnpublishFormPopup } from './UnpublishFormPopup'
+import {
+  FormsIcon,
+  SearchIcon,
+  EyeIcon,
+  EyeOffIcon,
+  PublishIcon,
+  TrashIcon,
+} from '../icons'
 
 const PAGE_SIZE = 20
 
@@ -62,22 +70,47 @@ export const FormsTab: FC<FormsTabProps> = ({ targetUser }) => {
   }, [targetUser, page, debouncedSearch])
 
   const handlePreview = (form: Form) => {
-    showSwalComponent(FormPreviewPopup, { form })
+    showSwalComponent(FormPreviewPopup, { form }, { width: '760px' })
   }
 
-  const handleUnpublish = async (form: Form) => {
+  const handlePublish = async (form: Form) => {
     setBusyId(form.id)
     try {
-      await formsApi.admin.unpublish(form.id)
+      await formsApi.admin.publish(form.id)
       setForms((prev) =>
-        prev.map((f) => (f.id === form.id ? { ...f, status: 'CLOSED' } : f)),
+        prev.map((f) => (f.id === form.id ? { ...f, status: 'ACTIVE' } : f)),
       )
-      await showSuccessAlert(`"${form.title}" has been unpublished`)
+      await showSuccessAlert(`"${form.title}" has been published`)
     } catch (error) {
-      await handleApiError(error, 'Failed to unpublish form')
+      await handleApiError(error, 'Failed to publish form')
     } finally {
       setBusyId(null)
     }
+  }
+
+  // Taking someone else's form offline by mistake (misclick on the crossed-
+  // out eye icon) used to be a single, unconfirmed click — worth a popup
+  // even though Publish can now undo it.
+  const handleUnpublish = (form: Form) => {
+    showSwalComponent(UnpublishFormPopup, {
+      formTitle: form.title,
+      onConfirm: async () => {
+        setBusyId(form.id)
+        try {
+          await formsApi.admin.unpublish(form.id)
+          setForms((prev) =>
+            prev.map((f) =>
+              f.id === form.id ? { ...f, status: 'CLOSED' } : f,
+            ),
+          )
+          await showSuccessAlert(`"${form.title}" has been unpublished`)
+        } catch (error) {
+          await handleApiError(error, 'Failed to unpublish form')
+        } finally {
+          setBusyId(null)
+        }
+      },
+    })
   }
 
   const handleDelete = (form: Form) => {
@@ -173,7 +206,7 @@ export const FormsTab: FC<FormsTabProps> = ({ targetUser }) => {
                   >
                     <EyeIcon />
                   </button>
-                  {form.status === 'ACTIVE' && (
+                  {form.status === 'ACTIVE' ? (
                     <button
                       className={styles.actionBtn}
                       aria-label="Unpublish form"
@@ -182,6 +215,16 @@ export const FormsTab: FC<FormsTabProps> = ({ targetUser }) => {
                       onClick={() => handleUnpublish(form)}
                     >
                       <EyeOffIcon />
+                    </button>
+                  ) : (
+                    <button
+                      className={styles.actionBtn}
+                      aria-label="Publish form"
+                      title="Publish"
+                      disabled={busyId === form.id || form.fields.length === 0}
+                      onClick={() => handlePublish(form)}
+                    >
+                      <PublishIcon />
                     </button>
                   )}
                   <button

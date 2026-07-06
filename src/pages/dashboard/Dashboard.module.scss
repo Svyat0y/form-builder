@@ -110,8 +110,14 @@
   flex: 1;
 }
 
+.statusSelectWrap {
+  position: relative;
+  display: inline-flex;
+}
+
 .statusSelect {
-  padding: 8px 12px;
+  appearance: none;
+  padding: 8px 34px 8px 12px;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   background: var(--surface);
@@ -124,6 +130,16 @@
     outline: none;
     border-color: var(--primary-color);
   }
+}
+
+.statusChevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  color: var(--text-color-secondary);
+  pointer-events: none;
 }
 
 // ─── View toggle ──────────────────────────────────────────────────────────────

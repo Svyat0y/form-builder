@@ -23,7 +23,13 @@ import { Header } from '@/widgets/header'
 import { FormCard } from './components/FormCard'
 import { FormList } from './components/FormList'
 import { EmptyState } from './components/EmptyState'
-import { GridIcon, ListIcon, PlusIcon, SearchIcon } from './components/icons'
+import {
+  ChevronDownIcon,
+  GridIcon,
+  ListIcon,
+  PlusIcon,
+  SearchIcon,
+} from './components/icons'
 import { FormItem, FormStatus, ViewMode } from './types'
 
 const STATUS_MAP: Record<Form['status'], FormStatus> = {
@@ -198,19 +204,24 @@ export const Dashboard: FC = () => {
                   />
                 </label>
 
-                <select
-                  className={styles.statusSelect}
-                  value={statusFilter}
-                  onChange={(e) =>
-                    setStatusFilter(e.target.value as Form['status'] | '')
-                  }
-                  aria-label="Filter by status"
-                >
-                  <option value="">All statuses</option>
-                  <option value="ACTIVE">Active</option>
-                  <option value="DRAFT">Draft</option>
-                  <option value="CLOSED">Closed</option>
-                </select>
+                <div className={styles.statusSelectWrap}>
+                  <select
+                    className={styles.statusSelect}
+                    value={statusFilter}
+                    onChange={(e) =>
+                      setStatusFilter(e.target.value as Form['status'] | '')
+                    }
+                    aria-label="Filter by status"
+                  >
+                    <option value="">All statuses</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="DRAFT">Draft</option>
+                    <option value="CLOSED">Closed</option>
+                  </select>
+                  <span className={styles.statusChevron}>
+                    <ChevronDownIcon />
+                  </span>
+                </div>
               </div>
 
               <div className={styles.viewToggle}>

@@ -21,15 +21,19 @@ export const onCallSwalWithComponent = (
 }
 
 // Like onCallSwalWithComponent but supports any extra props (callbacks, data, etc.)
+// and an optional wider popup (default SweetAlert width is ~32em, too narrow
+// for content like a form preview).
 export const showSwalComponent = <T extends object>(
   NodeComponent: ComponentType<T & { onClose?: () => void }>,
   extraProps?: Omit<T, 'onClose'>,
+  options?: { width?: string | number },
 ) => {
   const closeAlert = () => MySwal.close()
 
   return MySwal.fire({
     html: <NodeComponent {...(extraProps as T)} onClose={closeAlert} />,
     showConfirmButton: false,
+    width: options?.width,
     customClass: {
       popup: styles.myCustomModal,
     },

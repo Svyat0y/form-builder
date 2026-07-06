@@ -98,6 +98,14 @@ export const EyeIcon: FC = () => (
   </svg>
 )
 
+export const PublishIcon: FC = () => (
+  <svg width="16" height="16" {...base}>
+    <path d="M12 19V6" />
+    <path d="M6 11l6-6 6 6" />
+    <path d="M4 21h16" />
+  </svg>
+)
+
 export const EyeOffIcon: FC = () => (
   <svg width="16" height="16" {...base}>
     <path d="M3 3l18 18" />

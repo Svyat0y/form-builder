@@ -39,6 +39,9 @@ export const formsApi = {
         { params },
       ),
 
+    publish: (id: string) =>
+      api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/admin/${id}/publish`),
+
     unpublish: (id: string) =>
       api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/admin/${id}/unpublish`),
 
