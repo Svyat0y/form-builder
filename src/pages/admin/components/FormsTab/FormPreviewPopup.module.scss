@@ -1,0 +1,48 @@
+@use '@/shared/ui/styles/scss/vars' as *;
+
+.popup {
+  width: min(600px, 80vw);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 4px;
+  text-align: left;
+}
+
+.formHeader {
+  margin-bottom: $margin5;
+}
+
+.title {
+  margin: 0 0 6px;
+  font-size: $font-size-title-5;
+  font-weight: $font-weight-bold;
+  color: var(--text-color-primary);
+}
+
+.description {
+  margin: 0;
+  font-size: $font-size-caption;
+  color: var(--text-color-secondary);
+}
+
+.empty {
+  margin: 0;
+  font-size: $font-size-caption;
+  color: var(--text-color-secondary);
+}
+
+.field {
+  margin-bottom: $margin5;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: $font-size-caption;
+  margin-bottom: 6px;
+  color: var(--text-color-primary);
+}
+
+.required {
+  margin-left: 4px;
+  color: hsl(0, 72%, 50%);
+}

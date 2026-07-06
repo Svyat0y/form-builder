@@ -52,18 +52,24 @@ export const Dashboard: FC = () => {
   })
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebouncedValue(search, 350)
+  const [statusFilter, setStatusFilter] = useState<Form['status'] | ''>('')
 
   const setViewMode = (mode: ViewMode) => {
     setViewModeState(mode)
     localStorage.setItem(STORAGE_KEYS.DASHBOARD_VIEW_MODE, mode)
   }
 
-  // Any change to the debounced search term starts over at page 1.
+  // Any change to the debounced search term or status filter starts over at page 1.
   useEffect(() => {
     dispatch(
-      fetchForms({ page: 1, limit, search: debouncedSearch || undefined }),
+      fetchForms({
+        page: 1,
+        limit,
+        search: debouncedSearch || undefined,
+        status: statusFilter || undefined,
+      }),
     )
-  }, [dispatch, debouncedSearch, limit])
+  }, [dispatch, debouncedSearch, statusFilter, limit])
 
   // A plain useRef sentinel misses its target: this effect would run once on
   // mount, find the div not yet rendered (still behind the isLoading gate)
@@ -78,6 +84,7 @@ export const Dashboard: FC = () => {
     items,
     limit,
     debouncedSearch,
+    statusFilter,
   })
   loadMoreState.current = {
     hasMore,
@@ -86,6 +93,7 @@ export const Dashboard: FC = () => {
     items,
     limit,
     debouncedSearch,
+    statusFilter,
   }
 
   useEffect(() => {
@@ -103,6 +111,7 @@ export const Dashboard: FC = () => {
             page: nextPage,
             limit: current.limit,
             search: current.debouncedSearch || undefined,
+            status: current.statusFilter || undefined,
           }),
         )
       },
@@ -141,6 +150,7 @@ export const Dashboard: FC = () => {
   const forms = items.map(toFormItem)
   const hasForms = forms.length > 0
   const isSearching = debouncedSearch.trim().length > 0
+  const isFiltering = isSearching || statusFilter !== ''
   const countLabel = total > 0 ? `${total} form${total !== 1 ? 's' : ''}` : ''
 
   // page > 0 means at least one fetch has resolved. Everything below this
@@ -176,16 +186,32 @@ export const Dashboard: FC = () => {
         {hasLoadedOnce && (
           <>
             <div className={styles.viewToggleRow}>
-              <label className={styles.searchBox}>
-                <SearchIcon />
-                <input
-                  className={styles.searchInput}
-                  type="text"
-                  placeholder="Search forms by title"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </label>
+              <div className={styles.filters}>
+                <label className={styles.searchBox}>
+                  <SearchIcon />
+                  <input
+                    className={styles.searchInput}
+                    type="text"
+                    placeholder="Search forms by title"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </label>
+
+                <select
+                  className={styles.statusSelect}
+                  value={statusFilter}
+                  onChange={(e) =>
+                    setStatusFilter(e.target.value as Form['status'] | '')
+                  }
+                  aria-label="Filter by status"
+                >
+                  <option value="">All statuses</option>
+                  <option value="ACTIVE">Active</option>
+                  <option value="DRAFT">Draft</option>
+                  <option value="CLOSED">Closed</option>
+                </select>
+              </div>
 
               <div className={styles.viewToggle}>
                 <button
@@ -210,9 +236,11 @@ export const Dashboard: FC = () => {
                 <Ring color={SPINNER_COLOR} />
               </div>
             ) : !hasForms ? (
-              isSearching ? (
+              isFiltering ? (
                 <p className={styles.noResults}>
-                  No forms match &quot;{debouncedSearch}&quot;.
+                  {isSearching
+                    ? `No forms match "${debouncedSearch}".`
+                    : 'No forms match this filter.'}
                 </p>
               ) : (
                 <EmptyState

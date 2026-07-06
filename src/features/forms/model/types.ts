@@ -65,6 +65,7 @@ export interface ListFormsParams {
   page?: number
   limit?: number
   search?: string
+  status?: FormStatus
 }
 
 export interface PaginatedForms {
