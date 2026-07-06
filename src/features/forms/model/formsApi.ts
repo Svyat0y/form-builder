@@ -28,4 +28,26 @@ export const formsApi = {
 
   unpublish: (id: string) =>
     api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/${id}/unpublish`),
+
+  // Admin Panel "Forms" tab — browsing/moderating another user's forms.
+  // ADMIN can only act on regular USER accounts, SUPER_ADMIN on anyone's
+  // (enforced server-side, mirrors the sessions admin endpoints).
+  admin: {
+    listForUser: (userId: string, params: ListFormsParams = {}) =>
+      api.get<PaginatedForms>(
+        `${API_ENDPOINTS.FORMS.BASE}/admin/users/${userId}`,
+        { params },
+      ),
+
+    publish: (id: string) =>
+      api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/admin/${id}/publish`),
+
+    unpublish: (id: string) =>
+      api.post<Form>(`${API_ENDPOINTS.FORMS.BASE}/admin/${id}/unpublish`),
+
+    remove: (id: string) =>
+      api.delete<{ message: string }>(
+        `${API_ENDPOINTS.FORMS.BASE}/admin/${id}`,
+      ),
+  },
 }

@@ -102,6 +102,46 @@
   }
 }
 
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.statusSelectWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.statusSelect {
+  appearance: none;
+  padding: 8px 34px 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text-color-primary);
+  font-family: inherit;
+  font-size: $font-size-body-2;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
+.statusChevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  color: var(--text-color-secondary);
+  pointer-events: none;
+}
+
 // ─── View toggle ──────────────────────────────────────────────────────────────
 
 .viewToggleRow {

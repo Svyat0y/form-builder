@@ -90,3 +90,27 @@ export const TrashIcon: FC = () => (
     <path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13" />
   </svg>
 )
+
+export const EyeIcon: FC = () => (
+  <svg width="16" height="16" {...base}>
+    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+)
+
+export const PublishIcon: FC = () => (
+  <svg width="16" height="16" {...base}>
+    <path d="M12 19V6" />
+    <path d="M6 11l6-6 6 6" />
+    <path d="M4 21h16" />
+  </svg>
+)
+
+export const EyeOffIcon: FC = () => (
+  <svg width="16" height="16" {...base}>
+    <path d="M3 3l18 18" />
+    <path d="M10.6 5.1A11.6 11.6 0 0 1 12 5c7 0 11 7 11 7a13.9 13.9 0 0 1-3.2 4" />
+    <path d="M6.6 6.6C3.7 8.4 2 12 2 12s4 7 11 7c1.6 0 3-.4 4.2-1" />
+    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+  </svg>
+)

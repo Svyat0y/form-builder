@@ -8,7 +8,10 @@ import {
   useAppSelector,
   useMediaQuery,
 } from '@/shared/lib/hooks'
-import { showSimpleAlert } from '@/shared/lib/utils/sweetAlert'
+import {
+  showSimpleAlert,
+  showSwalComponent,
+} from '@/shared/lib/utils/sweetAlert'
 import { FieldType, FormField } from '@/features/forms/model'
 import {
   addField,
@@ -26,6 +29,7 @@ import {
   unpublishForm,
   updateField,
 } from '@/features/form-builder/model'
+import { DeleteFieldPopup } from '@/features/form-builder/ui/delete-field-popup'
 import { FormPageToolbar } from '@/widgets/form-page-toolbar'
 import { Sidebar, SidebarTab } from './components/Sidebar'
 import { Canvas } from './components/Canvas'
@@ -154,7 +158,7 @@ export const FormEditPage: FC = () => {
   // Deleting the last field of a published form should pull it off ACTIVE —
   // an empty form can't legitimately stay live (Publish is disabled at 0
   // fields for the same reason, see docs/pages/form-editor.md decision #7).
-  const handleDeleteField = (fieldId: string) => {
+  const deleteFieldAndMaybeUnpublish = (fieldId: string) => {
     dispatch(deleteField(fieldId))
     const remaining = fields.filter((f) => f.id !== fieldId).length
     if (remaining === 0 && status === 'ACTIVE' && formId) {
@@ -165,6 +169,14 @@ export const FormEditPage: FC = () => {
         'The form had no questions left, so it was taken off ACTIVE.',
       )
     }
+  }
+
+  const handleDeleteField = (fieldId: string) => {
+    const target = fields.find((f) => f.id === fieldId)
+    showSwalComponent(DeleteFieldPopup, {
+      fieldLabel: target?.label || 'this question',
+      onConfirm: () => deleteFieldAndMaybeUnpublish(fieldId),
+    })
   }
 
   const handlePublishToggle = async () => {
