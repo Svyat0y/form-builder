@@ -98,7 +98,7 @@
   transition: background $transition1, color $transition1;
 
   &:hover {
-    background: var(--hover-bg);
+    background: var(--primary-soft-bg);
     color: var(--text-color-primary);
   }
 }

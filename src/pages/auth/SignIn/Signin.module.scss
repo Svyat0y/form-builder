@@ -64,6 +64,12 @@
   gap: $gap1;
   font-size: $font-size-body-2;
 
+  a {
+    &:hover {
+      color: var(--primary-color-text);
+    }
+  }
+
   span {
     font-weight: $font-weight-semibold;
     position: relative;
