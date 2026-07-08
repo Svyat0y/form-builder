@@ -1,15 +1,25 @@
 // main colors — "Ink & Marigold": warm ink neutrals + a marigold accent,
 // replacing the generic SaaS blue (hsl(210,98%,48%)) and its blue-grey
-// neutral ramp. See docs/road_map.md for the rationale.
+// neutral ramp. Hex values match the approved palette mockup exactly.
+//
+// Two accent roles, not one — this matters:
+//  - $primaryMain/Light/Dark ("fill"): the punchy marigold used for
+//    backgrounds — logo, avatar, badges, buttons-on-accent, focus rings.
+//  - $primaryText ("text"): a darker, AA-safe marigold for when the accent
+//    IS the text color (nav-active, links) — the fill color only hits
+//    3:1 on paper, which fails for normal-size text.
 $whiteColor: #fff;
 $blackColor: #000;
-$primaryLight: #c2790e; // hover / soft variant
-$primaryMain: #9c5c0c; // light-theme accent — 5:1 on paper, 5.3:1 white-on-fill
-$primaryDark: #7a480a; // pressed / active
+$primaryLight: #d6963a; // fill, hover variant
+$primaryMain: #c8801f; // fill — logo/avatar/badges/buttons-on-accent
+$primaryDark: #a8690f; // fill, pressed/active variant
+$primaryTextLight: #915114; // text — nav-active/links, 5.9:1 on paper
 
-// dark-theme accent — brighter marigold, 7.3:1+ on the dark ground
-$primaryMainDark: #e3a542;
-$primaryDarkDark: #c98b34; // pressed / active (dark theme)
+// dark-theme fill accent — brighter marigold; unlike light theme it already
+// clears 4.5:1 as text too (7.5-9:1 on the dark ground), so no separate
+// text variant is needed there.
+$primaryMainDark: #e8aa4e;
+$primaryDarkDark: #d6963a; // pressed / active (dark theme)
 
 // additional colors
 $warningMain: hsl(45, 90%, 40%);
@@ -18,15 +28,15 @@ $successMain: hsl(120, 44%, 53%);
 $infoMain: hsl(210, 100%, 65%);
 
 // backgrounds
-$backgroundLight: #fbf8f2; // warm paper, not pure white
-$backgroundDark: #1f1a15; // warm charcoal, not navy
+$backgroundLight: #faf9f6; // warm paper, not pure white
+$backgroundDark: #181411; // warm charcoal, not navy
 $backgroundColor1: hsla(35, 15%, 55%, .35);
 
 // text colors
-$textPrimaryLight: #2a2420; // warm ink
-$textPrimaryDark: #f3eee6; // warm bone
+$textPrimaryLight: #29231e; // warm ink
+$textPrimaryDark: #f0eeeb; // warm bone
 $textSecondaryLight: #6b6153; // warm grey — 5.7:1 on paper
-$textSecondaryDark: #b8ac9a; // warm grey — 7.7:1 on dark bg
+$textSecondaryDark: #ada7a0; // warm grey — 7.7:1 on dark bg
 
 // shadows and gradients — flat grounds, no radial "glow"; shadow hue warmed
 // to match the ink ramp instead of the old blue-grey (hue 220).

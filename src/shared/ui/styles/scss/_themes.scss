@@ -4,9 +4,13 @@ html[data-theme='light'] {
   --primary-color: #{$primaryMain};
   --primary-color-hover: #{$primaryLight};
   --primary-color-active: #{$primaryDark};
-  // text/icon color for content painted on top of --primary-color; the dark
-  // theme's accent is bright enough that white text fails contrast on it.
-  --on-primary-color: #{$backgroundLight};
+  // darker, AA-safe marigold for when the accent IS the text color (the
+  // fill color above only hits 3:1 on paper — fine for a background, not
+  // for text/links/nav-active).
+  --primary-color-text: #{$primaryTextLight};
+  // text/icon color for content painted on top of --primary-color; the fill
+  // is a mid-tone marigold, so ink reads better on it than white (4.9:1 vs 3.2:1).
+  --on-primary-color: #{$textPrimaryLight};
   --background-color: #{$backgroundLight};
   //text
   --text-color-primary: #{$textPrimaryLight};
@@ -47,6 +51,9 @@ html[data-theme='dark'] {
   --primary-color: #{$primaryMainDark};
   --primary-color-hover: #{$primaryDarkDark};
   --primary-color-active: #{$primaryDarkDark};
+  // the dark accent is bright enough to also work as text (7.5-9:1 on the
+  // dark ground), so it doubles as its own text-safe variant.
+  --primary-color-text: #{$primaryMainDark};
   // bright amber accent needs dark ink on top, not white (white fails AA here)
   --on-primary-color: #{$backgroundDark};
   --background-color: #{$backgroundDark};
@@ -54,7 +61,7 @@ html[data-theme='dark'] {
   --text-color-primary: #{$textPrimaryDark};
   --text-color-secondary: #{$textSecondaryDark};
   //borders, shadows
-  --border-color: #5a4a37;
+  --border-color: #393430;
   --box-shadow: #{$boxShadow};
   //buttons
   --main-background-button: #{$textPrimaryDark};
@@ -63,12 +70,13 @@ html[data-theme='dark'] {
   --second-color-button: #{$textPrimaryDark};
   //background — flat charcoal, no radial glow
   --main-bg-color: #{$mainBgDarkColor};
-  // dashboard surface tokens — opaque step up from bg (the old 0.55-alpha
-  // card over a near-identical hue made cards nearly invisible; this is a
-  // real, distinct surface + a visible border instead of relying on alpha)
-  --surface: #2c2520;
-  --card-bg: #403528;
-  --header-bg: hsla(30, 20%, 9%, 0.82);
+  // dashboard surface tokens — opaque, matches the approved mockup exactly.
+  // (the old 0.55-alpha card over a near-identical hue made cards nearly
+  // invisible; this is a real, distinct, fully-opaque surface + a visible
+  // border instead of relying on alpha.)
+  --surface: #292420;
+  --card-bg: #292420;
+  --header-bg: hsla(30, 20%, 8%, 0.82);
   --hover-bg: hsla(35, 25%, 85%, 0.07);
   --shadow-card: 0 1px 2px hsla(30, 40%, 3%, 0.45), 0 4px 16px hsla(30, 40%, 3%, 0.35);
   --shadow-card-hover: 0 2px 4px hsla(30, 40%, 3%, 0.55), 0 14px 30px hsla(30, 40%, 3%, 0.55);

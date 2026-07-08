@@ -77,10 +77,10 @@
 }
 
 .navLinkActive {
-  color: var(--primary-color);
+  color: var(--primary-color-text);
 
   &:hover {
-    color: var(--primary-color);
+    color: var(--primary-color-text);
   }
 }
 
@@ -184,7 +184,7 @@
 }
 
 .dropdownItemActive {
-  color: var(--primary-color);
+  color: var(--primary-color-text);
   font-weight: $font-weight-medium;
 
   &:hover {
@@ -317,10 +317,10 @@
 }
 
 .mobileNavLinkActive {
-  color: var(--primary-color);
+  color: var(--primary-color-text);
 
   &:hover {
-    color: var(--primary-color);
+    color: var(--primary-color-text);
   }
 }
 
