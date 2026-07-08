@@ -4,9 +4,9 @@
   width: 100%;
   box-sizing: border-box;
   padding: 8px 10px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--input-border);
   border-radius: 7px;
-  background: transparent;
+  background: var(--input-bg);
   color: var(--text-color-primary);
   font-family: inherit;
   font-size: $font-size-caption;
@@ -131,9 +131,9 @@
 .scaleStep {
   min-width: 32px;
   padding: 6px 4px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--input-border);
   border-radius: 6px;
-  background: transparent;
+  background: var(--input-bg);
   color: var(--text-color-primary);
   font-family: inherit;
   font-size: $font-size-caption-sm;

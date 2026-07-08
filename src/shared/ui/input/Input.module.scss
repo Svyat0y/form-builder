@@ -19,10 +19,14 @@
 .inputWrapper {
   width: 100%;
   border-radius: $borderRadius2;
-  border: 1px solid var(--border-color);
+  // Dedicated input tokens, not --border-color/--background-color: on a
+  // page-level (non-card) form like Sign in, the input's fill was the same
+  // value as the page behind it, leaving only a faint 1px border to define
+  // the field — nearly invisible in dark theme at low monitor brightness.
+  border: 1px solid var(--input-border);
   padding: $padding3 calc($padding3 * 1.5);
   transition: $transition2;
-  background-color: var(--background-color);
+  background-color: var(--input-bg);
 
   &:focus-within {
     @include focus-within-effect();
@@ -45,7 +49,7 @@
     color: var(--text-color-primary);
 
     &:-webkit-autofill {
-      box-shadow: 0 0 0 1000px var(--background-color) inset !important;
+      box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
       -webkit-text-fill-color: var(--text-color-primary) !important;
     }
 
