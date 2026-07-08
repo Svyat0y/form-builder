@@ -7,4 +7,5 @@ export interface IUser {
   avatar?: string | null
   // false for social-only accounts (Google/Facebook) with no local password
   hasPassword?: boolean
+  emailOnResponse?: boolean
 }

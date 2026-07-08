@@ -22,6 +22,7 @@ export interface AuthResponse {
     avatar?: string | null
     // false for social-only accounts (Google/Facebook) with no local password
     hasPassword?: boolean
+    emailOnResponse?: boolean
   }
 }
 
@@ -45,6 +46,7 @@ export interface User {
   avatar?: string | null
   // false for social-only accounts (Google/Facebook) with no local password
   hasPassword?: boolean
+  emailOnResponse?: boolean
 }
 
 // A session as seen by an admin inspecting another user's account —

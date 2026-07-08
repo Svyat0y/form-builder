@@ -60,6 +60,7 @@ export const login = createAsyncThunk(
         role: user.role,
         avatar: user.avatar ?? null,
         hasPassword: user.hasPassword,
+        emailOnResponse: user.emailOnResponse,
       }
 
       const token = user.accessToken

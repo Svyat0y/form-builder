@@ -33,6 +33,12 @@ export const authApi = {
   setPassword: (newPassword: string) =>
     api.post(API_ENDPOINTS.USERS.PASSWORD, { newPassword }),
 
+  updateNotificationPrefs: (emailOnResponse: boolean) =>
+    api.patch<{ emailOnResponse: boolean }>(
+      API_ENDPOINTS.USERS.NOTIFICATION_PREFS,
+      { emailOnResponse },
+    ),
+
   getSessions: () => api.get<Session[]>(API_ENDPOINTS.USERS.SESSIONS),
 
   revokeSession: (sessionId: string) =>
