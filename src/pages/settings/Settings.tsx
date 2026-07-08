@@ -41,7 +41,9 @@ export const Settings: FC = () => {
           {activeTab === 'security' && (
             <SecuritySection hasPassword={user?.hasPassword} />
           )}
-          {activeTab === 'notifications' && <NotificationsSection />}
+          {activeTab === 'notifications' && (
+            <NotificationsSection emailOnResponse={user?.emailOnResponse} />
+          )}
           {activeTab === 'danger' && <DangerSection />}
         </div>
       </main>

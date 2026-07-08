@@ -20,6 +20,7 @@ export const API_ENDPOINTS = {
     UPDATE_ROLE: '/users/update-role',
     SESSIONS: '/users/me/sessions',
     REVOKE_OTHER_SESSIONS: '/users/me/sessions/revoke-others',
+    NOTIFICATION_PREFS: '/users/me/notifications',
   },
 
   FORMS: {
