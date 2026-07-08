@@ -219,7 +219,7 @@
   border: none;
   border-radius: 8px;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-family: inherit;
   font-size: $font-size-overline;
   font-weight: $font-weight-semibold;
@@ -262,7 +262,7 @@
   border: none;
   border-radius: 8px;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-family: inherit;
   font-size: $font-size-caption;
   font-weight: $font-weight-semibold;

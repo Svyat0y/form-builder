@@ -1,4 +1,7 @@
-@mixin focus-within-effect($border-color: rgba(0, 180, 250, 0.9), $boxShadow: 0 0 4px 4px rgba(0, 153, 250, 0.2)) {
+@mixin focus-within-effect(
+  $border-color: var(--primary-color),
+  $boxShadow: 0 0 4px 4px color-mix(in srgb, var(--primary-color) 20%, transparent)
+) {
   border-color: $border-color;
   box-shadow: $boxShadow;
 }

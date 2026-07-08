@@ -43,7 +43,7 @@
   border: none;
   border-radius: 8px;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-family: inherit;
   font-weight: $font-weight-semibold;
   font-size: $font-size-button;
@@ -183,7 +183,7 @@
 
 .viewBtnActive {
   background: var(--primary-color) !important;
-  color: #fff !important;
+  color: var(--on-primary-color) !important;
 }
 
 // ─── Grid ─────────────────────────────────────────────────────────────────────

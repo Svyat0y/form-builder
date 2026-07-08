@@ -57,7 +57,7 @@
   border: none;
   border-radius: $borderRadius2;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-family: inherit;
   font-size: $font-size-button;
   font-weight: $font-weight-semibold;

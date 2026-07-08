@@ -33,7 +33,7 @@
   height: 30px;
   border-radius: 8px;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-size: $font-size-body-1;
 }
 
@@ -117,8 +117,8 @@
   height: 32px;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-color), hsl(265, 80%, 58%));
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--on-primary-color);
   font-size: $font-size-caption-sm;
   font-weight: $font-weight-semibold;
 }
@@ -267,8 +267,8 @@
   height: 48px;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-color), hsl(265, 80%, 58%));
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--on-primary-color);
   font-size: $font-size-body-1;
   font-weight: $font-weight-semibold;
   flex-shrink: 0;

@@ -1,9 +1,15 @@
-// main colors
+// main colors — "Ink & Marigold": warm ink neutrals + a marigold accent,
+// replacing the generic SaaS blue (hsl(210,98%,48%)) and its blue-grey
+// neutral ramp. See docs/road_map.md for the rationale.
 $whiteColor: #fff;
 $blackColor: #000;
-$primaryLight: hsl(210, 100%, 80%);
-$primaryMain: hsl(210, 98%, 48%);
-$primaryDark: hsl(210, 100%, 35%);
+$primaryLight: #c2790e; // hover / soft variant
+$primaryMain: #9c5c0c; // light-theme accent — 5:1 on paper, 5.3:1 white-on-fill
+$primaryDark: #7a480a; // pressed / active
+
+// dark-theme accent — brighter marigold, 7.3:1+ on the dark ground
+$primaryMainDark: #e3a542;
+$primaryDarkDark: #c98b34; // pressed / active (dark theme)
 
 // additional colors
 $warningMain: hsl(45, 90%, 40%);
@@ -12,22 +18,23 @@ $successMain: hsl(120, 44%, 53%);
 $infoMain: hsl(210, 100%, 65%);
 
 // backgrounds
-$backgroundLight: hsl(0, 0%, 100%);
-$backgroundDark: hsl(220, 30%, 15%);
-$backgroundColor1: hsla(220, 20%, 80%, .5);
+$backgroundLight: #fbf8f2; // warm paper, not pure white
+$backgroundDark: #1f1a15; // warm charcoal, not navy
+$backgroundColor1: hsla(35, 15%, 55%, .35);
 
 // text colors
-$textPrimaryLight: hsl(220, 20%, 25%);
-$textPrimaryDark: hsl(0, 0%, 100%);
-$textSecondaryLight: hsl(220, 20%, 35%);
-$textSecondaryDark: hsl(220, 20%, 65%);
+$textPrimaryLight: #2a2420; // warm ink
+$textPrimaryDark: #f3eee6; // warm bone
+$textSecondaryLight: #6b6153; // warm grey — 5.7:1 on paper
+$textSecondaryDark: #b8ac9a; // warm grey — 7.7:1 on dark bg
 
-// shadows and gradients
-$mainBgLightColor: radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%));
-$mainBgDarkColor: radial-gradient(at 50% 50%, hsla(210, 100%, 13%, .9), hsl(220, 30%, 10%));
-$boxShadow: hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px;
+// shadows and gradients — flat grounds, no radial "glow"; shadow hue warmed
+// to match the ink ramp instead of the old blue-grey (hue 220).
+$mainBgLightColor: #{$backgroundLight};
+$mainBgDarkColor: #{$backgroundDark};
+$boxShadow: hsla(35, 25%, 8%, 0.06) 0px 5px 15px 0px, hsla(35, 20%, 12%, 0.05) 0px 15px 35px -5px;
 $boxShadow2: 0 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
 
 //borders
-$greyColor500: hsla(220, 20%, 80%, .5);
-$greyColor300: hsla(220, 20%, 80%, .3);
+$greyColor500: hsla(35, 15%, 55%, .35);
+$greyColor300: hsla(35, 15%, 55%, .2);

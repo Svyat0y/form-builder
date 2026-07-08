@@ -60,9 +60,7 @@ body {
   font-family: "Domine", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: var(--main-bg-color);
-  background-attachment: fixed;
-  background-size: cover;
+  background-color: var(--main-bg-color);
   min-height: 100vh;
   color: var(--text-color-primary);
   font-size: $font-size-body-2;

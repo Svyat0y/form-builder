@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-size: $font-size-title-5;
   font-weight: $font-weight-semibold;
 
@@ -105,7 +105,7 @@
   border: 1px solid transparent;
   border-radius: $borderRadius2;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-family: inherit;
   font-size: $font-size-input;
   font-weight: $font-weight-semibold;
