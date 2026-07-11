@@ -17,6 +17,7 @@ import {
 } from '@/features/notifications/lib/groupNotifications'
 import { formatRelativeTime } from '@/features/notifications/lib/formatRelativeTime'
 import { NotificationItem } from '@/features/notifications/model/types'
+import { BackButton } from '@/shared/ui/backButton'
 
 export const NotificationBell: FC = () => {
   const dispatch = useAppDispatch()
@@ -254,9 +255,7 @@ export const NotificationBell: FC = () => {
 
           <div className={styles.pane}>
             <div className={styles.detailHeader}>
-              <button type="button" className={styles.backBtn} onClick={goBack}>
-                <ArrowLeftIcon /> Back
-              </button>
+              <BackButton labelBtn="Back" onBack={goBack} />
               {selected?.kind === 'group' && (
                 <button
                   type="button"
@@ -322,21 +321,5 @@ const FileIcon: FC = () => (
   >
     <path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
     <path d="M14 3v5h5" />
-  </svg>
-)
-
-const ArrowLeftIcon: FC = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <line x1="19" y1="12" x2="5" y2="12" />
-    <polyline points="12 19 5 12 12 5" />
   </svg>
 )

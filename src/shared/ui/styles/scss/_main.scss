@@ -36,6 +36,17 @@ button {
   background: none;
 }
 
+// Most custom buttons across the app don't define their own focus style,
+// so keyboard/click focus was falling back to the browser's native blue
+// ring regardless of theme. This is the themed fallback; components that
+// set their own :focus-within/:focus-visible outline still win by specificity.
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
 input {
   border: none;
   outline: none;
@@ -60,9 +71,7 @@ body {
   font-family: "Domine", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: var(--main-bg-color);
-  background-attachment: fixed;
-  background-size: cover;
+  background-color: var(--main-bg-color);
   min-height: 100vh;
   color: var(--text-color-primary);
   font-size: $font-size-body-2;

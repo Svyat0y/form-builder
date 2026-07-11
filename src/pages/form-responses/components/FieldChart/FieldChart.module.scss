@@ -48,9 +48,9 @@
 }
 
 .toggleActive {
-  background: var(--surface);
-  color: var(--text-color-primary);
-  font-weight: $font-weight-medium;
+  background: var(--primary-soft-bg)!important;
+  color: var(--text-color-primary)!important;
+  font-weight: $font-weight-medium!important;
 }
 
 .empty {

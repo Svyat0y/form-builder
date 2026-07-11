@@ -25,7 +25,8 @@
   background: var(--main-background-button);
 
   &:focus-within {
-    outline: 3px solid hsla(210, 98%, 48%, 0.5);
+    outline: 3px solid var(--primary-color);
+    outline-offset: 1px;
   }
 
   &:active {

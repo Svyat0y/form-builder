@@ -23,6 +23,7 @@
   white-space: nowrap;
   color: var(--text-color-primary);
   font-family: 'Domine', Georgia, serif;
+  cursor: default;
 }
 
 .logoIcon {
@@ -33,7 +34,7 @@
   height: 30px;
   border-radius: 8px;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary-color);
   font-size: $font-size-body-1;
 }
 
@@ -62,6 +63,7 @@
   gap: 7px;
   padding: 7px 12px;
   border: none;
+  border-radius: $borderRadius3;
   background: transparent;
   color: var(--text-color-secondary);
   font-family: inherit;
@@ -69,18 +71,20 @@
   font-weight: $font-weight-medium;
   white-space: nowrap;
   cursor: pointer;
-  transition: color $transition1;
+  transition: color $transition1, background $transition1;
 
   &:hover {
-    color: var(--text-color-primary);
+    background: var(--primary-soft-bg);
+    color: var(--primary-color-text);
   }
 }
 
 .navLinkActive {
-  color: var(--primary-color);
+  background: var(--primary-soft-bg);
+  color: var(--primary-color-text);
 
   &:hover {
-    color: var(--primary-color);
+    color: var(--primary-color-text);
   }
 }
 
@@ -117,8 +121,8 @@
   height: 32px;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-color), hsl(265, 80%, 58%));
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--on-primary-color);
   font-size: $font-size-caption-sm;
   font-weight: $font-weight-semibold;
 }
@@ -171,7 +175,7 @@
   transition: background $transition1;
 
   &:hover {
-    background: var(--hover-bg);
+    background: var(--primary-soft-bg);
   }
 }
 
@@ -184,11 +188,11 @@
 }
 
 .dropdownItemActive {
-  color: var(--primary-color);
+  color: var(--primary-color-text);
   font-weight: $font-weight-medium;
 
   &:hover {
-    background: var(--hover-bg);
+    background: var(--primary-soft-bg);
   }
 }
 
@@ -267,8 +271,8 @@
   height: 48px;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-color), hsl(265, 80%, 58%));
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--on-primary-color);
   font-size: $font-size-body-1;
   font-weight: $font-weight-semibold;
   flex-shrink: 0;
@@ -317,10 +321,12 @@
 }
 
 .mobileNavLinkActive {
-  color: var(--primary-color);
+  background: var(--primary-soft-bg);
+  color: var(--primary-color-text);
 
   &:hover {
-    color: var(--primary-color);
+    background: var(--primary-soft-bg);
+    color: var(--primary-color-text);
   }
 }
 
