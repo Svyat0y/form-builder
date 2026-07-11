@@ -22,7 +22,7 @@
   white-space: nowrap;
 
   &:hover {
-    color: var(--text-color-primary);
+    color: var(--primary-color-text);
   }
 }
 
@@ -46,17 +46,19 @@
 
   &:hover {
     color: var(--text-color-primary);
+    background: var(--primary-soft-bg);
   }
 }
 
 .tabActive {
-  background: var(--card-bg);
+  background: var(--primary-soft-bg);
   box-shadow: var(--shadow-card);
   font-weight: $font-weight-bold;
   color: var(--text-color-primary);
 
   &:hover {
     color: var(--text-color-primary);
+    background: var(--primary-soft-bg);
   }
 }
 

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from '../UsersTab/DeleteUserPopup.module.scss'
+import styles from './BroadcastConfirmPopup.module.scss'
 
 interface BroadcastConfirmPopupProps {
   onConfirm: () => void
@@ -23,7 +23,7 @@ export const BroadcastConfirmPopup: FC<BroadcastConfirmPopupProps> = ({
         </button>
         <button
           type="button"
-          className={styles.deleteBtn}
+          className={styles.confirmBtn}
           onClick={() => {
             onConfirm()
             onClose?.()

@@ -2,6 +2,17 @@
 
 html[data-theme='light'] {
   --primary-color: #{$primaryMain};
+  --primary-color-hover: #{$primaryLight};
+  --primary-color-active: #{$primaryDark};
+  // darker, AA-safe marigold for when the accent IS the text color (the
+  // fill color above only hits 3:1 on paper — fine for a background, not
+  // for text/links/nav-active).
+  --primary-color-text: #{$primaryTextLight};
+  // text/icon color for content painted on top of --primary-color; the fill
+  // is a mid-tone marigold, so ink reads better on it than white (4.9:1 vs 3.2:1).
+  --on-primary-color: #{$textPrimaryLight};
+  // low-alpha accent wash for active nav pills / accent-tinted hover states
+  --primary-soft-bg: color-mix(in srgb, var(--primary-color) 12%, transparent);
   --background-color: #{$backgroundLight};
   //text
   --text-color-primary: #{$textPrimaryLight};
@@ -10,25 +21,30 @@ html[data-theme='light'] {
   --border-color: #{$greyColor500};
   --box-shadow: #{$boxShadow};
   //buttons
-  --main-background-button: #{$backgroundDark};
+  --main-background-button: #{$textPrimaryLight};
   --second-background-button: #{$backgroundLight};
-  --main-color-button: #{$textPrimaryDark};
+  --main-color-button: #{$backgroundLight};
   --second-color-button: #{$textPrimaryLight};
-  //background
+  //background — flat paper, no radial glow
   --main-bg-color: #{$mainBgLightColor};
   // dashboard surface tokens
-  --surface: hsl(0, 0%, 100%);
-  --card-bg: hsl(0, 0%, 100%);
-  --header-bg: hsla(0, 0%, 100%, 0.72);
-  --hover-bg: hsla(220, 20%, 50%, 0.07);
-  --shadow-card: 0 1px 2px hsla(220, 30%, 30%, 0.06), 0 4px 16px hsla(220, 30%, 30%, 0.05);
-  --shadow-card-hover: 0 2px 4px hsla(220, 30%, 30%, 0.08), 0 12px 28px hsla(220, 40%, 30%, 0.12);
-  --shadow-dropdown: 0 2px 4px hsla(220, 30%, 30%, 0.08), 0 12px 28px hsla(220, 40%, 30%, 0.12);
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  // dedicated form-field tokens: same white as card-bg here (light theme
+  // already separates fine against paper), but a real fill + stronger
+  // border in dark theme where "transparent + faint border" was invisible.
+  --input-bg: #ffffff;
+  --input-border: #{$greyColor500};
+  --header-bg: hsla(40, 45%, 99%, 0.82);
+  --hover-bg: hsla(30, 20%, 40%, 0.06);
+  --shadow-card: 0 1px 2px hsla(30, 30%, 15%, 0.05), 0 4px 16px hsla(30, 30%, 15%, 0.05);
+  --shadow-card-hover: 0 2px 4px hsla(30, 35%, 15%, 0.07), 0 12px 28px hsla(30, 40%, 15%, 0.1);
+  --shadow-dropdown: 0 2px 4px hsla(30, 35%, 15%, 0.07), 0 12px 28px hsla(30, 40%, 15%, 0.1);
   // status badge tokens
   --badge-active-bg: hsla(120, 44%, 53%, 0.16);
   --badge-active-fg: hsl(120, 44%, 30%);
-  --badge-draft-bg: hsla(220, 15%, 55%, 0.18);
-  --badge-draft-fg: hsl(220, 12%, 38%);
+  --badge-draft-bg: hsla(35, 12%, 50%, 0.18);
+  --badge-draft-fg: hsl(35, 15%, 35%);
   --badge-closed-bg: hsla(0, 75%, 50%, 0.14);
   --badge-closed-fg: hsl(0, 72%, 42%);
   // role badge tokens (admin panel)
@@ -39,38 +55,55 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-  --primary-color: #{$primaryDark};
+  --primary-color: #{$primaryMainDark};
+  --primary-color-hover: #{$primaryDarkDark};
+  --primary-color-active: #{$primaryDarkDark};
+  // the dark accent is bright enough to also work as text (7.5-9:1 on the
+  // dark ground), so it doubles as its own text-safe variant.
+  --primary-color-text: #{$primaryMainDark};
+  // bright amber accent needs dark ink on top, not white (white fails AA here)
+  --on-primary-color: #{$backgroundDark};
+  --primary-soft-bg: color-mix(in srgb, var(--primary-color) 18%, transparent);
   --background-color: #{$backgroundDark};
   //text
   --text-color-primary: #{$textPrimaryDark};
   --text-color-secondary: #{$textSecondaryDark};
   //borders, shadows
-  --border-color: #{$greyColor300};
+  --border-color: #393430;
   --box-shadow: #{$boxShadow};
   //buttons
-  --main-background-button: #{$backgroundLight};
+  --main-background-button: #{$textPrimaryDark};
   --second-background-button: #{$backgroundDark};
-  --main-color-button: #{$textPrimaryLight};
+  --main-color-button: #{$backgroundDark};
   --second-color-button: #{$textPrimaryDark};
-  //background
+  //background — flat charcoal, no radial glow
   --main-bg-color: #{$mainBgDarkColor};
-  // dashboard surface tokens
-  --surface: hsl(220, 30%, 17%);
-  --card-bg: hsla(220, 30%, 21%, 0.55);
-  --header-bg: hsla(220, 30%, 13%, 0.72);
-  --hover-bg: hsla(220, 20%, 85%, 0.08);
-  --shadow-card: 0 1px 2px hsla(220, 40%, 4%, 0.4), 0 4px 16px hsla(220, 40%, 4%, 0.35);
-  --shadow-card-hover: 0 2px 4px hsla(220, 40%, 4%, 0.5), 0 14px 30px hsla(220, 40%, 4%, 0.55);
-  --shadow-dropdown: 0 2px 4px hsla(220, 40%, 4%, 0.5), 0 14px 30px hsla(220, 40%, 4%, 0.55);
+  // dashboard surface tokens — opaque, matches the approved mockup exactly.
+  // (the old 0.55-alpha card over a near-identical hue made cards nearly
+  // invisible; this is a real, distinct, fully-opaque surface + a visible
+  // border instead of relying on alpha.)
+  --surface: #292420;
+  --card-bg: #292420;
+  // form fields need to read as distinct wells, not just a hairline on
+  // whatever they're sitting on — a plain 1px border at --border-color was
+  // getting lost against both the page bg and the card bg at low monitor
+  // brightness. A real fill + a stronger, more visible border fixes it.
+  --input-bg: #3a3024;
+  --input-border: #6b5a42;
+  --header-bg: hsla(30, 20%, 8%, 0.82);
+  --hover-bg: hsla(35, 25%, 85%, 0.07);
+  --shadow-card: 0 1px 2px hsla(30, 40%, 3%, 0.45), 0 4px 16px hsla(30, 40%, 3%, 0.35);
+  --shadow-card-hover: 0 2px 4px hsla(30, 40%, 3%, 0.55), 0 14px 30px hsla(30, 40%, 3%, 0.55);
+  --shadow-dropdown: 0 2px 4px hsla(30, 40%, 3%, 0.55), 0 14px 30px hsla(30, 40%, 3%, 0.55);
   // status badge tokens
   --badge-active-bg: hsla(120, 44%, 53%, 0.16);
   --badge-active-fg: hsl(120, 52%, 64%);
-  --badge-draft-bg: hsla(220, 15%, 55%, 0.18);
-  --badge-draft-fg: hsl(220, 16%, 72%);
+  --badge-draft-bg: hsla(35, 12%, 55%, 0.18);
+  --badge-draft-fg: hsl(35, 18%, 74%);
   --badge-closed-bg: hsla(0, 75%, 50%, 0.14);
   --badge-closed-fg: hsl(0, 75%, 68%);
   // role badge tokens (admin panel)
-  --badge-role-admin-bg: hsla(210, 90%, 55%, 0.16);
+  --badge-role-admin-bg: hsla(210, 90%, 55%, 0.14);
   --badge-role-admin-fg: hsl(210, 90%, 72%);
   --badge-role-super-bg: hsla(265, 60%, 55%, 0.18);
   --badge-role-super-fg: hsl(265, 70%, 76%);
