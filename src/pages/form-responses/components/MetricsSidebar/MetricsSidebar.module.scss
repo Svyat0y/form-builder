@@ -52,7 +52,7 @@
   cursor: pointer;
 
   &:hover:not(:disabled) {
-    background: var(--hover-bg);
+    background: var(--primary-soft-bg);
   }
 
   &:disabled {

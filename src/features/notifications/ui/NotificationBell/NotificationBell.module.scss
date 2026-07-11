@@ -75,7 +75,7 @@
   cursor: pointer;
 
   &:hover {
-    color: var(--text-color-primary);
+    color: var(--badge-closed-fg);
     text-decoration: underline;
   }
 }
@@ -99,7 +99,7 @@
   }
 
   &:hover {
-    background: var(--hover-bg);
+    background: var(--primary-soft-bg);
   }
 
   &:hover .rowDeleteBtn {
@@ -190,23 +190,7 @@
   justify-content: space-between;
   gap: 8px;
   border-bottom: 1px solid var(--border-color);
-}
-
-.backBtn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  border: none;
-  background: transparent;
-  color: var(--text-color-secondary);
-  font-family: inherit;
-  font-size: $font-size-caption;
-  cursor: pointer;
-
-  &:hover {
-    color: var(--text-color-primary);
-  }
+  padding: 8px 12px;
 }
 
 // Sits in the same fixed header row as Back, so it stays visible even when
@@ -214,7 +198,6 @@
 // filled style as .actionBtn, just smaller to fit the header row.
 .viewResponsesBtn {
   flex-shrink: 0;
-  margin-right: 12px;
   padding: 6px 12px;
   border: none;
   border-radius: 8px;

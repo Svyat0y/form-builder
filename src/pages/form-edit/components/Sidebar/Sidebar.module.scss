@@ -33,11 +33,13 @@
   display: flex;
   flex-shrink: 0;
   border-bottom: 1px solid var(--border-color);
+  gap: 4px;
+  padding: 8px 12px;
 }
 
 .tab {
   flex: 1;
-  padding: 12px;
+  padding: 7px 12px;
   border: none;
   background: transparent;
   font-family: inherit;
@@ -45,12 +47,18 @@
   color: var(--text-color-secondary);
   border-bottom: 2px solid transparent;
   cursor: pointer;
+  border-radius: $borderRadius3;
+
+  &:hover {
+    background: var(--primary-soft-bg);
+    color: var(--primary-color-text);
+  }
 }
 
 .tabActive {
-  color: var(--text-color-primary);
   font-weight: $font-weight-bold;
-  border-bottom-color: var(--primary-color);
+  background: var(--primary-soft-bg);
+  color: var(--primary-color-text);
 }
 
 .panel {
@@ -385,7 +393,7 @@
   cursor: pointer;
 
   &:hover {
-    background: var(--hover-bg);
+    background: var(--primary-soft-bg);
   }
 }
 
