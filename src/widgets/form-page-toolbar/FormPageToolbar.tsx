@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styles from './FormPageToolbar.module.scss'
-import { ArrowLeftIcon } from './icons'
+import { BackButton } from '@/shared/ui/backButton'
 
 export type FormPageTab = 'edit' | 'responses'
 
@@ -12,7 +12,6 @@ interface FormPageToolbarProps {
 
 // Shared between /forms/:id/edit and /forms/:id/responses — the
 // Edit/Responses tab switch each page needs, see docs/pages/form-editor.md
-// ("Между страницами — переключатель/табы в шапке страницы").
 export const FormPageToolbar: FC<FormPageToolbarProps> = ({
   active,
   onBack,
@@ -20,10 +19,7 @@ export const FormPageToolbar: FC<FormPageToolbarProps> = ({
 }) => {
   return (
     <div className={styles.wrapper}>
-      <button className={styles.backBtn} onClick={onBack}>
-        <ArrowLeftIcon />
-        <span>Back to dashboard</span>
-      </button>
+      <BackButton labelBtn="Back to dashboard" onBack={onBack} />
 
       <div className={styles.tabs}>
         <button

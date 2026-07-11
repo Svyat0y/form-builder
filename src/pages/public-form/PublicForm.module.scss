@@ -68,8 +68,8 @@
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  background: var(--primary-color);
-  color: #fff;
+  background: var(--main-background-button);
+  color: var(--main-color-button);
   font-family: inherit;
   font-size: $font-size-button;
   font-weight: $font-weight-medium;
@@ -121,7 +121,7 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--primary-color);
+  color: var(--primary-color-text);
   font-family: inherit;
   font-size: $font-size-caption;
   cursor: pointer;

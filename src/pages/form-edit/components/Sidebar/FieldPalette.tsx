@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './Sidebar.module.scss'
 import { FieldType, FormField } from '@/features/forms/model'
 import {
@@ -28,6 +28,7 @@ const newFieldId = () =>
 // the type is one we support, and enforces the same 50-field cap as the
 // canvas. Throws with a message meant to be shown inline, not as a toast
 // (docs/pages/form-editor.md, decision #4).
+// eslint-disable-next-line
 function parseFieldsJson(raw: string): FormField[] {
   let parsed: unknown
   try {
@@ -73,23 +74,26 @@ function parseFieldsJson(raw: string): FormField[] {
 
 export const FieldPalette: FC<FieldPaletteProps> = ({
   onAdd,
+  // eslint-disable-next-line
   onImport,
   disabled,
 }) => {
-  const [jsonInput, setJsonInput] = useState('')
-  const [jsonError, setJsonError] = useState('')
+  // eslint-disable-next-line
+  // const [jsonInput, setJsonInput] = useState('')
+  // const [jsonError, setJsonError] = useState('')
 
-  const handleApply = () => {
-    if (!jsonInput.trim()) return
-    try {
-      const fields = parseFieldsJson(jsonInput)
-      setJsonError('')
-      setJsonInput('')
-      onImport(fields)
-    } catch (error) {
-      setJsonError(error instanceof Error ? error.message : 'Invalid schema')
-    }
-  }
+  // eslint-disable-next-line
+  // const handleApply = () => {
+  //   if (!jsonInput.trim()) return
+  //   try {
+  //     const fields = parseFieldsJson(jsonInput)
+  //     setJsonError('')
+  //     setJsonInput('')
+  //     onImport(fields)
+  //   } catch (error) {
+  //     setJsonError(error instanceof Error ? error.message : 'Invalid schema')
+  //   }
+  // }
 
   return (
     <div>
@@ -119,27 +123,27 @@ export const FieldPalette: FC<FieldPaletteProps> = ({
         })}
       </div>
 
-      <div className={styles.jsonImport}>
-        <div className={styles.rowLabel}>Import JSON schema</div>
-        <textarea
-          className={styles.jsonTextarea}
-          placeholder='[{"type":"text","label":"Your name"}]'
-          value={jsonInput}
-          onChange={(e) => {
-            setJsonInput(e.target.value)
-            if (jsonError) setJsonError('')
-          }}
-        />
-        {jsonError && <div className={styles.jsonError}>{jsonError}</div>}
-        <button
-          type="button"
-          className={styles.applyJsonBtn}
-          disabled={!jsonInput.trim()}
-          onClick={handleApply}
-        >
-          Apply — replaces all questions
-        </button>
-      </div>
+      {/*<div className={styles.jsonImport}>*/}
+      {/*  <div className={styles.rowLabel}>Import JSON schema</div>*/}
+      {/*  <textarea*/}
+      {/*    className={styles.jsonTextarea}*/}
+      {/*    placeholder='[{"type":"text","label":"Your name"}]'*/}
+      {/*    value={jsonInput}*/}
+      {/*    onChange={(e) => {*/}
+      {/*      setJsonInput(e.target.value)*/}
+      {/*      if (jsonError) setJsonError('')*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*  {jsonError && <div className={styles.jsonError}>{jsonError}</div>}*/}
+      {/*  <button*/}
+      {/*    type="button"*/}
+      {/*    className={styles.applyJsonBtn}*/}
+      {/*    disabled={!jsonInput.trim()}*/}
+      {/*    onClick={handleApply}*/}
+      {/*  >*/}
+      {/*    Apply — replaces all questions*/}
+      {/*  </button>*/}
+      {/*</div>*/}
     </div>
   )
 }

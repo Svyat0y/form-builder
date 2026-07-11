@@ -13,52 +13,10 @@
   color: var(--text-color-primary);
 }
 
-.bodyLabel {
-  display: block;
-  margin: 0 0 6px;
-  color: var(--text-color-primary);
-  font-size: $font-size-body-2;
-  font-weight: $font-weight-medium;
-}
-
-.bodyInput {
-  width: 100%;
+.text {
   margin: 0 0 $margin5;
-  padding: 10px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--background-color);
-  color: var(--text-color-primary);
-  font-family: inherit;
+  color: var(--text-color-secondary);
   font-size: $font-size-body-2;
-  resize: vertical;
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary-color);
-  }
-}
-
-.linkFields {
-  display: flex;
-  flex-direction: column;
-  gap: $gap2;
-  margin: 0 0 $margin4;
-}
-
-.addLinkBtn {
-  margin: 0 0 $margin4;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--primary-color-text);
-  font-family: inherit;
-  font-size: $font-size-body-2;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .actions {
@@ -82,7 +40,7 @@
   }
 }
 
-.sendBtn {
+.confirmBtn {
   padding: 9px 16px;
   border: none;
   border-radius: 8px;
@@ -94,11 +52,6 @@
   cursor: pointer;
 
   &:hover {
-    opacity: 0.9;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    opacity: 0.85;
   }
 }
