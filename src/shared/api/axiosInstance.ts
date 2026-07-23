@@ -48,6 +48,30 @@ api.interceptors.request.use(
   },
 )
 
+// Single-flight refresh: a page (e.g. the dashboard) fires several authed
+// requests at once, so when the access token expires they all 401 together.
+// Without coordination each would POST /auth/refresh; the first rotates the
+// refresh token in the DB and the rest then present a stale one → 401 →
+// spurious logout. We share ONE in-flight refresh and let every waiter reuse
+// its result.
+let refreshPromise: Promise<string> | null = null
+
+const runRefresh = (): Promise<string> => {
+  if (!refreshPromise) {
+    refreshPromise = api
+      .post(API_ENDPOINTS.AUTH.REFRESH)
+      .then((res) => {
+        const newToken = res.data.user.accessToken
+        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, newToken)
+        return newToken
+      })
+      .finally(() => {
+        refreshPromise = null
+      })
+  }
+  return refreshPromise
+}
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -80,10 +104,7 @@ api.interceptors.response.use(
         originalRequest._retry = true
 
         try {
-          const refreshResponse = await api.post(API_ENDPOINTS.AUTH.REFRESH)
-          const newToken = refreshResponse.data.user.accessToken
-
-          localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, newToken)
+          const newToken = await runRefresh()
 
           originalRequest.headers.Authorization = `Bearer ${newToken}`
 
